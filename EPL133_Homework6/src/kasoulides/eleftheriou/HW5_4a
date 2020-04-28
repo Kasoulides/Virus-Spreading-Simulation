@@ -1,0 +1,38 @@
+Christos Kasoulides (ckasou01)
+Christos Eleftheriou (celeft01)
+
+Class Invariants
+------------------------
+1. heigth: must be between 5-100 inclusive so people can move
+
+2. width: must be between 5-100 inclusive so people can move
+
+3. N(Number of people): must be less or equal to the number of places in the grid
+
+4. time(The duration of the simulation): must not be negative
+
+5. selfPr(The chance to be self protected): must be between 1-100 inclusive
+
+6. imm(The chance to be immune): must be between 1-100 inclusive
+
+7. inf(The chance to be infected): must be between 1-100 inclusive
+
+8. answer: must be "Y" for yes or "n" for no
+
+9. num: must be between 1-7 inclusive
+
+10. TTI(Time To Infect): must not be negative
+
+11. PTP(Chance of infection from Person To Person contact): must be between 1-100 inclusive
+
+12. FTP(Chance of infection from Floor To Person): must be between 1-100 inclusive
+
+13. PTF(Chance of a person to leave trace): must be between 1-100 inclusive
+
+14. MAXtrace: must not be negative
+
+15. newAnswe: must be "Y" for yes or "n" for no
+
+16. sureExit: must be "Y" for yes or "n" for no
+
+17. SP(Protection level): must be between 1-100 inclusive
