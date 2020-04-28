@@ -1,4 +1,4 @@
-package kasoulides.eleftheriou;
+package team5.hw6;
 
 import java.util.Random;
 

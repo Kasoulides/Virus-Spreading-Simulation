@@ -1,4 +1,4 @@
-package kasoulides.eleftheriou;
+package team5.hw6;
 
 /**
  * This class represents a simulation size exception.
