@@ -5,7 +5,7 @@ import java.util.Random;
 import edu.princeton.cs.introcs.StdDraw;
 
 /**
- * This class represents the grid_test
+ * This class represents the grid_test1
  * 
  * @author Christos Eleftheriou
  * @author Christos Kasoulides
