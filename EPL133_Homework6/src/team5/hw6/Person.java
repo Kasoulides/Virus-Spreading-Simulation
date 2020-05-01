@@ -130,16 +130,20 @@ public class Person {
 
 		Random r = new Random();
 
-		int new1=0;
+	
 		int nx=0;
 		int ny=0;
 
 		if (grid.isTrapped(currentX, currentY)) {
 			nx = 0;
 			ny = 0;
-			new1=r.nextInt(8);
+			
 		} else {
+			
 			do {
+				
+				int new1=r.nextInt(8);
+				
 				switch(new1) {
 				case 1:
 					nx=-1;

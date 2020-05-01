@@ -29,7 +29,7 @@ public class Simulation {		//testing
 			throws IncorrectAnswerException, OutOfRangeException, 
 			PeopleOverloadingException, SimulationSizeException {
 		int height = 0, width = 0, N = 0, time = 0, selfPr = 0, imm = 0, inf = 0,
-				TTI = 20, PTP = 50, FTP = 30,MAXtrace = 3, PTF = 40, SP = 30;
+				TTI = 2, PTP = 50, FTP = 30,MAXtrace = 2, PTF = 40, SP = 30;
 		String answer, newAnswer, sureExit;
 		boolean exit;
 
