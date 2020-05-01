@@ -282,7 +282,11 @@ public class Person {
 	}
 
 	private void eraseCircle() {
-		StdDraw.setPenColor(StdDraw.WHITE);
+		if(grid.getTrace(currentX, currentY) > 0)
+			StdDraw.setPenColor(StdDraw.GRAY);
+		else
+			StdDraw.setPenColor(StdDraw.WHITE);
+		
 		StdDraw.filledCircle(currentX + 0.5, currentY + 0.5, R + 0.01);
 	}
 
