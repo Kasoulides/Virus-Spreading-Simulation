@@ -133,6 +133,8 @@ public class Person {
 	
 		int nx=0;
 		int ny=0;
+		
+		grid.clearPos(currentX, currentY);
 
 		if (grid.isTrapped(currentX, currentY)) {
 			nx = 0;
@@ -274,7 +276,7 @@ public class Person {
 		return counter;
 	}
 
-	private void drawCircle() {
+	public void drawCircle() {
 		StdDraw.setPenColor(col);
 		StdDraw.filledCircle(currentX + 0.5, currentY + 0.5, R);
 	}
