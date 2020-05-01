@@ -276,7 +276,7 @@ public class Person {
 		return counter;
 	}
 
-	public void drawCircle() {
+	private void drawCircle() {
 		StdDraw.setPenColor(col);
 		StdDraw.filledCircle(currentX + 0.5, currentY + 0.5, R);
 	}
