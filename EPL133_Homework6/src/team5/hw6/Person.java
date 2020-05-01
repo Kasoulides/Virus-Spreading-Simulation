@@ -142,7 +142,7 @@ public class Person {
 			
 			do {
 				
-				int new1=r.nextInt(8);
+				int new1=r.nextInt(9)+1;
 				
 				switch(new1) {
 				case 1:
