@@ -14,7 +14,7 @@ import java.util.*;
  * @since 14/04/20
  *
  */
-public class Simulation {			//testing
+public class Simulation {		//testing
 
 	static void drawFrame(int h, int w) {
 
