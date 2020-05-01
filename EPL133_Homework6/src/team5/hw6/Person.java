@@ -130,18 +130,57 @@ public class Person {
 
 		Random r = new Random();
 
-		int nx;
-		int ny;
+		int new1=0;
+		int nx=0;
+		int ny=0;
 
 		if (grid.isTrapped(currentX, currentY)) {
 			nx = 0;
 			ny = 0;
-
+			new1=r.nextInt(8);
 		} else {
 			do {
-
-				nx = r.nextInt(3) - 1;
-				ny = r.nextInt(3) - 1;
+				switch(new1) {
+				case 1:
+					nx=-1;
+					ny=-1;
+					break;
+				case 2:
+					nx=-1;
+					ny=0;
+					break;
+				case 3:
+					nx=-1;
+					ny=1;
+					break;
+				case 4:
+					nx=0;
+					ny=-1;
+					break;
+				case 5:
+					nx=0;
+					ny=0;
+					break;
+				case 6:
+					nx=0;
+					ny=1;
+					break;
+				case 7:
+					nx=1;
+					ny=-1;
+					break;
+				case 8:
+					nx=1;
+					ny=0;
+					break;
+				case 9:
+					nx=1;
+					ny=1;
+					break;
+				}
+					
+				//nx = r.nextInt(3) - 1;
+				//ny = r.nextInt(3) - 1;
 			} while (!(isValid(currentX + nx, currentY + ny)));
 		}
 
