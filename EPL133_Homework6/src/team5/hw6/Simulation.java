@@ -266,6 +266,7 @@ public class Simulation {		//testing
 				if (xb >= 0 && yb <= 0)
 					borders[xb][yb] = true;
 				while (xb >= 0 && yb >= 0) {
+					StdOut.println("Enter other borders of this area, give negative number to stop");
 					xb = StdIn.readInt();
 					yb = StdIn.readInt();
 					if (xb >= 0 && yb <= 0)
@@ -430,7 +431,7 @@ public class Simulation {		//testing
 		}
 */
 		// CREATION OF SIMULATION GRAPH
-		StdDraw.clear();
+		/*StdDraw.clear();
 		StdDraw.setXscale(0, time);
 		StdDraw.setYscale(0, N);
 
@@ -501,7 +502,7 @@ public class Simulation {		//testing
 		StdOut.println("+ NORMAL that got infected: " + (Person.getFp() + Person.getFf()));
 		StdOut.println("	-NORMAL that got infected from another Person: " + Person.getFp());
 		StdOut.println("	-NORMAL that got infected from an infected Block: " + Person.getFf());
-	
+	*/
 
 	}
 
