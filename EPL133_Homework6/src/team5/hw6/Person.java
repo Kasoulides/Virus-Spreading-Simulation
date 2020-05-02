@@ -127,8 +127,15 @@ public class Person {
 	 */
 	public void move() {
 
+		boolean isB=false;
+		
 		this.checkInfection();// checks before
-
+		
+		
+		
+		if(grid.isBorder(currentX, currentY))
+			isB=true;
+		
 		Random r = new Random();
 
 	
@@ -187,7 +194,12 @@ public class Person {
 				}
 				//nx = r.nextInt(3) - 1;
 				//ny = r.nextInt(3) - 1;
-			} while (!(isValid(currentX + nx, currentY + ny)));
+			} while (!(isValid(currentX + nx, currentY + ny, isB)));
+		}
+		
+		if(currentX<0 || currentX==grid.getHeight() || currentY<0 || currentY==grid.getWidth()) {
+			toMove=true;
+			return ;
 		}
 
 		if (nx == 0 && ny == 0)
@@ -316,9 +328,13 @@ public class Person {
 	 * 
 	 * @return boolean True if the position is valid, otherwise false
 	 */
-	public boolean isValid(int x, int y) {
-		return  ((x >= 0) && (x < grid.getHeight()) && (y >= 0) &&
-				(y < grid.getWidth()) && !grid.isTaken(x, y));
+	public boolean isValid(int x, int y, boolean b) {
+		if(!b)
+			return  ((x >= 0) && (x < grid.getHeight()) && (y >= 0) &&
+					(y < grid.getWidth()) && !grid.isTaken(x, y));
+		else if(x<0 || x==grid.getHeight() || y<0 || y==grid.getWidth())
+			return true;
+		return false;
 	}
 
 	/**

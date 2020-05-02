@@ -203,11 +203,7 @@ public class Grid {
 	}
 	
 	
-	public void removePerson(int x,int y) {
-		exists[x][y] = false;
-		persons[x][y] = null;
 	
-	}
 
 	/**
 	 * This method returns true if that x,y position is taken by another person.
