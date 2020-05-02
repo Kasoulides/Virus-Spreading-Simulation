@@ -25,6 +25,26 @@ public class Simulation {		//testing
 		for (int i = 0; i <= h; i++)
 			StdDraw.line(0, i, w, i);
 	}
+	
+	public static boolean isValid(String s, int height,int width) {
+		if (s == null) {
+			return false;
+
+		} else if (s.indexOf(',') <= 0) {
+			System.out.println("Wrong input!! The correct form is x,y .\n");
+			return false;
+		}
+		try {
+			int x = Integer.parseInt(s.substring(0, s.indexOf(',')));
+			int y = Integer.parseInt(s.substring(s.indexOf(',') + 1));
+		} catch (Exception e) {
+			System.out.println("Wrong input!! The correct form is x,y .\n");
+			return false;
+		}
+	
+		return true;
+	
+		}
 
 	public static void main(String[] args)
 			throws IncorrectAnswerException, OutOfRangeException, 
@@ -35,8 +55,8 @@ public class Simulation {		//testing
 		boolean exit;
 
 		// USER INPUTS
-		boolean done = false;
-		while (!done) {
+		boolean done1 = false;
+		while (!done1) {
 			try {
 				/*StdOut.println("Enter the height of the simulation block(must be between 5-100): ");
 				height = StdIn.readInt();
@@ -200,16 +220,16 @@ public class Simulation {		//testing
 
 				}
 
-				done = true;
+				done1 = true;
 
 			} catch (InputMismatchException e) {
 				StdOut.println("The input you have entered doesn't match the "
 						+ "required type.\n ");
-				done = false;
+				done1 = false;
 			} catch (Exception e) {
 				StdOut.println("Wrong Input.PLease try again!\n"
 			+ e.getMessage() + "\n");
-				done = false;
+				done1 = false;
 
 			}
 
@@ -230,7 +250,8 @@ public class Simulation {		//testing
 		
 		
 		Grid G[];
-
+		boolean done2 = false;
+		while (!done2) {
 		try {
 			StdOut.println("How many areas do you want? (up to 4)");
 			areas = StdIn.readInt();
@@ -331,13 +352,14 @@ public class Simulation {		//testing
 					}
 
 				}
+				done2 = true;
 			}
 		} catch (InputMismatchException e) {
 			StdOut.println("The input you have entered doesn't match the " + "required type.\n ");
-			done = false;
+			done2 = false;
 		} catch (Exception e) {
 			StdOut.println("Wrong Input.PLease try again!\n" + e.getMessage() + "\n");
-			done = false;
+			done2 = false;
 
 		}
 		
@@ -506,4 +528,4 @@ public class Simulation {		//testing
 
 	}
 
-}
+}}
