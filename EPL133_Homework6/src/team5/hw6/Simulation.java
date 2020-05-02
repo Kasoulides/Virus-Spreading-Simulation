@@ -279,19 +279,22 @@ public class Simulation {		//testing
 							"The number of people " + "can't exceed the maximun capacity of the simulation.\n");
 
 				boolean borders[][] = new boolean[height][width];
-				int xb = 0;
-				int yb = 0;
+				String bo;
 				StdOut.println("Enter the coordinates of the borders of this area, give negative coordinates to stop");
-				xb = StdIn.readInt();
-				yb = StdIn.readInt();
-				if (xb >= 0 && yb <= 0)
+				bo=StdIn.readString();
+				if (isValid(bo,height,width)) {
+					int xb = Integer.parseInt(bo.substring(0, bo.indexOf(',')));
+					int yb = Integer.parseInt(bo.substring(bo.indexOf(',') + 1));
 					borders[xb][yb] = true;
-				while (xb >= 0 && yb >= 0) {
+				}
+				while (isValid(bo,height,width)) {
 					StdOut.println("Enter other borders of this area, give negative number to stop");
-					xb = StdIn.readInt();
-					yb = StdIn.readInt();
-					if (xb >= 0 && yb <= 0)
+					bo=StdIn.readString();
+					if (isValid(bo,height,width)) {
+						int xb = Integer.parseInt(bo.substring(0, bo.indexOf(',')));
+						int yb = Integer.parseInt(bo.substring(bo.indexOf(',') + 1));
 						borders[xb][yb] = true;
+					}
 				}
 
 				int A[][] = new int[5][time];
