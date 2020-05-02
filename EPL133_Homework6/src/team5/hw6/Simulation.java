@@ -1,6 +1,12 @@
 package team5.hw6;
 
 import edu.princeton.cs.introcs.*;
+import kasoulides.eleftheriou.Grid;
+import kasoulides.eleftheriou.OutOfRangeException;
+import kasoulides.eleftheriou.PeopleOverloadingException;
+import kasoulides.eleftheriou.Person;
+import kasoulides.eleftheriou.SimulationSizeException;
+
 import java.util.*;
 
 /**
@@ -37,7 +43,7 @@ public class Simulation {		//testing
 		boolean done = false;
 		while (!done) {
 			try {
-				StdOut.println("Enter the height of the simulation block(must be between 5-100): ");
+				/*StdOut.println("Enter the height of the simulation block(must be between 5-100): ");
 				height = StdIn.readInt();
 				if (height < 5 || height > 100)
 					throw new SimulationSizeException("The height of the "
@@ -55,7 +61,7 @@ public class Simulation {		//testing
 				if (N > height * width)
 					throw new PeopleOverloadingException("The number of people "
 							+ "can't exceed the maximun capacity of the simulation.\n");
-
+*/
 				StdOut.println("Enter the duration of the simulation(must be in "
 						+ "minutes): ");
 				time = StdIn.readInt();
@@ -213,9 +219,160 @@ public class Simulation {		//testing
 			}
 
 		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		Grid G[];
+
+		try {
+			StdOut.println("How many areas do you want? (up to 4)");
+			areas = StdIn.readInt();
+			if (areas <= 0 || areas > 4)
+				throw new OutOfRangeException("Should be between 1-4 inclusive");
+
+			G = new Grid[areas];
+
+			for (int z = 1; z <= areas; z++) {
+
+				StdOut.println("Enter the height of the " + z + " simulation block(must be between 5-100): ");
+				height = StdIn.readInt();
+				if (height < 5 || height > 100)
+					throw new SimulationSizeException("The height of the " + "simulation  must be between 5-100.\n  ");
+
+				StdOut.println("Enter the width of the " + z + "  simulation block" + "(must be between 5-100): ");
+				width = StdIn.readInt();
+				if (width < 5 || width > 100)
+					throw new SimulationSizeException("The width of the simulation  must be between 5-100.\n  ");
+
+				StdOut.println("Enter the number of people in the " + z + "  simulation: ");
+				N = StdIn.readInt();
+				if (N > height * width)
+					throw new PeopleOverloadingException(
+							"The number of people " + "can't exceed the maximun capacity of the simulation.\n");
+
+				boolean borders[][] = new boolean[height][width];
+				int xb = 0;
+				int yb = 0;
+				StdOut.println("Enter the borders of this area, give negative number to stop");
+				xb = StdIn.readInt();
+				yb = StdIn.readInt();
+				if (xb >= 0 && yb <= 0)
+					borders[xb][yb] = true;
+				while (xb >= 0 && yb >= 0) {
+					xb = StdIn.readInt();
+					yb = StdIn.readInt();
+					if (xb >= 0 && yb <= 0)
+						borders[xb][yb] = true;
+				}
+
+				int A[][] = new int[5][time];
+				for (int i = 0; i < A.length; i++)
+					for (int j = 0; j < A[0].length; j++)
+						A[i][j] = 0;
+				StdDraw.setXscale(0, width);
+				StdDraw.setYscale(height, 0);
+
+				drawFrame(height, width);
+
+				Grid grid = new Grid(width, height, MAXtrace, TTI, PTF, borders, z);
+
+				Person[] persons = new Person[N];
+
+				StdOut.println("\nTHE SIMULATION HAS STARTED!\n");
+				StdOut.println("PERSON COLORING:");
+				StdOut.println("+ RED        --> INFECTED");
+				StdOut.println("+ GREEN      --> IMMUNE");
+				StdOut.println("+ BLUE       --> SELF PROTECTED");
+				StdOut.println("+ LIGHT BLUE --> NORMAL");
+				StdOut.println("\nBLOCK COLORING:");
+				StdOut.println("+ WHITE      --> NOT INFECTED");
+				StdOut.println("+ GRAY       --> INFECTED");
+
+				for (int i = 0; i < N; i++) {
+					persons[i] = new Person(grid, selfPr, imm, inf, TTI, PTP, FTP, SP);
+				}
+
+				for (int j = 0; j < time; j++) {
+					grid.showTrace();
+					grid.reduceTrace();
+
+					drawFrame(height, width);
+
+					for (int i = 0; i < N; i++) {
+
+						persons[i].move();
+
+						if (persons[i].getImmune())
+							A[0][j]++;
+						if (persons[i].isInfected())
+							A[1][j]++;
+						if (persons[i].getSelfProtected())
+							A[2][j]++;
+						if (!persons[i].getImmune() && !persons[i].isInfected() && !persons[i].getSelfProtected())
+							A[3][j]++;
+
+						if (persons[i].getSelfProtected() && persons[i].isInfected())
+							A[4][j]++;
+
+					}
+
+					try {
+						Thread.sleep(500);
+					} catch (InterruptedException ex) {
+						Thread.currentThread().interrupt();
+					}
+
+				}
+			}
+		} catch (InputMismatchException e) {
+			StdOut.println("The input you have entered doesn't match the " + "required type.\n ");
+			done = false;
+		} catch (Exception e) {
+			StdOut.println("Wrong Input.PLease try again!\n" + e.getMessage() + "\n");
+			done = false;
+
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 
 		// SIMULATION 
-		int A[][] = new int[5][time];
+		/*int A[][] = new int[5][time];
 		for (int i = 0; i < A.length; i++)
 			for (int j = 0; j < A[0].length; j++)
 				A[i][j] = 0;
@@ -276,7 +433,7 @@ public class Simulation {		//testing
 			 
 
 		}
-
+*/
 		// CREATION OF SIMULATION GRAPH
 		StdDraw.clear();
 		StdDraw.setXscale(0, time);
