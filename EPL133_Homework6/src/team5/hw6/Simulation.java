@@ -262,17 +262,17 @@ public class Simulation {		//testing
 
 			for (int z = 1; z <= areas; z++) {
 
-				StdOut.println("Enter the height of the " + z + " simulation block(must be between 5-100): ");
+				StdOut.println("Enter the height of the simulation area no" + z + " (must be between 5-100): ");
 				height = StdIn.readInt();
 				if (height < 5 || height > 100)
 					throw new SimulationSizeException("The height of the " + "simulation  must be between 5-100.\n  ");
 
-				StdOut.println("Enter the width of the " + z + "  simulation block" + "(must be between 5-100): ");
+				StdOut.println("Enter the width of the  simulation area no" + z + " (must be between 5-100): ");
 				width = StdIn.readInt();
 				if (width < 5 || width > 100)
 					throw new SimulationSizeException("The width of the simulation  must be between 5-100.\n  ");
 
-				StdOut.println("Enter the number of people in the " + z + "  simulation: ");
+				StdOut.println("Enter the number of people in the  simulation area no" + z);
 				N = StdIn.readInt();
 				if (N > height * width)
 					throw new PeopleOverloadingException(
@@ -281,7 +281,7 @@ public class Simulation {		//testing
 				boolean borders[][] = new boolean[height][width];
 				int xb = 0;
 				int yb = 0;
-				StdOut.println("Enter the borders of this area, give negative number to stop");
+				StdOut.println("Enter the coordinates of the borders of this area, give negative coordinates to stop");
 				xb = StdIn.readInt();
 				yb = StdIn.readInt();
 				if (xb >= 0 && yb <= 0)
