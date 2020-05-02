@@ -1,11 +1,6 @@
 package team5.hw6;
 
 import edu.princeton.cs.introcs.*;
-import kasoulides.eleftheriou.Grid;
-import kasoulides.eleftheriou.OutOfRangeException;
-import kasoulides.eleftheriou.PeopleOverloadingException;
-import kasoulides.eleftheriou.Person;
-import kasoulides.eleftheriou.SimulationSizeException;
 
 import java.util.*;
 
@@ -34,7 +29,7 @@ public class Simulation {		//testing
 	public static void main(String[] args)
 			throws IncorrectAnswerException, OutOfRangeException, 
 			PeopleOverloadingException, SimulationSizeException {
-		int height = 0, width = 0, N = 0, time = 0, selfPr = 0, imm = 0, inf = 0,
+		int height = 0, width = 0, areas = 0, N = 0, time = 0, selfPr = 0, imm = 0, inf = 0,
 				TTI = 2, PTP = 30, FTP = 30,MAXtrace = 2, PTF = 30, SP = 30;
 		String answer, newAnswer, sureExit;
 		boolean exit;

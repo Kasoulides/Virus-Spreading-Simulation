@@ -31,6 +31,7 @@ public class Person {
 	private int currentY;
 	private Grid grid;
 	private Color col;
+	private boolean toMove;
 	// counters
 	private static int c = 0;
 	private static int spff = 0; // counter for people infected from floor while self-Protected
@@ -184,7 +185,6 @@ public class Person {
 					ny=1;
 					break;
 				}
-					
 				//nx = r.nextInt(3) - 1;
 				//ny = r.nextInt(3) - 1;
 			} while (!(isValid(currentX + nx, currentY + ny)));
@@ -209,6 +209,7 @@ public class Person {
 
 		this.drawCircle();
 	}
+	
 
 	private void Calculate(int imm, int selfPr, int inf) {
 
@@ -316,7 +317,7 @@ public class Person {
 	 * @return boolean True if the position is valid, otherwise false
 	 */
 	public boolean isValid(int x, int y) {
-		return ((x >= 0) && (x < grid.getHeight()) && (y >= 0) &&
+		return  ((x >= 0) && (x < grid.getHeight()) && (y >= 0) &&
 				(y < grid.getWidth()) && !grid.isTaken(x, y));
 	}
 
@@ -406,6 +407,16 @@ public class Person {
 	 */
 	public static int getFp() {
 		return fp;
+	}
+	
+	public void setGrid(Grid other) {
+		grid = other;
+	}
+	public void setX(int otherX) {
+		currentX = otherX;
+	}
+	public void setY(int otherY) {
+		currentY = otherY;
 	}
 
 }
