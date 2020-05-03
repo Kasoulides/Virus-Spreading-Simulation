@@ -85,6 +85,8 @@ public class Person {
 		} while (grid.isTaken(currentX, currentY));
 
 		grid.setPos(currentX, currentY, this);
+		
+		System.out.println(currentX + " " + currentY);
 
 		if (infected)
 			col = StdDraw.RED;
@@ -291,16 +293,16 @@ public class Person {
 
 	private void drawCircle() {
 		StdDraw.setPenColor(col);
-		StdDraw.filledCircle(currentX + 0.5, currentY + 0.5, R);
+		StdDraw.filledCircle(currentY + 0.5, currentX + 0.5, R);
 	}
 
 	private void eraseCircle() {
-		if(grid.getTrace(currentX, currentY) > 0)
+		if(grid.getTrace(currentY, currentX) > 0)
 			StdDraw.setPenColor(StdDraw.GRAY);
 		else
 			StdDraw.setPenColor(StdDraw.WHITE);
 		
-		StdDraw.filledCircle(currentX + 0.5, currentY + 0.5, R + 0.01);
+		StdDraw.filledCircle(currentY + 0.5, currentX + 0.5, R + 0.01);
 	}
 
 	/**

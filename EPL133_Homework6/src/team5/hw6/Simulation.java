@@ -21,23 +21,26 @@ public class Simulation { // testing
 
 		StdDraw.clear();
 
-		StdDraw.setXscale(0, g.getHeight());
-		StdDraw.setYscale(g.getWidth(), 0);
+		StdDraw.setXscale(0, g.getWidth());
+		StdDraw.setYscale(g.getHeight(),0);
 
+		
 		StdDraw.setPenColor(StdDraw.BLACK);
-		for (int i = 0; i <= g.getHeight(); i++)
-			StdDraw.line(i, 0, i, g.getWidth());
 		for (int i = 0; i <= g.getWidth(); i++)
-			StdDraw.line(0, i, g.getHeight(), i);
+			StdDraw.line(i, 0, i, g.getHeight());
+		for (int i = 0; i <= g.getHeight(); i++)
+			StdDraw.line(0, i, g.getWidth(), i);
 
 		boolean[][] array = g.getBorders();
 
-		for (int i = 0; i < g.getWidth(); i++)
-			for (int j = 0; j < g.getHeight(); j++)
+		for (int i = 0; i < g.getHeight(); i++) 
+			for (int j = 0; j < g.getWidth(); j++) 
 				if (array[i][j]) {
-					StdDraw.setPenColor(StdDraw.ORANGE);
+					StdDraw.setPenColor(StdDraw.MAGENTA);
 					StdDraw.square(j + 0.5, i + 0.5, 0.5);
 				}
+		
+		
 
 	}
 
@@ -210,7 +213,7 @@ public class Simulation { // testing
 		 */
 
 		Grid G[] = null;
-		ArrayList<Person> AL[] = null;
+		List<Person> AL[] = null;
 		boolean done2 = false;
 		while (!done2) {
 			try {
@@ -220,7 +223,7 @@ public class Simulation { // testing
 					throw new OutOfRangeException("Should be between 2-4 inclusive");
 
 				G = new Grid[areas];
-				AL = new ArrayList[areas];
+				AL = new List[areas];
 
 				for (int z = 1; z <= areas; z++) {
 
@@ -245,10 +248,12 @@ public class Simulation { // testing
 					StdOut.println("Enter the number of border blocks in this area no" + z + "(can't be more than "
 							+ (2 * height + 2 * width - 4) + "):");
 					numOfBorders = StdIn.readInt();
-					if (numOfBorders > (2 * height + 2 * width - 4))
-						throw new BordersOutOfRangeException(
-								"The number of border blocks in this area cant be more than "
-										+ (2 * height + 2 * width - 4) + ".");
+					/*
+					 * if (numOfBorders > (2 * height + 2 * width - 4)) throw new
+					 * BordersOutOfRangeException(
+					 * "The number of border blocks in this area cant be more than " + (2 * height +
+					 * 2 * width - 4) + ".");
+					 */
 
 					StdOut.println(
 							"Enter the number of the area where the border blocks are connected to(can't be more than "
@@ -280,17 +285,21 @@ public class Simulation { // testing
 					G[z - 1] = new Grid(height, width, MAXtrace, TTI, PTF, borders, newGrid);
 
 					drawFrame(G[z - 1]);
-
-					// StdDraw.setXscale(0, G[j].getWidth());
-					// StdDraw.setYscale(G[j].getHeight(), 0);
-
-					// drawFrame(G[j]);
+					
+					AL[z - 1] = new ArrayList<Person>();
+				
 					Person[] persons = new Person[N];
 					for (int k = 0; k < N; k++) {
 						persons[k] = new Person(G[z - 1], selfPr, imm, inf, TTI, PTP, FTP, SP);
 						AL[z - 1].add(persons[k]);
+						try {
+							Thread.sleep(500);
+						} catch (InterruptedException ex) {
+							Thread.currentThread().interrupt();
+						}
 
 					}
+				
 
 				}
 				done2 = true;
@@ -304,20 +313,15 @@ public class Simulation { // testing
 
 		}
 
-		// for(int i=0; i<time*3; i++) {
-		for (int j = 0; j < areas; j++) {
-			// StdDraw.setXscale(0, G[j].getWidth());
-			// StdDraw.setYscale(G[j].getHeight(), 0);
-
-			// drawFrame(G[j]);
-			Person[] persons = new Person[N];
-			for (int z = 0; z < N; z++) {
-				persons[z] = new Person(G[j], selfPr, imm, inf, TTI, PTP, FTP, SP);
-				AL[j].add(persons[z]);
-			}
-		}
-		// }
-
+		/*
+		 * // for(int i=0; i<time*3; i++) { for (int j = 0; j < areas; j++) { //
+		 * StdDraw.setXscale(0, G[j].getWidth()); // StdDraw.setYscale(G[j].getHeight(),
+		 * 0);
+		 * 
+		 * // drawFrame(G[j]); Person[] persons = new Person[N]; for (int z = 0; z < N;
+		 * z++) { persons[z] = new Person(G[j], selfPr, imm, inf, TTI, PTP, FTP, SP);
+		 * AL[j].add(persons[z]); } } // }
+		 */
 	}
 
 }
