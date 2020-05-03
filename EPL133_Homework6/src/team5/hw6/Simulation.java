@@ -267,7 +267,7 @@ public class Simulation {		//testing
 		
 		
 		
-		
+		ArrayList AL[]=new ArrayList[areas];
 		
 		
 		
@@ -326,6 +326,7 @@ public class Simulation {		//testing
 
 				
 				
+				AL[z-1]= new ArrayList<Person>();
 				
 			}
 			done2 = true;
@@ -343,6 +344,12 @@ public class Simulation {		//testing
 	}}	
 				
 			/*
+
+				
+				
+				
+				
+
 				int A[][] = new int[5][time];
 				for (int i = 0; i < A.length; i++)
 					for (int j = 0; j < A[0].length; j++)
@@ -368,8 +375,12 @@ public class Simulation {		//testing
 
 				for (int i = 0; i < N; i++) {
 					persons[i] = new Person(grid, selfPr, imm, inf, TTI, PTP, FTP, SP);
+					AL[z-1].add(persons[i]);
 				}
 
+				
+				
+				
 				for (int j = 0; j < time; j++) {
 					grid.showTrace();
 					grid.reduceTrace();
