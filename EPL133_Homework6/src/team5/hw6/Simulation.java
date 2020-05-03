@@ -364,7 +364,7 @@ public class Simulation {		//testing
 					for (int k = 0; k < N; k++) {
 						persons[k] = new Person(G[z-1], selfPr, imm, inf, TTI, PTP, FTP, SP);
 						AL[z-1].add(persons[k]);
-						drawFrame(G[z-1]);
+						
 					}
 				
 				
