@@ -354,8 +354,19 @@ public class Simulation {		//testing
 				
 				G[z-1] = new Grid(height, width, MAXtrace, TTI, PTF, borders, newGrid);
 				
-				//drawFrame(G[z-1]);
-			
+				drawFrame(G[z-1]);
+				
+					//StdDraw.setXscale(0, G[j].getWidth());
+					//StdDraw.setYscale(G[j].getHeight(), 0);
+
+					//drawFrame(G[j]);
+					Person[] persons = new Person[N];
+					for (int k = 0; k < N; k++) {
+						persons[k] = new Person(G[z-1], selfPr, imm, inf, TTI, PTP, FTP, SP);
+						AL[z-1].add(persons[k]);
+						drawFrame(G[z-1]);
+					}
+				
 				
 			}
 			done2 = true;
@@ -380,10 +391,10 @@ public class Simulation {		//testing
 		
 		//for(int i=0; i<time*3; i++) {
 			for(int j=0; j<areas; j++) {
-				StdDraw.setXscale(0, G[j].getWidth());
-				StdDraw.setYscale(G[j].getHeight(), 0);
+				//StdDraw.setXscale(0, G[j].getWidth());
+				//StdDraw.setYscale(G[j].getHeight(), 0);
 
-				drawFrame(G[j]);
+				//drawFrame(G[j]);
 				Person[] persons = new Person[N];
 				for (int z = 0; z < N; z++) {
 					persons[z] = new Person(G[j], selfPr, imm, inf, TTI, PTP, FTP, SP);
