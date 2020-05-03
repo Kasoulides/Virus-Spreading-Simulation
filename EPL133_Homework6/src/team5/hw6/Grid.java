@@ -231,6 +231,10 @@ public class Grid {
 	public int getNewGrid() {
 		return newGrid;
 	}
+	
+	public boolean[][] getBorders() {
+		return borders;
+	}
 
 	/**
 	 * This method returns the trace of the x,y position.

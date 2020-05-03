@@ -17,13 +17,27 @@ import java.util.*;
  */
 public class Simulation {		//testing
 
-	static void drawFrame(int h, int w) {
+	static void drawFrame(Grid g) {
+		
+		StdDraw.clear();
 
+		StdDraw.setXscale(0, g.getWidth());
+		StdDraw.setYscale(g.getHeight(), 0);
+		
 		StdDraw.setPenColor(StdDraw.BLACK);
-		for (int i = 0; i <= w; i++)
-			StdDraw.line(i, 0, i, h);
-		for (int i = 0; i <= h; i++)
-			StdDraw.line(0, i, w, i);
+		for (int i = 0; i <= g.getWidth(); i++)
+			StdDraw.line(i, 0, i, g.getHeight());
+		for (int i = 0; i <= g.getHeight(); i++)
+			StdDraw.line(0, i, g.getWidth(), i);
+		
+		
+		  boolean[][] array = g.getBorders();
+		  
+		  for(int i = 0; i < g.getHeight(); i++) 
+			  for(int j = 0; j < g.getWidth(); j++)
+				  if(array[i][j]) { StdDraw.setPenColor(StdDraw.ORANGE);
+				  StdDraw.square(j + 0.5, i + 0.5, 0.5); }
+		 
 	}
 	
 	public static boolean isValid(String s, int height,int width,boolean arr[][]) {
@@ -73,7 +87,7 @@ public class Simulation {		//testing
 			throws IncorrectAnswerException, OutOfRangeException, 
 			PeopleOverloadingException, SimulationSizeException {
 		int height = 0, width = 0, areas = 0, N = 0, time = 0, selfPr = 0, imm = 0, inf = 0,
-				TTI = 2, PTP = 30, FTP = 30,MAXtrace = 2, PTF = 30, SP = 30, numOfBorders = 0;
+				TTI = 2, PTP = 30, FTP = 30,MAXtrace = 2, PTF = 30, SP = 30, numOfBorders = 0, newGrid = 0;
 		String answer, newAnswer, sureExit;
 		boolean exit;
 
@@ -267,22 +281,23 @@ public class Simulation {		//testing
 		
 		
 		
-		ArrayList AL[]=new ArrayList[areas];
 		
 		
 		
 		
 		Grid G[];
+		ArrayList<Person> AL[];
 		boolean done2 = false;
 		while (!done2) {
 		try {
-			StdOut.println("How many areas do you want? (up to 4)");
+			StdOut.println("How many areas do you want? (2 to 4)");
 			areas = StdIn.readInt();
-			if (areas <= 0 || areas > 4)
-				throw new OutOfRangeException("Should be between 1-4 inclusive");
+			if (areas <= 1 || areas > 4)
+				throw new OutOfRangeException("Should be between 2-4 inclusive");
 
 			G = new Grid[areas];
-
+			AL = new ArrayList[areas];
+			
 			for (int z = 1; z <= areas; z++) {
 
 				StdOut.println("Enter the height of the simulation area no" + z + " (must be between 5-100): ");
@@ -306,13 +321,25 @@ public class Simulation {		//testing
 				if (numOfBorders > (2*height + 2*width -4))
 					throw new BordersOutOfRangeException(
 							"The number of border blocks in this area cant be more than " + (2*height + 2*width -4) + ".");
+				
+				StdOut.println("Enter the number of the area where the border blocks are connected to(can't be more than " + areas + " and can't be " + z + ").");
+				newGrid = StdIn.readInt();
+				
+				if (newGrid > areas || newGrid <= 0 || newGrid == z)
+					throw new OutOfRangeException(
+							"The number of the area where the border blocks are connected to cant be more than can't be more than " + areas + " and can't be " + z + ".");
+				
+				
 				boolean borders[][] = new boolean[height][width];
 				String bo;
+				
+				
+				
 				
 				for(int i = 1; i <= numOfBorders; i++) {
 	
 				
-				StdOut.println("Enter the coordinate of the border block no" + i + " of this area(the correct form is x,y).");
+				StdOut.println("Enter the coordinate of the border block no" + i + " of this area(the correct form is x,y ).");
 				
 				do{
 					bo=StdIn.readString();		
@@ -325,8 +352,10 @@ public class Simulation {		//testing
 			}
 
 				
+				G[z-1] = new Grid(height, width, MAXtrace, TTI, PTF, borders, newGrid);
 				
-				AL[z-1]= new ArrayList<Person>();
+				drawFrame(G[z-1]);
+			
 				
 			}
 			done2 = true;
@@ -335,11 +364,17 @@ public class Simulation {		//testing
 		StdOut.println("The input you have entered doesn't match the " + "required type.\n ");
 		done2 = false;
 		} catch (Exception e) {
-		StdOut.println("Wrong Input.PLease try again!\n" + e.getMessage() + "\n");
+		StdOut.println("Wrong Input.Please try again!\n" + e.getMessage() + "\n");
 		done2 = false;
 		}
 		
-		}		
+		}	
+		
+		
+
+	
+		
+
 				
 	}}	
 				
