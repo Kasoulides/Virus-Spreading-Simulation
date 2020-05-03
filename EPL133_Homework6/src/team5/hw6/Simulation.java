@@ -248,12 +248,11 @@ public class Simulation { // testing
 					StdOut.println("Enter the number of border blocks in this area no" + z + "(can't be more than "
 							+ (2 * height + 2 * width - 4) + "):");
 					numOfBorders = StdIn.readInt();
-					/*
-					 * if (numOfBorders > (2 * height + 2 * width - 4)) throw new
-					 * BordersOutOfRangeException(
-					 * "The number of border blocks in this area cant be more than " + (2 * height +
-					 * 2 * width - 4) + ".");
-					 */
+					
+					if (numOfBorders > (2 * height + 2 * width - 4))
+						throw new BordersOutOfRangeException(
+								"The number of border blocks in this area cant be more than "
+										+ (2 * height + 2 * width - 4) + ".");
 
 					StdOut.println(
 							"Enter the number of the area where the border blocks are connected to(can't be more than "
@@ -313,15 +312,7 @@ public class Simulation { // testing
 
 		}
 
-		/*
-		 * // for(int i=0; i<time*3; i++) { for (int j = 0; j < areas; j++) { //
-		 * StdDraw.setXscale(0, G[j].getWidth()); // StdDraw.setYscale(G[j].getHeight(),
-		 * 0);
-		 * 
-		 * // drawFrame(G[j]); Person[] persons = new Person[N]; for (int z = 0; z < N;
-		 * z++) { persons[z] = new Person(G[j], selfPr, imm, inf, TTI, PTP, FTP, SP);
-		 * AL[j].add(persons[z]); } } // }
-		 */
+		
 	}
 
 }
