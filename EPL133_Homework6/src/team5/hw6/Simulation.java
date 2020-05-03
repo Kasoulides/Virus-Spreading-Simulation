@@ -26,7 +26,7 @@ public class Simulation {		//testing
 			StdDraw.line(0, i, w, i);
 	}
 	
-	public static boolean isValid(String s, int height,int width) {
+	public static boolean isValid(String s, int height,int width,boolean arr[][]) {
 		if (s == null) {
 			return false;
 
@@ -37,12 +37,35 @@ public class Simulation {		//testing
 		try {
 			int x = Integer.parseInt(s.substring(0, s.indexOf(',')));
 			int y = Integer.parseInt(s.substring(s.indexOf(',') + 1));
-		} catch (Exception e) {
+		} catch (Exception valid) {
 			System.out.println("Wrong input!! The correct form is x,y .\n");
 			return false;
 		}
+		
+		int x = Integer.parseInt(s.substring(0, s.indexOf(',')));
+		int y = Integer.parseInt(s.substring(s.indexOf(',') + 1));
+		
+		
+		
+		if(x < 0 || x >= height || y < 0 || y >= width ) {
+			System.out.println("Values are not included in the simulation!! Please try again.\n");
+			return false;
+		}
+		
+		if(arr[x][y]) {
+			System.out.println(x + "," + y + " is already a border!! Please try again.\n");
+			return false;
+		}
+		
+		if(x == 0 || y == 0 || x == height-1 || y == width-1)
+			return true;
+		else {
+			System.out.println(x + "," + y + " isn't on the border of the simulation!! Please try again.\n");
+			return false;
+			
+		}
 	
-		return true;
+		
 	
 		}
 
@@ -50,7 +73,7 @@ public class Simulation {		//testing
 			throws IncorrectAnswerException, OutOfRangeException, 
 			PeopleOverloadingException, SimulationSizeException {
 		int height = 0, width = 0, areas = 0, N = 0, time = 0, selfPr = 0, imm = 0, inf = 0,
-				TTI = 2, PTP = 30, FTP = 30,MAXtrace = 2, PTF = 30, SP = 30;
+				TTI = 2, PTP = 30, FTP = 30,MAXtrace = 2, PTF = 30, SP = 30, numOfBorders = 0;
 		String answer, newAnswer, sureExit;
 		boolean exit;
 
@@ -227,7 +250,7 @@ public class Simulation {		//testing
 						+ "required type.\n ");
 				done1 = false;
 			} catch (Exception e) {
-				StdOut.println("Wrong Input.PLease try again!\n"
+				StdOut.println("Wrong Input.Please try again!\n"
 			+ e.getMessage() + "\n");
 				done1 = false;
 
@@ -272,31 +295,54 @@ public class Simulation {		//testing
 				if (width < 5 || width > 100)
 					throw new SimulationSizeException("The width of the simulation  must be between 5-100.\n  ");
 
-				StdOut.println("Enter the number of people in the  simulation area no" + z);
+				StdOut.println("Enter the number of people in the  simulation area no" + z + "(can't be more than " + (height * width) + "):");
 				N = StdIn.readInt();
 				if (N > height * width)
 					throw new PeopleOverloadingException(
-							"The number of people " + "can't exceed the maximun capacity of the simulation.\n");
-
+							"The number of people can't exceed the maximun capacity of the simulation.\n");
+				
+				StdOut.println("Enter the number of border blocks in this area no" + z + "(can't be more than " +(2*height + 2*width -4) + "):");
+				numOfBorders = StdIn.readInt();
+				if (numOfBorders > (2*height + 2*width -4))
+					throw new BordersOutOfRangeException(
+							"The number of border blocks in this area cant be more than " + (2*height + 2*width -4) + ".");
 				boolean borders[][] = new boolean[height][width];
 				String bo;
-				StdOut.println("Enter the coordinates of the borders of this area, give negative coordinates to stop");
-				bo=StdIn.readString();
-				if (isValid(bo,height,width)) {
+				
+				for(int i = 1; i <= numOfBorders; i++) {
+	
+				
+				StdOut.println("Enter the coordinate of the border block no" + i + " of this area(the correct form is x,y).");
+				
+				do{
+					bo=StdIn.readString();		
+				}
+				while (!isValid(bo,height,width,borders));
+					
 					int xb = Integer.parseInt(bo.substring(0, bo.indexOf(',')));
 					int yb = Integer.parseInt(bo.substring(bo.indexOf(',') + 1));
 					borders[xb][yb] = true;
-				}
-				while (isValid(bo,height,width)) {
-					StdOut.println("Enter other borders of this area, give negative number to stop");
-					bo=StdIn.readString();
-					if (isValid(bo,height,width)) {
-						int xb = Integer.parseInt(bo.substring(0, bo.indexOf(',')));
-						int yb = Integer.parseInt(bo.substring(bo.indexOf(',') + 1));
-						borders[xb][yb] = true;
-					}
-				}
+			}
 
+				
+				
+				
+			}
+			done2 = true;
+		}
+		catch (InputMismatchException e) {
+		StdOut.println("The input you have entered doesn't match the " + "required type.\n ");
+		done2 = false;
+		} catch (Exception e) {
+		StdOut.println("Wrong Input.PLease try again!\n" + e.getMessage() + "\n");
+		done2 = false;
+		}
+		
+		}		
+				
+	}}	
+				
+			/*
 				int A[][] = new int[5][time];
 				for (int i = 0; i < A.length; i++)
 					for (int j = 0; j < A[0].length; j++)
@@ -354,19 +400,9 @@ public class Simulation {		//testing
 						Thread.currentThread().interrupt();
 					}
 
-				}
-				done2 = true;
-			}
-		} catch (InputMismatchException e) {
-			StdOut.println("The input you have entered doesn't match the " + "required type.\n ");
-			done2 = false;
-		} catch (Exception e) {
-			StdOut.println("Wrong Input.PLease try again!\n" + e.getMessage() + "\n");
-			done2 = false;
-
-		}
+	
 		
-		
+		*/
 		
 		
 		
@@ -527,8 +563,8 @@ public class Simulation {		//testing
 		StdOut.println("+ NORMAL that got infected: " + (Person.getFp() + Person.getFf()));
 		StdOut.println("	-NORMAL that got infected from another Person: " + Person.getFp());
 		StdOut.println("	-NORMAL that got infected from an infected Block: " + Person.getFf());
-	*/
+	
 
-	}
+	}*/
 
-}}
+
