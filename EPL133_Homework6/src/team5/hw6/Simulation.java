@@ -90,7 +90,7 @@ public class Simulation {		//testing
 				TTI = 2, PTP = 30, FTP = 30,MAXtrace = 2, PTF = 30, SP = 30, numOfBorders = 0, newGrid = 0;
 		String answer, newAnswer, sureExit;
 		boolean exit;
-
+		
 		// USER INPUTS
 		boolean done1 = false;
 		while (!done1) {
@@ -285,8 +285,8 @@ public class Simulation {		//testing
 		
 		
 		
-		Grid G[];
-		ArrayList<Person> AL[];
+		Grid G[]=null;
+		ArrayList<Person> AL[]=null;
 		boolean done2 = false;
 		while (!done2) {
 		try {
@@ -354,7 +354,7 @@ public class Simulation {		//testing
 				
 				G[z-1] = new Grid(height, width, MAXtrace, TTI, PTF, borders, newGrid);
 				
-				drawFrame(G[z-1]);
+				//drawFrame(G[z-1]);
 			
 				
 			}
@@ -373,10 +373,47 @@ public class Simulation {		//testing
 		
 
 	
+
+		
+		
+		
+		
+		//for(int i=0; i<time*3; i++) {
+			for(int j=0; j<areas; j++) {
+				StdDraw.setXscale(0, G[j].getWidth());
+				StdDraw.setYscale(G[j].getHeight(), 0);
+
+				drawFrame(G[j]);
+				Person[] persons = new Person[N];
+				for (int z = 0; z < N; z++) {
+					persons[z] = new Person(G[j], selfPr, imm, inf, TTI, PTP, FTP, SP);
+					AL[j].add(persons[z]);
+				}
+			}
+		//}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 
 				
-	}}	
+	}
+	
+
+}	
+
+
+
+
+	
 				
 			/*
 
