@@ -27,7 +27,7 @@ public class Grid {
 	private int width;
 	private final int TO_FLOOR;
 	private final int TIME_INF;
-	private static int counter = 1;
+	private static int counter = 0;
 	private int ID;
 
 	/**

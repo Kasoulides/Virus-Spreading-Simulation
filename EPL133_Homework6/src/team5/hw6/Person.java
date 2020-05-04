@@ -194,7 +194,7 @@ public class Person {
 			} while (!(isValid(currentX + nx, currentY + ny)));
 		}
 		
-		if(currentX<0 || currentX==grid.getHeight() || currentY<0 || currentY==grid.getWidth()) {
+		if(currentX + nx < 0 || currentX + nx == grid.getHeight() || currentY + ny < 0 || currentY + ny == grid.getWidth()) {
 			toMove=true;
 			return ;
 		}
@@ -430,6 +430,11 @@ public class Person {
 	}
 	public void setY(int otherY) {
 		currentY = otherY;
+	}
+	
+	
+	public boolean hasToMove() {
+		return toMove;
 	}
 	
 	public void resetToMove() {

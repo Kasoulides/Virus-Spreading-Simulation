@@ -85,7 +85,7 @@ public class Simulation { // testing
 		
 		//INITIALIZATIONS
 		int height = 0, width = 0, areas = 0, N = 0, time = 0, selfPr = 0, imm = 0, inf = 0, TTI = 2, PTP = 30,
-			FTP = 30, MAXtrace = 2, PTF = 30, SP = 30, numOfBorders = 0, newGrid = 0;
+			FTP = 30, MAXtrace = 2, PTF = 30, SP = 30, numOfBorders = 0, newGrid = 0, totalPerson = 0;
 		String answer, newAnswer, sureExit;
 		boolean exit;
 		Person[] persons = null;
@@ -286,6 +286,9 @@ public class Simulation { // testing
 							+ (height * width) + "):");
 				
 					N = StdIn.readInt();
+					
+					totalPerson += N;
+					
 					if (N > height * width)
 						throw new PeopleOverloadingException(
 								"The number of people can't exceed the maximun capacity of the simulation.\n");		
@@ -345,8 +348,11 @@ public class Simulation { // testing
 					numOfBorders = StdIn.readInt();
 
 					if (numOfBorders > (2 * G[i - 1].getHeight() + 2 * G[i - 1].getWidth() - 4 - cnt))
-						throw new BordersOutOfRangeException("The number of border blocks in this area cant be more than "
-										+ (2 * G[i - 1].getHeight() + 2 * G[i - 1].getWidth() - 4 - cnt) + ".");
+					 
+					  throw new
+					  BordersOutOfRangeException("The number of border blocks in this area cant be more than "
+					  + (2 * G[i - 1].getHeight() + 2 * G[i - 1].getWidth() - 4 - cnt) + ".");
+					 
 					
 					//NUMBER OF THE CONNECTED AREA
 					StdOut.println("Enter the number of the area where the border blocks are connected to(can't be more than "
@@ -375,7 +381,7 @@ public class Simulation { // testing
 						int yb = Integer.parseInt(bo.substring(bo.indexOf(',') + 1));
 						cnt++;
 						temp[xb][yb] = true;
-						G[i].getBorders()[xb][yb].setGrid(G[newGrid-1]);
+						G[i-1].getBorders()[xb][yb].setGrid(G[newGrid-1]);
 					}
 
 				
@@ -397,7 +403,7 @@ public class Simulation { // testing
 					}
 					 
 					 StdOut.println("Processing data..Please wait\n");
-
+					
 				} catch (InputMismatchException e) {
 					StdOut.println("The input you have entered doesn't match the " + "required type.\n ");
 					done3 = false;
@@ -409,49 +415,86 @@ public class Simulation { // testing
 		
 		}
 		
+		// ARRAY FOR STATS
 
-			//ARRAY FOR STATS
-			
-			int A[][] = new int[5][time];
-			for (int i = 0; i < A.length; i++)
-				for (int j = 0; j < A[0].length; j++)
-					A[i][j] = 0;
-			
-			
-			for (int i = 0; i < areas; i++) {
-				
-				drawFrame(G[i]);
-				G[i].showTrace();
-				G[i].reduceTrace();
-				for (Person p : AL[i]) {
+		int A[][] = new int[5][time];
+		for (int i = 0; i < A.length; i++)
+			for (int j = 0; j < A[0].length; j++)
+				A[i][j] = 0;
+
+		
+		
+		 StdOut.println("\nTHE SIMULATION HAS STARTED!\n");
+		 StdOut.println("PERSON COLORING:");
+		 StdOut.println("+ RED        --> INFECTED");
+		 StdOut.println("+ GREEN      --> IMMUNE");
+		 StdOut.println("+ BLUE       --> SELF PROTECTED");
+		 StdOut.println("+ LIGHT BLUE --> NORMAL");
+		 StdOut.println("\nBLOCK COLORING:");
+		 StdOut.println("+ WHITE      --> NOT INFECTED");
+		 StdOut.println("+ GRAY       --> INFECTED");
+		 StdOut.println("+ PURPLE     --> BORDER");
+		 
+		 
+		//SIMULATION PART
+		 
+		 Person[][] removed = new Person[areas][totalPerson];
+		 Person[][] added = new Person[areas][totalPerson]; // Prepei na ginun je tuta arraylist tlka !!
+		 
+		for (int i = 0; i < time; i++) {
+			for (int j = 0; j < areas; j++) {
+
+				drawFrame(G[j]);
+				G[j].showTrace();
+				G[j].reduceTrace();
+				int cnt = 0;
+				for (Person p : AL[j]) {
 					p.move();
 					
+					if(p.hasToMove()) {
+						p.setGrid(G[j].getBorders()[p.getCurrentX()][p.getCurrentY()].getGrid());
+						G[j].getBorders()[p.getCurrentX()][p.getCurrentY()].getGrid().placeRandom(p);
+						
+						removed[G[j].getID()][cnt] = p;
+						added[G[j].getBorders()[p.getCurrentX()][p.getCurrentY()].getGrid().getID()][cnt] = p;
+						cnt++;
+					}
 
 					try {
-						Thread.sleep(100);
+						Thread.sleep(200);
 					} catch (InterruptedException ex) {
 						Thread.currentThread().interrupt();
 					}
-					
-			
-				
-				if (p.getImmune())
-					A[0][i]++;
-				if (p.isInfected())
-					A[1][i]++;
-				if (p.getSelfProtected())
-					A[2][i]++;
-				if (!p.getImmune() && !p.isInfected() && !p.getSelfProtected())
-					A[3][i]++;
 
-				if (p.getSelfProtected() && p.isInfected())
-					A[4][i]++;
+					if (p.getImmune())
+						A[0][j]++;
+					if (p.isInfected())
+						A[1][j]++;
+					if (p.getSelfProtected())
+						A[2][j]++;
+					if (!p.getImmune() && !p.isInfected() && !p.getSelfProtected())
+						A[3][j]++;
+
+					if (p.getSelfProtected() && p.isInfected())
+						A[4][j]++;
+				}
 			}
-		}
-
+		
+			
+			  for(int k = 0; k < areas; k++) { 
+				  
+				  for(int l = 0; l < removed[k].length; l++ ) { 
+					  AL[k].remove(removed[k][l]); 
+					  }
+				  
+				  for(int m = 0; m < added[k].length; m++ ) { 
+					  AL[k].add(added[k][m]); 
+					  }
+			 
 	}
 }
-
+}
+}
 
 /*
  * 
@@ -470,15 +513,7 @@ public class Simulation { // testing
  * 
  * Person[] persons = new Person[N];
  * 
- * StdOut.println("\nTHE SIMULATION HAS STARTED!\n");
- * StdOut.println("PERSON COLORING:");
- * StdOut.println("+ RED        --> INFECTED");
- * StdOut.println("+ GREEN      --> IMMUNE");
- * StdOut.println("+ BLUE       --> SELF PROTECTED");
- * StdOut.println("+ LIGHT BLUE --> NORMAL");
- * StdOut.println("\nBLOCK COLORING:");
- * StdOut.println("+ WHITE      --> NOT INFECTED");
- * StdOut.println("+ GRAY       --> INFECTED");
+ *
  * 
  * for (int i = 0; i < N; i++) { persons[i] = new Person(grid, selfPr, imm, inf,
  * TTI, PTP, FTP, SP); AL[z-1].add(persons[i]); }
