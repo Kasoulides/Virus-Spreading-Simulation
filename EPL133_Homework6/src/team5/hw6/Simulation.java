@@ -22,9 +22,8 @@ public class Simulation { // testing
 		StdDraw.clear();
 
 		StdDraw.setXscale(0, g.getWidth());
-		StdDraw.setYscale(g.getHeight(),0);
+		StdDraw.setYscale(g.getHeight(), 0);
 
-		
 		StdDraw.setPenColor(StdDraw.BLACK);
 		for (int i = 0; i <= g.getWidth(); i++)
 			StdDraw.line(i, 0, i, g.getHeight());
@@ -33,14 +32,12 @@ public class Simulation { // testing
 
 		boolean[][] array = g.getBorders();
 
-		for (int i = 0; i < g.getHeight(); i++) 
-			for (int j = 0; j < g.getWidth(); j++) 
+		for (int i = 0; i < g.getHeight(); i++)
+			for (int j = 0; j < g.getWidth(); j++)
 				if (array[i][j]) {
 					StdDraw.setPenColor(StdDraw.MAGENTA);
 					StdDraw.square(j + 0.5, i + 0.5, 0.5);
 				}
-		
-		
 
 	}
 
@@ -89,6 +86,7 @@ public class Simulation { // testing
 				FTP = 30, MAXtrace = 2, PTF = 30, SP = 30, numOfBorders = 0, newGrid = 0;
 		String answer, newAnswer, sureExit;
 		boolean exit;
+		Person[] persons = null;
 
 		/*
 		 * // USER INPUTS boolean done1 = false; while (!done1) { try { StdOut.
@@ -248,7 +246,7 @@ public class Simulation { // testing
 					StdOut.println("Enter the number of border blocks in this area no" + z + "(can't be more than "
 							+ (2 * height + 2 * width - 4) + "):");
 					numOfBorders = StdIn.readInt();
-					
+
 					if (numOfBorders > (2 * height + 2 * width - 4))
 						throw new BordersOutOfRangeException(
 								"The number of border blocks in this area cant be more than "
@@ -284,10 +282,10 @@ public class Simulation { // testing
 					G[z - 1] = new Grid(height, width, MAXtrace, TTI, PTF, borders, newGrid);
 
 					drawFrame(G[z - 1]);
-					
+
 					AL[z - 1] = new ArrayList<Person>();
-				
-					Person[] persons = new Person[N];
+
+					persons = new Person[N];
 					for (int k = 0; k < N; k++) {
 						persons[k] = new Person(G[z - 1], selfPr, imm, inf, TTI, PTP, FTP, SP);
 						AL[z - 1].add(persons[k]);
@@ -298,7 +296,6 @@ public class Simulation { // testing
 						}
 
 					}
-				
 
 				}
 				done2 = true;
@@ -312,7 +309,31 @@ public class Simulation { // testing
 
 		}
 
-		
+		for (int i = 0; i < areas; i++) {
+			int A[][] = new int[5][time];
+			for (int k = 0; k < A.length; k++)
+				for (int j = 0; j < A[0].length; j++)
+					A[k][j] = 0;
+			StdDraw.setXscale(0, G[i].getWidth());
+			StdDraw.setYscale(G[i].getHeight(), 0);
+			
+			for (int j = 0; j < AL[i].size(); j++) {
+				persons[i].move();
+				drawFrame(G[i]);
+				if (persons[i].getImmune())
+					A[0][j]++;
+				if (persons[i].isInfected())
+					A[1][j]++;
+				if (persons[i].getSelfProtected())
+					A[2][j]++;
+				if (!persons[i].getImmune() && !persons[i].isInfected() && !persons[i].getSelfProtected())
+					A[3][j]++;
+
+				if (persons[i].getSelfProtected() && persons[i].isInfected())
+					A[4][j]++;
+			}
+		}
+
 	}
 
 }
