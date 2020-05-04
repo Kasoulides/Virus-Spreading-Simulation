@@ -17,7 +17,7 @@ import edu.princeton.cs.introcs.StdDraw;
  */
 public class Grid {
 	
-	private boolean[][] borders; //the blocks that are considered borders are true
+	private Block[][] borders; //the blocks that are considered borders are true
 	private Person[][] persons;
 	private int[][] trace;
 	private boolean[][] exists;
@@ -28,7 +28,6 @@ public class Grid {
 	private final int TIME_INF;
 	private static int counter = 1;
 	private int ID;
-	private int newGrid; //the ID of the bordered Grid
 
 	/**
 	 * This is the constructor of grid.
@@ -47,16 +46,15 @@ public class Grid {
 	 * 
 	 * @since 1.0
 	 */
-	public Grid(int h, int w, int maxTrace, int tti, int ptf,boolean[][] borders,int newGrid) {
+	public Grid(int h, int w, int maxTrace, int tti, int ptf) {
 		MAX_TRACE = maxTrace;
 		TO_FLOOR = ptf;
 		TIME_INF = tti;
-		this.newGrid = newGrid;
 		ID = counter;
 		counter ++;
 		height = h;
 		width = w;
-		this.borders = borders;
+		borders = null;
 		this.trace = new int[height][width];
 		exists = new boolean[height][width];
 		persons = new Person[height][width];
@@ -151,7 +149,7 @@ public class Grid {
 	public boolean isTrapped(int x, int y) {
 		for (int i = -1; i <= 1; i++)
 			for (int j = -1; j <= 1; j++)
-				if(borders[x][y])
+				if(borders[x][y].isBorder())
 					return false;
 				else if ((x + i >= 0) && (x + i < height) && (y + j >= 0) &&
 						(y + j < width) && !(i == 0) && !(j == 0)) {
@@ -221,18 +219,16 @@ public class Grid {
 	}
 	
 	public boolean isBorder(int x,int y) {
-		return borders[x][y];
+		return borders[x][y].isBorder();
 	}
 	
 	public int getID() {
 		return ID;
 	}
 	
-	public int getNewGrid() {
-		return newGrid;
-	}
+
 	
-	public boolean[][] getBorders() {
+	public Block[][] getBorders() {
 		return borders;
 	}
 

@@ -30,11 +30,11 @@ public class Simulation { // testing
 		for (int i = 0; i <= g.getHeight(); i++)
 			StdDraw.line(0, i, g.getWidth(), i);
 
-		boolean[][] array = g.getBorders();
+		Block[][] array = g.getBorders();
 
 		for (int i = 0; i < g.getHeight(); i++)
 			for (int j = 0; j < g.getWidth(); j++)
-				if (array[i][j]) {
+				if (array[i][j].isBorder()) {
 					StdDraw.setPenColor(StdDraw.MAGENTA);
 					StdDraw.square(j + 0.5, i + 0.5, 0.5);
 				}
@@ -241,23 +241,11 @@ public class Simulation { // testing
 
 					StdOut.println("Enter the number of people in the  simulation area no" + z + "(can't be more than "
 							+ (height * width) + "):");
+					
 					N = StdIn.readInt();
 					if (N > height * width)
 						throw new PeopleOverloadingException(
-								"The number of people can't exceed the maximun capacity of the simulation.\n");
-
-					
-					/*if(z==1)
-						N1=N;
-					else if(z==2)
-						N2=N;
-					else if(z==3)
-						N3=N;
-					else
-						N4=N;
-					*/
-					
-					
+								"The number of people can't exceed the maximun capacity of the simulation.\n");		
 					
 					StdOut.println("Enter the number of border blocks in this area no" + z + "(can't be more than "
 							+ (2 * height + 2 * width - 4) + "):");
@@ -295,7 +283,7 @@ public class Simulation { // testing
 						borders[xb][yb] = true;
 					}
 
-					G[z - 1] = new Grid(height, width, MAXtrace, TTI, PTF, borders, newGrid);
+					G[z - 1] = new Grid(height, width, MAXtrace, TTI, PTF);
 
 					drawFrame(G[z - 1]);
 
@@ -325,21 +313,12 @@ public class Simulation { // testing
 
 		}
 
-		//for (int i = 0; i < areas; i++) {
-			/*int A[][] = new int[5][time];
+
+			int A[][] = new int[5][time];
 			for (int k = 0; k < A.length; k++)
 				for (int j = 0; j < A[0].length; j++)
-					A[k][j] = 0;*/
-			/*
-			 * StdDraw.setXscale(0, G[i].getWidth()); StdDraw.setYscale(G[i].getHeight(),
-			 * 0);
-			 * 
-			 * 
-			 * int slr; if(i==0) slr=N1; else if(i==1) slr=N2; else if(i==2) slr=N3; else
-			 * slr=N;
-			 */
+					A[k][j] = 0;
 			
-			//drawFrame(G[i]);
 			
 			for (int j = 0; j < areas; j++) {
 				
@@ -356,25 +335,24 @@ public class Simulation { // testing
 						Thread.currentThread().interrupt();
 					}
 					
-				}
-				//persons[j].move();
+			
 				
-				/*if (persons[i].getImmune())
+				if (p.getImmune())
 					A[0][j]++;
-				if (persons[i].isInfected())
+				if (p.isInfected())
 					A[1][j]++;
-				if (persons[i].getSelfProtected())
+				if (p.getSelfProtected())
 					A[2][j]++;
-				if (!persons[i].getImmune() && !persons[i].isInfected() && !persons[i].getSelfProtected())
+				if (!p.getImmune() && !p.isInfected() && !p.getSelfProtected())
 					A[3][j]++;
 
-				if (persons[i].getSelfProtected() && persons[i].isInfected())
-					A[4][j]++;*/
+				if (p.getSelfProtected() && p.isInfected())
+					A[4][j]++;
 			}
 		}
 
 	}
-
+}
 
 
 /*
