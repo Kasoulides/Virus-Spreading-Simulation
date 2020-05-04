@@ -15,7 +15,7 @@ public class Block {
 	private int x;
 	private int y;
 	private boolean border;
-	private Grid g;
+	private Grid grid;
 	
 	/**
 	 * This is the constructor of Block.
@@ -28,11 +28,11 @@ public class Block {
 	 * 
 	 * @param grid If this block is a border, this is the grid to which this block sends people
 	 */
-	public Block(int xc, int yc, boolean b, Grid grid) {
+	public Block(int xc, int yc, boolean b, Grid Grid) {
 		x=xc;
 		y=yc;
 		border=b;
-		g=grid;
+		grid=Grid;
 	}
 	
 	/**
@@ -68,6 +68,15 @@ public class Block {
 		return border;
 	}
 	
-	
+	/**
+	 * This method returns the grid
+	 * 
+	 * @return Grid The grid that this block, if it is a border, leads to
+	 * 
+	 * @since 1.0
+	 */
+	public Grid getGrid() {
+		return grid;
+	}
 	
 }
