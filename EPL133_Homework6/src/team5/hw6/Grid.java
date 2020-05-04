@@ -46,7 +46,7 @@ public class Grid {
 	 * 
 	 * @since 1.0
 	 */
-	public Grid(int h, int w, int maxTrace, int tti, int ptf) {
+	public Grid(int h, int w, int maxTrace, int tti, int ptf, Block bord[][]) {
 		MAX_TRACE = maxTrace;
 		TO_FLOOR = ptf;
 		TIME_INF = tti;
@@ -54,11 +54,11 @@ public class Grid {
 		counter ++;
 		height = h;
 		width = w;
-		borders = null;
+		//borders = null;
 		this.trace = new int[height][width];
 		exists = new boolean[height][width];
 		persons = new Person[height][width];
-
+		borders=bord;
 	}
 
 	/**
@@ -149,7 +149,7 @@ public class Grid {
 	public boolean isTrapped(int x, int y) {
 		for (int i = -1; i <= 1; i++)
 			for (int j = -1; j <= 1; j++)
-				if(borders[x][y].isBorder())
+				if(borders[x][y].getBorder())
 					return false;
 				else if ((x + i >= 0) && (x + i < height) && (y + j >= 0) &&
 						(y + j < width) && !(i == 0) && !(j == 0)) {
@@ -219,7 +219,7 @@ public class Grid {
 	}
 	
 	public boolean isBorder(int x,int y) {
-		return borders[x][y].isBorder();
+		return borders[x][y].getBorder();
 	}
 	
 	public int getID() {
@@ -291,5 +291,7 @@ public class Grid {
 	public void setWidth(int width) {
 		this.width = width;
 	}
+	
+	
 
 }

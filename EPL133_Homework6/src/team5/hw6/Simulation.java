@@ -34,7 +34,7 @@ public class Simulation { // testing
 
 		for (int i = 0; i < g.getHeight(); i++)
 			for (int j = 0; j < g.getWidth(); j++)
-				if (array[i][j].isBorder()) {
+				if (array[i][j].getBorder()) {
 					StdDraw.setPenColor(StdDraw.MAGENTA);
 					StdDraw.square(j + 0.5, i + 0.5, 0.5);
 				}
@@ -87,7 +87,7 @@ public class Simulation { // testing
 		String answer, newAnswer, sureExit;
 		boolean exit;
 		Person[] persons = null;
-		
+		Block borders[][]=null;
 		
 		int N1=0,N2=0,N3=0,N4=0;
 
@@ -242,12 +242,24 @@ public class Simulation { // testing
 					StdOut.println("Enter the number of people in the  simulation area no" + z + "(can't be more than "
 							+ (height * width) + "):");
 					
+					
+					
+					borders = new Block[height][width];
+					for(int h=0; h<height; h++)
+						for(int w=0; w<width; w++ )
+							borders[h][w]=new Block(h,w,false);
+					
+					
+					
+					
+					
+					
 					N = StdIn.readInt();
 					if (N > height * width)
 						throw new PeopleOverloadingException(
 								"The number of people can't exceed the maximun capacity of the simulation.\n");		
 					
-					StdOut.println("Enter the number of border blocks in this area no" + z + "(can't be more than "
+					/*StdOut.println("Enter the number of border blocks in this area no" + z + "(can't be more than "
 							+ (2 * height + 2 * width - 4) + "):");
 					numOfBorders = StdIn.readInt();
 
@@ -282,8 +294,8 @@ public class Simulation { // testing
 						int yb = Integer.parseInt(bo.substring(bo.indexOf(',') + 1));
 						borders[xb][yb] = true;
 					}
-
-					G[z - 1] = new Grid(height, width, MAXtrace, TTI, PTF);
+*/
+					G[z - 1] = new Grid(height, width, MAXtrace, TTI, PTF, borders);
 
 					drawFrame(G[z - 1]);
 
@@ -312,6 +324,66 @@ public class Simulation { // testing
 			}
 
 		}
+		
+		
+		
+		
+		
+		
+		for(int i=0; i<areas; i++) {
+			StdOut.println("Enter the number of border blocks in this area no" + i + "(can't be more than "
+					+ (2 * height + 2 * width - 4) + "):");
+			numOfBorders = StdIn.readInt();
+
+			/*if (numOfBorders > (2 * height + 2 * width - 4))
+				throw new BordersOutOfRangeException(
+						"The number of border blocks in this area cant be more than "
+								+ (2 * height + 2 * width - 4) + ".");*/
+
+			StdOut.println(
+					"Enter the number of the area where the border blocks are connected to(can't be more than "
+							+ areas + " and can't be " + i + ").");
+			newGrid = StdIn.readInt();
+
+			
+			
+			
+			
+			
+			
+			if (newGrid > areas || newGrid <= 0 || newGrid == i)
+				throw new OutOfRangeException(
+						"The number of the area where the border blocks are connected to cant be more than can't be more than "
+								+ areas + " and can't be " + i + ".");
+
+			
+			
+			
+			boolean borders2[][] = new boolean[height][width];
+			for(int h=0; h<height; h++)
+				for(int w=0; w<width; w++)
+					borders2[h][w]=G[i].getBorders()[h][w].getBorder();
+			String bo;
+
+			for (int j = 1; j <= numOfBorders; j++) {
+
+				StdOut.println("Enter the coordinate of the border block no" + i
+						+ " of this area(the correct form is x,y ).");
+
+				do {
+					bo = StdIn.readString();
+				} while (!isValid(bo, height, width, borders2));
+
+				int xb = Integer.parseInt(bo.substring(0, bo.indexOf(',')));
+				int yb = Integer.parseInt(bo.substring(bo.indexOf(',') + 1));
+				G[i].getBorders()[xb][yb].setGrid(G[j]);
+			}
+		}
+		
+		
+		
+		
+		
 
 
 			int A[][] = new int[5][time];

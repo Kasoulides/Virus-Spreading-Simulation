@@ -28,11 +28,11 @@ public class Block {
 	 * 
 	 * @param grid If this block is a border, this is the grid to which this block sends people
 	 */
-	public Block(int xc, int yc, boolean b, Grid Grid) {
+	public Block(int xc, int yc, boolean b /*Grid Grid*/) {
 		x=xc;
 		y=yc;
 		border=b;
-		grid=Grid;
+		grid=null;
 	}
 	
 	/**
@@ -64,7 +64,7 @@ public class Block {
 	 * 
 	 * @since 1.0
 	 */
-	public boolean isBorder() {
+	public boolean getBorder() {
 		return border;
 	}
 	
@@ -79,4 +79,11 @@ public class Block {
 		return grid;
 	}
 	
+	public void setGrid(Grid g) {
+		grid=g;
+	}
+	
+	public void setBorder() {
+		border=true;
+	}
 }
