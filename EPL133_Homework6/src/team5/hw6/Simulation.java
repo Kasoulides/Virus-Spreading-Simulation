@@ -87,6 +87,9 @@ public class Simulation { // testing
 		String answer, newAnswer, sureExit;
 		boolean exit;
 		Person[] persons = null;
+		
+		
+		int N1=0,N2=0,N3=0,N4=0;
 
 		/*
 		 * // USER INPUTS boolean done1 = false; while (!done1) { try { StdOut.
@@ -243,6 +246,19 @@ public class Simulation { // testing
 						throw new PeopleOverloadingException(
 								"The number of people can't exceed the maximun capacity of the simulation.\n");
 
+					
+					if(z==1)
+						N1=N;
+					else if(z==2)
+						N2=N;
+					else if(z==3)
+						N3=N;
+					else
+						N4=N;
+					
+					
+					
+					
 					StdOut.println("Enter the number of border blocks in this area no" + z + "(can't be more than "
 							+ (2 * height + 2 * width - 4) + "):");
 					numOfBorders = StdIn.readInt();
@@ -288,7 +304,7 @@ public class Simulation { // testing
 					persons = new Person[N];
 					for (int k = 0; k < N; k++) {
 						persons[k] = new Person(G[z - 1], selfPr, imm, inf, TTI, PTP, FTP, SP);
-						AL[z - 1].add(persons[k]);
+						//AL[z - 1].add(persons[k]);
 						try {
 							Thread.sleep(500);
 						} catch (InterruptedException ex) {
@@ -310,17 +326,31 @@ public class Simulation { // testing
 		}
 
 		for (int i = 0; i < areas; i++) {
-			int A[][] = new int[5][time];
+			/*int A[][] = new int[5][time];
 			for (int k = 0; k < A.length; k++)
 				for (int j = 0; j < A[0].length; j++)
-					A[k][j] = 0;
+					A[k][j] = 0;*/
 			StdDraw.setXscale(0, G[i].getWidth());
 			StdDraw.setYscale(G[i].getHeight(), 0);
 			
-			for (int j = 0; j < AL[i].size(); j++) {
-				persons[i].move();
-				drawFrame(G[i]);
-				if (persons[i].getImmune())
+			
+			int slr;
+			if(i==0)
+				slr=N1;
+			else if(i==1)
+				slr=N2;
+			else if(i==2)
+				slr=N3;
+			else
+				slr=N;
+			
+			drawFrame(G[i]);
+			
+			for (int j = 0; j < slr; j++) {
+				persons[j].move();
+				try { Thread.sleep(500); } catch (InterruptedException ex) {
+					 Thread.currentThread().interrupt(); }
+				/*if (persons[i].getImmune())
 					A[0][j]++;
 				if (persons[i].isInfected())
 					A[1][j]++;
@@ -330,7 +360,7 @@ public class Simulation { // testing
 					A[3][j]++;
 
 				if (persons[i].getSelfProtected() && persons[i].isInfected())
-					A[4][j]++;
+					A[4][j]++;*/
 			}
 		}
 
