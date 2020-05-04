@@ -342,6 +342,7 @@ public class Simulation { // testing
 			//drawFrame(G[i]);
 			
 			for (int j = 0; j < areas; j++) {
+				
 				drawFrame(G[j]);
 				G[j].showTrace();
 				G[j].reduceTrace();
