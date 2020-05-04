@@ -297,7 +297,7 @@ public class Person {
 	}
 
 	private void eraseCircle() {
-		if(grid.getTrace(currentY, currentX) > 0)
+		if(grid.getTrace(currentX, currentY) > 0)
 			StdDraw.setPenColor(StdDraw.GRAY);
 		else
 			StdDraw.setPenColor(StdDraw.WHITE);
