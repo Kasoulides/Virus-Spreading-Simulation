@@ -28,13 +28,36 @@ public class Block {
 	 * 
 	 * @param grid If this block is a border, this is the grid to which this block sends people
 	 */
-	public Block(int xc, int yc, boolean b /*Grid Grid*/) {
+	public Block(int xc, int yc, boolean b ) {
 		x=xc;
 		y=yc;
 		border=b;
 		grid=null;
 	}
 	
+	
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Block other = (Block) obj;
+		if (border != other.border)
+			return false;
+		if (grid == null) {
+			if (other.grid != null)
+				return false;
+		} else if (!grid.equals(other.grid))
+			return false;
+		if (x != other.x)
+			return false;
+		if (y != other.y)
+			return false;
+		return true;
+	}
+
 	/**
 	 * This method returns the value of x.
 	 * 

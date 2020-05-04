@@ -82,136 +82,179 @@ public class Simulation { // testing
 
 	public static void main(String[] args)
 			throws IncorrectAnswerException, OutOfRangeException, PeopleOverloadingException, SimulationSizeException {
+		
+		//INITIALIZATIONS
 		int height = 0, width = 0, areas = 0, N = 0, time = 0, selfPr = 0, imm = 0, inf = 0, TTI = 2, PTP = 30,
-				FTP = 30, MAXtrace = 2, PTF = 30, SP = 30, numOfBorders = 0, newGrid = 0;
+			FTP = 30, MAXtrace = 2, PTF = 30, SP = 30, numOfBorders = 0, newGrid = 0;
 		String answer, newAnswer, sureExit;
 		boolean exit;
 		Person[] persons = null;
 		Block borders[][]=null;
 		
-		int N1=0,N2=0,N3=0,N4=0;
+		
+		StdOut.println("+--------------------------------------------------------+");
+		StdOut.println("|       WELCOME TO OUR VIRUS-SPREADING SIMULATION        |");
+		StdOut.println("|                                                        |");
+		StdOut.println("|   The purpose of this program is to simulate a virus 	 |");
+		StdOut.println("| spreading through different areas and to provide data  |");
+		StdOut.println("|  about the level of the spread in different scenarios. |");
+		StdOut.println("|                                                        |");
+		StdOut.println("+--------------------------------------------------------+");
 
-		/*
-		 * // USER INPUTS boolean done1 = false; while (!done1) { try { StdOut.
-		 * println("Enter the height of the simulation block(must be between 5-100): ");
-		 * height = StdIn.readInt(); if (height < 5 || height > 100) throw new
-		 * SimulationSizeException("The height of the " +
-		 * "simulation  must be between 5-100.\n  ");
-		 * 
-		 * StdOut.println("Enter the width of the simulation block" +
-		 * "(must be between 5-100): "); width = StdIn.readInt(); if (width < 5 || width
-		 * > 100) throw new SimulationSizeException
-		 * ("The width of the simulation  must be between 5-100.\n  ");
-		 * 
-		 * StdOut.println("Enter the number of people in the simulation: "); N =
-		 * StdIn.readInt(); if (N > height * width) throw new
-		 * PeopleOverloadingException("The number of people " +
-		 * "can't exceed the maximun capacity of the simulation.\n");
-		 * 
-		 * StdOut.println("Enter the duration of the simulation(must be in " +
-		 * "minutes): "); time = StdIn.readInt(); if (time < 0) throw new
-		 * NegativeNumberException("The duration of the " +
-		 * "simulation cannot be a negative number:");
-		 * 
-		 * StdOut.println("Enter the chance of a person being Self " +
-		 * "Protected(must be between 1-100): "); selfPr = StdIn.readInt(); if (selfPr <
-		 * 1 || selfPr > 100) throw new
-		 * OutOfRangeException("The number must be between 1-100");
-		 * 
-		 * StdOut.println("Enter the chance of a person being Immune" +
-		 * "(must be between 1-100): "); imm = StdIn.readInt(); if (imm < 1 || imm >
-		 * 100) throw new OutOfRangeException("The number must be between 1-100");
-		 * 
-		 * StdOut.println("Enter the chance of a person being Infected" +
-		 * "(must be between 1-100): "); inf = StdIn.readInt(); if (inf < 1 || inf >
-		 * 100) throw new OutOfRangeException("The number must be between 1-100");
-		 * 
-		 * StdOut.println("Would you like to open Advanced Settings? (Y/n) "); answer =
-		 * StdIn.readString(); if (!answer.equals("Y") && !answer.equals("n")) throw new
-		 * IncorrectAnswerException("The answer must be either Y or n");
-		 * 
-		 * if (answer.equals("Y")) { StdOut.println("ADVANCED SETTINGS "); exit = false;
-		 * 
-		 * // ADVANCED USER INPUTS newAnswer = "Y"; sureExit = null; int num; do {
-		 * StdOut.println("1. Time to Infect(time needed for a" +
-		 * "person to stay in a block to infect it)");
-		 * StdOut.println("2. Person to Person(chances of an" +
-		 * " infected person to infect another one)");
-		 * StdOut.println("3. Floor to Person(chances of a " +
-		 * "person getting infected by an infected block)");
-		 * StdOut.println("4. Person to Floor(chances of a " +
-		 * "person infecting a block)"); StdOut.println("5. Max trace time(time that an"
-		 * + " infected block stays infected)"); StdOut.println(
-		 * "6. Protection Level(protection level making it" +
-		 * " harder for a self protected person to get infected)");
-		 * StdOut.println("7. Exit"); StdOut.println("\nChoose a number to continue..");
-		 * num = StdIn.readInt(); if (num < 1 || num > 7) { throw new
-		 * OutOfRangeException("The number must be " + "between 1 and 7 inclusive"); }
-		 * switch (num) { case 1: StdOut.println("Set new Time to Infect: "); TTI =
-		 * StdIn.readInt(); if (TTI < 0) throw new
-		 * NegativeNumberException("The time to " +
-		 * "infect cannot be a negative number"); break; case 2:
-		 * StdOut.println("Set new Person to Person" + "(must be between 1-100): "); PTP
-		 * = StdIn.readInt(); if (PTP < 1 || PTP > 100) throw new OutOfRangeException
-		 * ("The number must be between 1-100"); break; case 3:
-		 * StdOut.println("Set new Floor to Person" + "(must be between 1-100): "); FTP
-		 * = StdIn.readInt(); if (FTP < 1 || FTP > 100) throw new OutOfRangeException
-		 * ("The number must be between 1-100"); break; case 4:
-		 * StdOut.println("Set new Person to Floor" + "(must be between 1-100): "); PTF
-		 * = StdIn.readInt(); if (PTF < 1 || PTF > 100) throw new OutOfRangeException
-		 * ("The number must be between 1-100"); break; case 5:
-		 * StdOut.println("Set new Max trace time: "); MAXtrace = StdIn.readInt(); if
-		 * (MAXtrace < 0) throw new NegativeNumberException
-		 * ("The max trace time cannot be a negative number"); break; case 6:
-		 * StdOut.println("Set new Protection Level" + "(must be between 1-100): "); SP
-		 * = StdIn.readInt(); if (SP < 0) throw new NegativeNumberException
-		 * ("The number must be between 1-100"); break; case 7: exit = true; break;
-		 * 
-		 * }
-		 * 
-		 * if (!exit) { StdOut.println("Would you like to change anything else? " +
-		 * "(Y/n) "); newAnswer = StdIn.readString(); if (!newAnswer.equals("Y") &&
-		 * !newAnswer.equals("n")) throw new IncorrectAnswerException
-		 * ("The answer must be either Y or n");
-		 * 
-		 * } else { StdOut.println("Are you sure? (Y/n) "); sureExit =
-		 * StdIn.readString(); if (!sureExit.equals("Y") && !sureExit.equals("n")) throw
-		 * new IncorrectAnswerException ("The answer must be either Y or n"); if
-		 * (sureExit.equals("Y")) { exit = true; } else if (sureExit.equals("n")) {
-		 * 
-		 * if (!newAnswer.equals("Y")) {
-		 * 
-		 * exit = false;
-		 * 
-		 * }
-		 * 
-		 * }
-		 * 
-		 * } } while (newAnswer.equals("Y") && !exit);
-		 * 
-		 * }
-		 * 
-		 * done1 = true;
-		 * 
-		 * } catch (InputMismatchException e) {
-		 * StdOut.println("The input you have entered doesn't match the " +
-		 * "required type.\n "); done1 = false; } catch (Exception e) {
-		 * StdOut.println("Wrong Input.Please try again!\n" + e.getMessage() + "\n");
-		 * done1 = false;
-		 * 
-		 * }
-		 * 
-		 * }
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 */
+		
+		StdOut.println("Follow the instructions and you'll be fine\n");
+		StdOut.println("LETS BEGIN!!\n\n\n");
+		
+		// USER INPUTS 1st part
+		boolean done1 = false;
+		while (!done1) {
+			try {
+				//DURATION OF SIMULATION
+				StdOut.println("Enter the duration of the simulation(must be in " + "minutes): ");
+				time = StdIn.readInt();
+				if (time < 0)
+					throw new NegativeNumberException(
+							"The duration of the " + "simulation cannot be a negative number:");
+				
+				//CHANCE OF A PERSON BEING SELF-PROTECTED
+				StdOut.println("Enter the chance of a person being Self " + "Protected(must be between 1-100): ");
+				selfPr = StdIn.readInt();
+				if (selfPr < 1 || selfPr > 100)
+					throw new OutOfRangeException("The number must be between 1-100");
+				
+				//CHANCE OF A PERSON BEING IMMUNE
+				StdOut.println("Enter the chance of a person being Immune" + "(must be between 1-100): ");
+				imm = StdIn.readInt();
+				if (imm < 1 || imm > 100)
+					throw new OutOfRangeException("The number must be between 1-100");
+				
+				//CHANCE OF A PERSON BEING INFECTED
+				StdOut.println("Enter the chance of a person being Infected" + "(must be between 1-100): ");
+				inf = StdIn.readInt();
+				if (inf < 1 || inf > 100)
+					throw new OutOfRangeException("The number must be between 1-100");
+				
+				//ADVANCE SETTINGS
+				StdOut.println("Would you like to open Advanced Settings? (Y/n) ");
+				answer = StdIn.readString();
+				if (!answer.equals("Y") && !answer.equals("n"))
+					throw new IncorrectAnswerException("The answer must be either Y or n");
+
+				if (answer.equals("Y")) {
+					StdOut.println("ADVANCED SETTINGS ");
+					exit = false;
+
+					// ADVANCED USER INPUTS
+					newAnswer = "Y";
+					sureExit = null;
+					int num;
+					do {
+						StdOut.println(
+								"1. Time to Infect(time needed for a" + "person to stay in a block to infect it)");
+						StdOut.println("2. Person to Person(chances of an" + " infected person to infect another one)");
+						StdOut.println(
+								"3. Floor to Person(chances of a " + "person getting infected by an infected block)");
+						StdOut.println("4. Person to Floor(chances of a " + "person infecting a block)");
+						StdOut.println("5. Max trace time(time that an" + " infected block stays infected)");
+						StdOut.println("6. Protection Level(protection level making it"
+								+ " harder for a self protected person to get infected)");
+						StdOut.println("7. Exit");
+						StdOut.println("\nChoose a number to continue..");
+						num = StdIn.readInt();
+						if (num < 1 || num > 7) {
+							throw new OutOfRangeException("The number must be " + "between 1 and 7 inclusive");
+						}
+						switch (num) {
+						case 1:
+							StdOut.println("Set new Time to Infect: ");
+							TTI = StdIn.readInt();
+							if (TTI < 0)
+								throw new NegativeNumberException(
+										"The time to " + "infect cannot be a negative number");
+							break;
+						case 2:
+							StdOut.println("Set new Person to Person" + "(must be between 1-100): ");
+							PTP = StdIn.readInt();
+							if (PTP < 1 || PTP > 100)
+								throw new OutOfRangeException("The number must be between 1-100");
+							break;
+						case 3:
+							StdOut.println("Set new Floor to Person" + "(must be between 1-100): ");
+							FTP = StdIn.readInt();
+							if (FTP < 1 || FTP > 100)
+								throw new OutOfRangeException("The number must be between 1-100");
+							break;
+						case 4:
+							StdOut.println("Set new Person to Floor" + "(must be between 1-100): ");
+							PTF = StdIn.readInt();
+							if (PTF < 1 || PTF > 100)
+								throw new OutOfRangeException("The number must be between 1-100");
+							break;
+						case 5:
+							StdOut.println("Set new Max trace time: ");
+							MAXtrace = StdIn.readInt();
+							if (MAXtrace < 0)
+								throw new NegativeNumberException("The max trace time cannot be a negative number");
+							break;
+						case 6:
+							StdOut.println("Set new Protection Level" + "(must be between 1-100): ");
+							SP = StdIn.readInt();
+							if (SP < 0)
+								throw new NegativeNumberException("The number must be between 1-100");
+							break;
+						case 7:
+							exit = true;
+							break;
+
+						}
+
+						if (!exit) {
+							StdOut.println("Would you like to change anything else? " + "(Y/n) ");
+							newAnswer = StdIn.readString();
+							if (!newAnswer.equals("Y") && !newAnswer.equals("n"))
+								throw new IncorrectAnswerException("The answer must be either Y or n");
+
+						} else {
+							StdOut.println("Are you sure? (Y/n) ");
+							sureExit = StdIn.readString();
+							if (!sureExit.equals("Y") && !sureExit.equals("n"))
+								throw new IncorrectAnswerException("The answer must be either Y or n");
+							if (sureExit.equals("Y")) {
+								exit = true;
+							} else if (sureExit.equals("n")) {
+
+								if (!newAnswer.equals("Y")) {
+
+									exit = false;
+
+								}
+
+							}
+
+						}
+					} while (newAnswer.equals("Y") && !exit);
+
+				}
+
+				done1 = true;
+
+			} catch (InputMismatchException e) {
+				StdOut.println("The input you have entered doesn't match the " + "required type.\n ");
+				done1 = false;
+			} catch (Exception e) {
+				StdOut.println("Wrong Input.Lets start again!\n" + e.getMessage() + "\n");
+				done1 = false;
+
+			}
+
+		}
+		  
+		  
+		  
+		  
+		  
+		  
+		 
 
 		Grid G[] = null;
 		List<Person> AL[] = null;
@@ -241,6 +284,11 @@ public class Simulation { // testing
 
 					StdOut.println("Enter the number of people in the  simulation area no" + z + "(can't be more than "
 							+ (height * width) + "):");
+				
+					N = StdIn.readInt();
+					if (N > height * width)
+						throw new PeopleOverloadingException(
+								"The number of people can't exceed the maximun capacity of the simulation.\n");		
 					
 					
 					
@@ -250,51 +298,6 @@ public class Simulation { // testing
 							borders[h][w]=new Block(h,w,false);
 					
 					
-					
-					
-					
-					
-					N = StdIn.readInt();
-					if (N > height * width)
-						throw new PeopleOverloadingException(
-								"The number of people can't exceed the maximun capacity of the simulation.\n");		
-					
-					/*StdOut.println("Enter the number of border blocks in this area no" + z + "(can't be more than "
-							+ (2 * height + 2 * width - 4) + "):");
-					numOfBorders = StdIn.readInt();
-
-					if (numOfBorders > (2 * height + 2 * width - 4))
-						throw new BordersOutOfRangeException(
-								"The number of border blocks in this area cant be more than "
-										+ (2 * height + 2 * width - 4) + ".");
-
-					StdOut.println(
-							"Enter the number of the area where the border blocks are connected to(can't be more than "
-									+ areas + " and can't be " + z + ").");
-					newGrid = StdIn.readInt();
-
-					if (newGrid > areas || newGrid <= 0 || newGrid == z)
-						throw new OutOfRangeException(
-								"The number of the area where the border blocks are connected to cant be more than can't be more than "
-										+ areas + " and can't be " + z + ".");
-
-					boolean borders[][] = new boolean[height][width];
-					String bo;
-
-					for (int i = 1; i <= numOfBorders; i++) {
-
-						StdOut.println("Enter the coordinate of the border block no" + i
-								+ " of this area(the correct form is x,y ).");
-
-						do {
-							bo = StdIn.readString();
-						} while (!isValid(bo, height, width, borders));
-
-						int xb = Integer.parseInt(bo.substring(0, bo.indexOf(',')));
-						int yb = Integer.parseInt(bo.substring(bo.indexOf(',') + 1));
-						borders[xb][yb] = true;
-					}
-*/
 					G[z - 1] = new Grid(height, width, MAXtrace, TTI, PTF, borders);
 
 					drawFrame(G[z - 1]);
@@ -305,12 +308,6 @@ public class Simulation { // testing
 					for (int k = 0; k < N; k++) {
 						persons[k] = new Person(G[z - 1], selfPr, imm, inf, TTI, PTP, FTP, SP);
 						AL[z - 1].add(persons[k]);
-						try {
-							Thread.sleep(500);
-						} catch (InterruptedException ex) {
-							Thread.currentThread().interrupt();
-						}
-
 					}
 
 				}
@@ -319,7 +316,7 @@ public class Simulation { // testing
 				StdOut.println("The input you have entered doesn't match the " + "required type.\n ");
 				done2 = false;
 			} catch (Exception e) {
-				StdOut.println("Wrong Input.Please try again!\n" + e.getMessage() + "\n");
+				StdOut.println("Wrong Input.Lets start again!\n" + e.getMessage() + "\n");
 				done2 = false;
 			}
 
@@ -329,75 +326,104 @@ public class Simulation { // testing
 		
 		
 		
+		for (int i = 1; i <= areas; i++) {
+			int cnt = 0;
+			boolean done3 = false, exit3 = false;
+			String sureExit3 = null, newAnswer3 = "Y";
+			
+			boolean temp[][] = new boolean[height][width];
+			for (int h = 0; h < height; h++)
+				for (int w = 0; w < width; w++)
+					temp[h][w] = false;
+
+			do {
+				try {
+					
+					//NUMBER OF BORDER BLOCKS
+					StdOut.println("Enter the number of border blocks in the area no" + i + "(can't be more than "
+							+ (2 * G[i - 1].getHeight() + 2 * G[i - 1].getWidth() - 4 - cnt) + "):");
+					numOfBorders = StdIn.readInt();
+
+					if (numOfBorders > (2 * G[i - 1].getHeight() + 2 * G[i - 1].getWidth() - 4 - cnt))
+						throw new BordersOutOfRangeException("The number of border blocks in this area cant be more than "
+										+ (2 * G[i - 1].getHeight() + 2 * G[i - 1].getWidth() - 4 - cnt) + ".");
+					
+					//NUMBER OF THE CONNECTED AREA
+					StdOut.println("Enter the number of the area where the border blocks are connected to(can't be more than "
+									+ areas + " and can't be " + i + ").");
+					newGrid = StdIn.readInt();
+
+					if (newGrid > areas || newGrid <= 0 || newGrid == i)
+						throw new OutOfRangeException("The number of the area where the border blocks are connected to cant be more than can't be more than "
+										+ areas + " and can't be " + i + ".");
+
+					
+					//BORDER BLOCKS
+					
+					String bo;
+
+					for (int j = 1; j <= numOfBorders; j++) {
+
+						StdOut.println("Enter the coordinate of the border block no" + j
+								+ " of this area(the correct form is x,y ).");
+
+						do {
+							bo = StdIn.readString();
+						} while (!isValid(bo, height, width, temp));
+
+						int xb = Integer.parseInt(bo.substring(0, bo.indexOf(',')));
+						int yb = Integer.parseInt(bo.substring(bo.indexOf(',') + 1));
+						cnt++;
+						temp[xb][yb] = true;
+						G[i].getBorders()[xb][yb].setGrid(G[newGrid-1]);
+					}
+
+				
+						StdOut.println("Would you like to add more border blocks for a different area? " + "(Y/n) ");
+						newAnswer3 = StdIn.readString();
+						if (!newAnswer3.equals("Y") && !newAnswer3.equals("n"))
+							throw new IncorrectAnswerException("The answer must be either Y or n");
+
+					 if (!newAnswer3.equals("Y")){
+						StdOut.println("Are you sure? (Y/n) ");
+						sureExit3 = StdIn.readString();
+						if (!sureExit3.equals("Y") && !sureExit3.equals("n"))
+							throw new IncorrectAnswerException("The answer must be either Y or n");
+						if (sureExit3.equals("Y")) {
+							done3 = true;
+						} else if (sureExit3.equals("n"))
+							done3 = false;
+
+					}
+					 
+					 StdOut.println("Processing data..Please wait\n");
+
+				} catch (InputMismatchException e) {
+					StdOut.println("The input you have entered doesn't match the " + "required type.\n ");
+					done3 = false;
+				} catch (Exception e) {
+					StdOut.println("Wrong Input.Lets start again!\n" + e.getMessage() + "\n");
+					done3 = false;
+				}
+			} while (!done3);	
 		
-		for(int i=0; i<areas; i++) {
-			StdOut.println("Enter the number of border blocks in this area no" + i + "(can't be more than "
-					+ (2 * height + 2 * width - 4) + "):");
-			numOfBorders = StdIn.readInt();
-
-			/*if (numOfBorders > (2 * height + 2 * width - 4))
-				throw new BordersOutOfRangeException(
-						"The number of border blocks in this area cant be more than "
-								+ (2 * height + 2 * width - 4) + ".");*/
-
-			StdOut.println(
-					"Enter the number of the area where the border blocks are connected to(can't be more than "
-							+ areas + " and can't be " + i + ").");
-			newGrid = StdIn.readInt();
-
-			
-			
-			
-			
-			
-			
-			if (newGrid > areas || newGrid <= 0 || newGrid == i)
-				throw new OutOfRangeException(
-						"The number of the area where the border blocks are connected to cant be more than can't be more than "
-								+ areas + " and can't be " + i + ".");
-
-			
-			
-			
-			boolean borders2[][] = new boolean[height][width];
-			for(int h=0; h<height; h++)
-				for(int w=0; w<width; w++)
-					borders2[h][w]=G[i].getBorders()[h][w].getBorder();
-			String bo;
-
-			for (int j = 1; j <= numOfBorders; j++) {
-
-				StdOut.println("Enter the coordinate of the border block no" + i
-						+ " of this area(the correct form is x,y ).");
-
-				do {
-					bo = StdIn.readString();
-				} while (!isValid(bo, height, width, borders2));
-
-				int xb = Integer.parseInt(bo.substring(0, bo.indexOf(',')));
-				int yb = Integer.parseInt(bo.substring(bo.indexOf(',') + 1));
-				G[i].getBorders()[xb][yb].setGrid(G[j]);
-			}
 		}
 		
-		
-		
-		
-		
 
-
+			//ARRAY FOR STATS
+			
 			int A[][] = new int[5][time];
-			for (int k = 0; k < A.length; k++)
+			for (int i = 0; i < A.length; i++)
 				for (int j = 0; j < A[0].length; j++)
-					A[k][j] = 0;
+					A[i][j] = 0;
 			
 			
-			for (int j = 0; j < areas; j++) {
+			for (int i = 0; i < areas; i++) {
 				
-				drawFrame(G[j]);
-				G[j].showTrace();
-				G[j].reduceTrace();
-				for (Person p : AL[j]) {
+				drawFrame(G[i]);
+				G[i].showTrace();
+				G[i].reduceTrace();
+				for (Person p : AL[i]) {
 					p.move();
 					
 
@@ -410,16 +436,16 @@ public class Simulation { // testing
 			
 				
 				if (p.getImmune())
-					A[0][j]++;
+					A[0][i]++;
 				if (p.isInfected())
-					A[1][j]++;
+					A[1][i]++;
 				if (p.getSelfProtected())
-					A[2][j]++;
+					A[2][i]++;
 				if (!p.getImmune() && !p.isInfected() && !p.getSelfProtected())
-					A[3][j]++;
+					A[3][i]++;
 
 				if (p.getSelfProtected() && p.isInfected())
-					A[4][j]++;
+					A[4][i]++;
 			}
 		}
 

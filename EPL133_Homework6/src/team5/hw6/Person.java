@@ -40,6 +40,9 @@ public class Person {
 	private static int ff = 0; // counter for normal people infected from floor
 	private static int fp = 0; // counter for normal people infected from person
 
+	
+		
+
 	/**
 	 * This is the constructor of the person.
 	 * 
@@ -85,9 +88,7 @@ public class Person {
 		} while (grid.isTaken(currentX, currentY));
 
 		grid.setPos(currentX, currentY, this);
-		
-		System.out.println(currentX + " " + currentY);
-
+	
 		if (infected)
 			col = StdDraw.RED;
 		else if (selfProtected)
@@ -120,7 +121,7 @@ public class Person {
 	public Person(Grid g, int selfPr, int imm, int inf) {
 		this(g, selfPr, imm, inf, 20, 50, 30, 30);
 	}
-
+	
 	/**
 	 * This method is used by a person to move to a different position or stay at
 	 * the same one, this happens randomly.
@@ -129,14 +130,8 @@ public class Person {
 	 */
 	public void move() {
 
-		boolean isB=false;
-		
 		this.checkInfection();// checks before
 		
-		
-		
-		if(grid.isBorder(currentX, currentY))
-			isB=true;
 		
 		Random r = new Random();
 
@@ -196,7 +191,7 @@ public class Person {
 				}
 				//nx = r.nextInt(3) - 1;
 				//ny = r.nextInt(3) - 1;
-			} while (!(isValid(currentX + nx, currentY + ny, isB)));
+			} while (!(isValid(currentX + nx, currentY + ny)));
 		}
 		
 		if(currentX<0 || currentX==grid.getHeight() || currentY<0 || currentY==grid.getWidth()) {
@@ -330,11 +325,11 @@ public class Person {
 	 * 
 	 * @return boolean True if the position is valid, otherwise false
 	 */
-	public boolean isValid(int x, int y, boolean b) {
-		if(!b)
+	private boolean isValid(int x, int y) {
+		if(!grid.isBorder(currentX, currentY))
 			return  ((x >= 0) && (x < grid.getHeight()) && (y >= 0) &&
 					(y < grid.getWidth()) && !grid.isTaken(x, y));
-		else if(x<0 || x==grid.getHeight() || y<0 || y==grid.getWidth())
+		else if(x<0 || x==grid.getHeight() || y<0 || y==grid.getWidth() && !grid.getBorders()[x][y].getGrid().isFull())
 			return true;
 		return false;
 	}
@@ -435,6 +430,54 @@ public class Person {
 	}
 	public void setY(int otherY) {
 		currentY = otherY;
+	}
+	
+	public void resetToMove() {
+		toMove = false;
+	}
+
+
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Person other = (Person) obj;
+		if (FTP != other.FTP)
+			return false;
+		if (PTP != other.PTP)
+			return false;
+		if (SP != other.SP)
+			return false;
+		if (TTI != other.TTI)
+			return false;
+		if (col == null) {
+			if (other.col != null)
+				return false;
+		} else if (!col.equals(other.col))
+			return false;
+		if (counter != other.counter)
+			return false;
+		if (currentX != other.currentX)
+			return false;
+		if (currentY != other.currentY)
+			return false;
+		if (grid == null) {
+			if (other.grid != null)
+				return false;
+		} else if (!grid.equals(other.grid))
+			return false;
+		if (immune != other.immune)
+			return false;
+		if (infected != other.infected)
+			return false;
+		if (selfProtected != other.selfProtected)
+			return false;
+		if (toMove != other.toMove)
+			return false;
+		return true;
 	}
 
 }

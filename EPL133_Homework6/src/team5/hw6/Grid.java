@@ -1,5 +1,6 @@
 package team5.hw6;
 
+import java.util.Arrays;
 import java.util.Random;
 
 import edu.princeton.cs.introcs.StdDraw;
@@ -290,6 +291,55 @@ public class Grid {
 	 */
 	public void setWidth(int width) {
 		this.width = width;
+	}
+	
+	public void placeRandom(Person p) {
+		
+		int newX,newY;
+		Random r = new Random();
+		do {
+			newX = r.nextInt(height);
+			newY = r.nextInt(width);
+
+		} while (isTaken(newX,newY));
+		
+		p.setX(newX);
+		p.setY(newY);
+
+		
+	}
+
+
+
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Grid other = (Grid) obj;
+		if (ID != other.ID)
+			return false;
+		if (MAX_TRACE != other.MAX_TRACE)
+			return false;
+		if (TIME_INF != other.TIME_INF)
+			return false;
+		if (TO_FLOOR != other.TO_FLOOR)
+			return false;
+		if (!Arrays.deepEquals(borders, other.borders))
+			return false;
+		if (!Arrays.deepEquals(exists, other.exists))
+			return false;
+		if (height != other.height)
+			return false;
+		if (!Arrays.deepEquals(persons, other.persons))
+			return false;
+		if (!Arrays.deepEquals(trace, other.trace))
+			return false;
+		if (width != other.width)
+			return false;
+		return true;
 	}
 	
 	
