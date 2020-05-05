@@ -416,9 +416,14 @@ public class Simulation { // testing
 		StdOut.println("+ PURPLE     --> BORDER");
 
 		// SIMULATION PART
-
-		Person[][] removed = new Person[areas][totalPerson];
-		Person[][] added = new Person[areas][totalPerson]; // Prepei na ginun je tuta arraylist tlka !!
+		List<Person> removed[] = new ArrayList[areas];
+		List<Person> added[] = new ArrayList[areas];
+		//Person[][] removed = new Person[areas][totalPerson];
+		//Person[][] added = new Person[areas][totalPerson]; // Prepei na ginun je tuta arraylist tlka !!
+		for(int i = 0; i < areas; i++) {
+			removed[i] = new ArrayList<Person>();
+			added[i] = new ArrayList<Person>();
+		}
 
 		for (int i = 0; i < time; i++) {
 			for (int j = 0; j < areas; j++) {
@@ -447,12 +452,12 @@ public class Simulation { // testing
 						temp.placeRandom(p);
 						
 						
-						removed[G[j].getID()][cnt] = p;
+						removed[G[j].getID()].add(p);
 
 						// added[G[j].getBorders()[p.getCurrentX()][p.getCurrentY()].getGrid().getID()][cnt]
 						// = p;
 
-						added[G[j].getBorders()[cx][cy].getGrid().getID()][cnt] = p;
+						added[G[j].getBorders()[cx][cy].getGrid().getID()].add(p);
 
 						cnt++;
 					}
@@ -479,17 +484,21 @@ public class Simulation { // testing
 
 			for (int k = 0; k < areas; k++) {
 
-				for (int l = 0; l < removed[k].length; l++) {
-					if(removed[k][l]!=null)
-						AL[k].remove(removed[k][l]);
+				for (Person p : removed[k]) {
+					if(p !=null)
+						AL[k].remove(p);
 				}
+				removed[k].clear();
 
-				for (int m = 0; m < added[k].length; m++) {
-					if(added[k][m]!=null)
-						AL[k].add(added[k][m]);
+				for (Person p : added[k]) {
+					if(p !=null)
+						AL[k].add(p);
 				}
+				added[k].clear();
 
 			}
+			
+			
 
 		}
 		StdOut.println("Works");
