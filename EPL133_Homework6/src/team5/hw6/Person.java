@@ -422,26 +422,69 @@ public class Person {
 		return fp;
 	}
 	
+	/**
+	 * This method sets the grid that this person is into.
+	 * 
+	 * @param other This is the grid that this person is into
+	 * 
+	 * @since 1.0
+	 */
 	public void setGrid(Grid other) {
 		grid = other;
 	}
+	
+	/**
+	 * This method sets the value of the x coordinate of this person.
+	 * 
+	 * @param otherX This is the new x coordinate
+	 * 
+	 * @since 1.0
+	 */
 	public void setX(int otherX) {
 		currentX = otherX;
 	}
+	
+	/**
+	 * This method sets the value of the y coordinate of this person.
+	 * 
+	 * @param otherY This is the new y coordinate
+	 * 
+	 * @since 1.0
+	 */
 	public void setY(int otherY) {
 		currentY = otherY;
 	}
 	
-	
+	/**
+	 * This method returns the value of toMove.
+	 * 
+	 * @return boolean The value of toMove
+	 * 
+	 * @since 1.0
+	 */
 	public boolean hasToMove() {
 		return toMove;
 	}
 	
+	/**
+	 * This method sets the value of toMove to false.
+	 * 
+	 * @since 1.0
+	 */
 	public void resetToMove() {
 		toMove = false;
 	}
 
 
+	/**
+	 * This method returns true if this object is equal to the other one, otherwise false.
+	 * 
+	 * @param obj The other object that is compared to this one
+	 * 
+	 * @return boolean True if this object if this object is equal to the other one, otherwise false
+	 * 
+	 * @since 1.0
+	 */
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;

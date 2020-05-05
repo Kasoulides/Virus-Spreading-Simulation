@@ -35,7 +35,15 @@ public class Block {
 		grid=null;
 	}
 	
-	
+	/**
+	 * This method returns true  if this object is equal to the other one, otherwise false.
+	 * 
+	 *  @param obj The other object that is compared to this one
+	 *  
+	 *  @return boolean True if this object is equal to the other one, otherwise false
+	 *  
+	 *  @since 1.0
+	 */
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -102,10 +110,22 @@ public class Block {
 		return grid;
 	}
 	
+	/**
+	 * This method sets the grid that this block leads to.
+	 * 
+	 * @param g The grid that this block leads to
+	 * 
+	 * @since 1.0
+	 */
 	public void setGrid(Grid g) {
 		grid=g;
 	}
 	
+	/**
+	 * This method sets the value of border to true.
+	 * 
+	 * @since 1.0
+	 */
 	public void setBorder() {
 		border=true;
 	}

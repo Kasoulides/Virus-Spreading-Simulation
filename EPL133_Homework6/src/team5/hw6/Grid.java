@@ -219,16 +219,39 @@ public class Grid {
 		return exists[x][y];
 	}
 	
+	/**
+	 * This method returns true if this is a border, otherwise false.
+	 * 
+	 * @param x The x coordinate of the border
+	 * 
+	 * @param y The y coordinate of the border
+	 * 
+	 * @return boolean True if it is a border, otherwise false
+	 * 
+	 * @since 1.0
+	 */
 	public boolean isBorder(int x,int y) {
 		return borders[x][y].getBorder();
 	}
 	
+	/**
+	 * This method returns the value of ID.
+	 * 
+	 * @return int The value of ID
+	 * 
+	 * @since 1.0
+	 */
 	public int getID() {
 		return ID;
 	}
 	
-
-	
+	/**
+	 * This method returns the borders array.
+	 * 
+	 * @return Block[][] The borders array
+	 * 
+	 * @since 1.0
+	 */
 	public Block[][] getBorders() {
 		return borders;
 	}
@@ -293,6 +316,13 @@ public class Grid {
 		this.width = width;
 	}
 	
+	/**
+	 * This method places a person on a random place. 
+	 * 
+	 * @param p This is the person that is going to be placed
+	 * 
+	 * @since 1.0
+	 */
 	public void placeRandom(Person p) {
 		
 		int newX,newY;
@@ -311,6 +341,15 @@ public class Grid {
 
 
 
+	/**
+	 * This method returns true if this object is equal to the other one, otherwise false.
+	 * 
+	 * @param obj The object that is compared to this one
+	 * 
+	 * @return boolean True if this object is equal to the other one, otherwise false
+	 * 
+	 * @since 1.0
+	 */
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
