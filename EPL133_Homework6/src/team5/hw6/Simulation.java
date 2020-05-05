@@ -437,7 +437,7 @@ public class Simulation { // testing
 					if (p.hasToMove()) {
 						// p.setGrid(G[j].getBorders()[p.getCurrentX()][p.getCurrentY()].getGrid());
 						// G[j].getBorders()[p.getCurrentX()][p.getCurrentY()].getGrid().placeRandom(p);
-
+						StdOut.println("One person from grid " + j + "has moved");
 						p.setGrid(G[j].getBorders()[cx][cy].getGrid());
 						G[j].getBorders()[cx][cy].getGrid().placeRandom(p);
 
@@ -486,6 +486,7 @@ public class Simulation { // testing
 			}
 
 		}
+		StdOut.println("Works");
 	}
 }
 
