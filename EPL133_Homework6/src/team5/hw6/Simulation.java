@@ -30,8 +30,6 @@ public class Simulation { // testing
 		for (int i = 0; i <= g.getHeight(); i++)
 			StdDraw.line(0, i, g.getWidth(), i);
 
-	
-
 		for (int i = 0; i < g.getHeight(); i++)
 			for (int j = 0; j < g.getWidth(); j++)
 				if (g.getBorders()[i][j].getBorder()) {
@@ -82,16 +80,15 @@ public class Simulation { // testing
 
 	public static void main(String[] args)
 			throws IncorrectAnswerException, OutOfRangeException, PeopleOverloadingException, SimulationSizeException {
-		
-		//INITIALIZATIONS
+
+		// INITIALIZATIONS
 		int height = 0, width = 0, areas = 0, N = 0, time = 0, selfPr = 0, imm = 0, inf = 0, TTI = 2, PTP = 30,
-			FTP = 30, MAXtrace = 2, PTF = 30, SP = 30, numOfBorders = 0, newGrid = 0, totalPerson = 0;
+				FTP = 30, MAXtrace = 2, PTF = 30, SP = 30, numOfBorders = 0, newGrid = 0, totalPerson = 0;
 		String answer, newAnswer, sureExit;
 		boolean exit;
 		Person[] persons = null;
-		Block borders[][]=null;
-		
-		
+		Block borders[][] = null;
+
 		StdOut.println("+--------------------------------------------------------+");
 		StdOut.println("|       WELCOME TO OUR VIRUS-SPREADING SIMULATION        |");
 		StdOut.println("|                                                        |");
@@ -101,40 +98,39 @@ public class Simulation { // testing
 		StdOut.println("|                                                        |");
 		StdOut.println("+--------------------------------------------------------+");
 
-		
 		StdOut.println("Follow the instructions and you'll be fine\n");
 		StdOut.println("LETS BEGIN!!\n\n\n");
-		
+
 		// USER INPUTS 1st part
 		boolean done1 = false;
 		while (!done1) {
 			try {
-				//DURATION OF SIMULATION
+				// DURATION OF SIMULATION
 				StdOut.println("Enter the duration of the simulation(must be in " + "minutes): ");
 				time = StdIn.readInt();
 				if (time < 0)
 					throw new NegativeNumberException(
 							"The duration of the " + "simulation cannot be a negative number:");
-				
-				//CHANCE OF A PERSON BEING SELF-PROTECTED
+
+				// CHANCE OF A PERSON BEING SELF-PROTECTED
 				StdOut.println("Enter the chance of a person being Self " + "Protected(must be between 1-100): ");
 				selfPr = StdIn.readInt();
 				if (selfPr < 1 || selfPr > 100)
 					throw new OutOfRangeException("The number must be between 1-100");
-				
-				//CHANCE OF A PERSON BEING IMMUNE
+
+				// CHANCE OF A PERSON BEING IMMUNE
 				StdOut.println("Enter the chance of a person being Immune" + "(must be between 1-100): ");
 				imm = StdIn.readInt();
 				if (imm < 1 || imm > 100)
 					throw new OutOfRangeException("The number must be between 1-100");
-				
-				//CHANCE OF A PERSON BEING INFECTED
+
+				// CHANCE OF A PERSON BEING INFECTED
 				StdOut.println("Enter the chance of a person being Infected" + "(must be between 1-100): ");
 				inf = StdIn.readInt();
 				if (inf < 1 || inf > 100)
 					throw new OutOfRangeException("The number must be between 1-100");
-				
-				//ADVANCE SETTINGS
+
+				// ADVANCE SETTINGS
 				StdOut.println("Would you like to open Advanced Settings? (Y/n) ");
 				answer = StdIn.readString();
 				if (!answer.equals("Y") && !answer.equals("n"))
@@ -248,13 +244,6 @@ public class Simulation { // testing
 			}
 
 		}
-		  
-		  
-		  
-		  
-		  
-		  
-		 
 
 		Grid G[] = null;
 		List<Person> AL[] = null;
@@ -284,23 +273,20 @@ public class Simulation { // testing
 
 					StdOut.println("Enter the number of people in the  simulation area no" + z + "(can't be more than "
 							+ (height * width) + "):");
-				
+
 					N = StdIn.readInt();
-					
+
 					totalPerson += N;
-					
+
 					if (N > height * width)
 						throw new PeopleOverloadingException(
-								"The number of people can't exceed the maximun capacity of the simulation.\n");		
-					
-					
-					
+								"The number of people can't exceed the maximun capacity of the simulation.\n");
+
 					borders = new Block[height][width];
-					for(int h=0; h<height; h++)
-						for(int w=0; w<width; w++ )
-							borders[h][w]=new Block(h,w,false);
-					
-					
+					for (int h = 0; h < height; h++)
+						for (int w = 0; w < width; w++)
+							borders[h][w] = new Block(h, w, false);
+
 					G[z - 1] = new Grid(height, width, MAXtrace, TTI, PTF, borders);
 
 					drawFrame(G[z - 1]);
@@ -324,16 +310,12 @@ public class Simulation { // testing
 			}
 
 		}
-		
-		
-		
-		
-		
+
 		for (int i = 1; i <= areas; i++) {
 			int cnt = 0;
 			boolean done3 = false, exit3 = false;
 			String sureExit3 = null, newAnswer3 = "Y";
-			
+
 			boolean temp[][] = new boolean[height][width];
 			for (int h = 0; h < height; h++)
 				for (int w = 0; w < width; w++)
@@ -341,31 +323,31 @@ public class Simulation { // testing
 
 			do {
 				try {
-					
-					//NUMBER OF BORDER BLOCKS
+
+					// NUMBER OF BORDER BLOCKS
 					StdOut.println("Enter the number of border blocks in the area no" + i + "(can't be more than "
 							+ (2 * G[i - 1].getHeight() + 2 * G[i - 1].getWidth() - 4 - cnt) + "):");
 					numOfBorders = StdIn.readInt();
 
 					if (numOfBorders > (2 * G[i - 1].getHeight() + 2 * G[i - 1].getWidth() - 4 - cnt))
-					 
-					  throw new
-					  BordersOutOfRangeException("The number of border blocks in this area cant be more than "
-					  + (2 * G[i - 1].getHeight() + 2 * G[i - 1].getWidth() - 4 - cnt) + ".");
-					 
-					
-					//NUMBER OF THE CONNECTED AREA
-					StdOut.println("Enter the number of the area where the border blocks are connected to(can't be more than "
+
+						throw new BordersOutOfRangeException(
+								"The number of border blocks in this area cant be more than "
+										+ (2 * G[i - 1].getHeight() + 2 * G[i - 1].getWidth() - 4 - cnt) + ".");
+
+					// NUMBER OF THE CONNECTED AREA
+					StdOut.println(
+							"Enter the number of the area where the border blocks are connected to(can't be more than "
 									+ areas + " and can't be " + i + ").");
 					newGrid = StdIn.readInt();
 
 					if (newGrid > areas || newGrid <= 0 || newGrid == i)
-						throw new OutOfRangeException("The number of the area where the border blocks are connected to cant be more than can't be more than "
+						throw new OutOfRangeException(
+								"The number of the area where the border blocks are connected to cant be more than can't be more than "
 										+ areas + " and can't be " + i + ".");
 
-					
-					//BORDER BLOCKS
-					
+					// BORDER BLOCKS
+
 					String bo;
 
 					for (int j = 1; j <= numOfBorders; j++) {
@@ -381,17 +363,16 @@ public class Simulation { // testing
 						int yb = Integer.parseInt(bo.substring(bo.indexOf(',') + 1));
 						cnt++;
 						temp[xb][yb] = true;
-						G[i-1].getBorders()[xb][yb].setGrid(G[newGrid-1]);
-						G[i-1].getBorders()[xb][yb].setBorder();
+						G[i - 1].getBorders()[xb][yb].setGrid(G[newGrid - 1]);
+						G[i - 1].getBorders()[xb][yb].setBorder();
 					}
 
-				
-						StdOut.println("Would you like to add more border blocks for a different area? " + "(Y/n) ");
-						newAnswer3 = StdIn.readString();
-						if (!newAnswer3.equals("Y") && !newAnswer3.equals("n"))
-							throw new IncorrectAnswerException("The answer must be either Y or n");
+					StdOut.println("Would you like to add more border blocks for a different area? " + "(Y/n) ");
+					newAnswer3 = StdIn.readString();
+					if (!newAnswer3.equals("Y") && !newAnswer3.equals("n"))
+						throw new IncorrectAnswerException("The answer must be either Y or n");
 
-					 if (!newAnswer3.equals("Y")){
+					if (!newAnswer3.equals("Y")) {
 						StdOut.println("Are you sure? (Y/n) ");
 						sureExit3 = StdIn.readString();
 						if (!sureExit3.equals("Y") && !sureExit3.equals("n"))
@@ -402,9 +383,9 @@ public class Simulation { // testing
 							done3 = false;
 
 					}
-					 
-					 StdOut.println("Processing data..Please wait\n");
-					
+
+					StdOut.println("Processing data..Please wait\n");
+
 				} catch (InputMismatchException e) {
 					StdOut.println("The input you have entered doesn't match the " + "required type.\n ");
 					done3 = false;
@@ -412,10 +393,10 @@ public class Simulation { // testing
 					StdOut.println("Wrong Input.Lets start again!\n" + e.getMessage() + "\n");
 					done3 = false;
 				}
-			} while (!done3);	
-		
+			} while (!done3);
+
 		}
-		
+
 		// ARRAY FOR STATS
 
 		int A[][] = new int[5][time];
@@ -423,25 +404,22 @@ public class Simulation { // testing
 			for (int j = 0; j < A[0].length; j++)
 				A[i][j] = 0;
 
-		
-		
-		 StdOut.println("\nTHE SIMULATION HAS STARTED!\n");
-		 StdOut.println("PERSON COLORING:");
-		 StdOut.println("+ RED        --> INFECTED");
-		 StdOut.println("+ GREEN      --> IMMUNE");
-		 StdOut.println("+ BLUE       --> SELF PROTECTED");
-		 StdOut.println("+ LIGHT BLUE --> NORMAL");
-		 StdOut.println("\nBLOCK COLORING:");
-		 StdOut.println("+ WHITE      --> NOT INFECTED");
-		 StdOut.println("+ GRAY       --> INFECTED");
-		 StdOut.println("+ PURPLE     --> BORDER");
-		 
-		 
-		//SIMULATION PART
-		 
-		 Person[][] removed = new Person[areas][totalPerson];
-		 Person[][] added = new Person[areas][totalPerson]; // Prepei na ginun je tuta arraylist tlka !!
-		 
+		StdOut.println("\nTHE SIMULATION HAS STARTED!\n");
+		StdOut.println("PERSON COLORING:");
+		StdOut.println("+ RED        --> INFECTED");
+		StdOut.println("+ GREEN      --> IMMUNE");
+		StdOut.println("+ BLUE       --> SELF PROTECTED");
+		StdOut.println("+ LIGHT BLUE --> NORMAL");
+		StdOut.println("\nBLOCK COLORING:");
+		StdOut.println("+ WHITE      --> NOT INFECTED");
+		StdOut.println("+ GRAY       --> INFECTED");
+		StdOut.println("+ PURPLE     --> BORDER");
+
+		// SIMULATION PART
+
+		Person[][] removed = new Person[areas][totalPerson];
+		Person[][] added = new Person[areas][totalPerson]; // Prepei na ginun je tuta arraylist tlka !!
+
 		for (int i = 0; i < time; i++) {
 			for (int j = 0; j < areas; j++) {
 
@@ -450,29 +428,26 @@ public class Simulation { // testing
 				G[j].reduceTrace();
 				int cnt = 0;
 				for (Person p : AL[j]) {
-					
-					
-					int cx=p.getCurrentX();
-					int cy=p.getCurrentY();
-					
-					
-					
-					
+
+					int cx = p.getCurrentX();
+					int cy = p.getCurrentY();
+
 					p.move();
-					
-					if(p.hasToMove()) {
-						//p.setGrid(G[j].getBorders()[p.getCurrentX()][p.getCurrentY()].getGrid());
-						//G[j].getBorders()[p.getCurrentX()][p.getCurrentY()].getGrid().placeRandom(p);
-						
+
+					if (p.hasToMove()) {
+						// p.setGrid(G[j].getBorders()[p.getCurrentX()][p.getCurrentY()].getGrid());
+						// G[j].getBorders()[p.getCurrentX()][p.getCurrentY()].getGrid().placeRandom(p);
+
 						p.setGrid(G[j].getBorders()[cx][cy].getGrid());
 						G[j].getBorders()[p.getCurrentX()][p.getCurrentY()].getGrid().placeRandom(p);
-						
+
 						removed[G[j].getID()][cnt] = p;
-						
-						//added[G[j].getBorders()[p.getCurrentX()][p.getCurrentY()].getGrid().getID()][cnt] = p;
-						
+
+						// added[G[j].getBorders()[p.getCurrentX()][p.getCurrentY()].getGrid().getID()][cnt]
+						// = p;
+
 						added[G[j].getBorders()[cx][cy].getGrid().getID()][cnt] = p;
-						
+
 						cnt++;
 					}
 
@@ -495,18 +470,21 @@ public class Simulation { // testing
 						A[4][j]++;
 				}
 			}
-		
-			/*
-			 * for (int k = 0; k < areas; k++) {
-			 * 
-			 * for (int l = 0; l < removed[k].length; l++) { AL[k].remove(removed[k][l]); }
-			 * 
-			 * for (int m = 0; m < added[k].length; m++) { AL[k].add(added[k][m]); }
-			 * 
-			 * }
-			 */
-}
-}
+
+			for (int k = 0; k < areas; k++) {
+
+				for (int l = 0; l < removed[k].length; l++) {
+					AL[k].remove(removed[k][l]);
+				}
+
+				for (int m = 0; m < added[k].length; m++) {
+					AL[k].add(added[k][m]);
+				}
+
+			}
+
+		}
+	}
 }
 
 /*
