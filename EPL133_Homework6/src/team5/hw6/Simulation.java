@@ -30,11 +30,11 @@ public class Simulation { // testing
 		for (int i = 0; i <= g.getHeight(); i++)
 			StdDraw.line(0, i, g.getWidth(), i);
 
-		Block[][] array = g.getBorders();
+	
 
 		for (int i = 0; i < g.getHeight(); i++)
 			for (int j = 0; j < g.getWidth(); j++)
-				if (array[i][j].getBorder()) {
+				if (g.getBorders()[i][j].getBorder()) {
 					StdDraw.setPenColor(StdDraw.MAGENTA);
 					StdDraw.square(j + 0.5, i + 0.5, 0.5);
 				}
@@ -382,6 +382,7 @@ public class Simulation { // testing
 						cnt++;
 						temp[xb][yb] = true;
 						G[i-1].getBorders()[xb][yb].setGrid(G[newGrid-1]);
+						G[i-1].getBorders()[xb][yb].setBorder();
 					}
 
 				
@@ -480,18 +481,15 @@ public class Simulation { // testing
 				}
 			}
 		
-			
-			  for(int k = 0; k < areas; k++) { 
-				  
-				  for(int l = 0; l < removed[k].length; l++ ) { 
-					  AL[k].remove(removed[k][l]); 
-					  }
-				  
-				  for(int m = 0; m < added[k].length; m++ ) { 
-					  AL[k].add(added[k][m]); 
-					  }
-			 
-	}
+			/*
+			 * for (int k = 0; k < areas; k++) {
+			 * 
+			 * for (int l = 0; l < removed[k].length; l++) { AL[k].remove(removed[k][l]); }
+			 * 
+			 * for (int m = 0; m < added[k].length; m++) { AL[k].add(added[k][m]); }
+			 * 
+			 * }
+			 */
 }
 }
 }
