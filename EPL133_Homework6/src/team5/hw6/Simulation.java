@@ -439,7 +439,7 @@ public class Simulation { // testing
 						// G[j].getBorders()[p.getCurrentX()][p.getCurrentY()].getGrid().placeRandom(p);
 
 						p.setGrid(G[j].getBorders()[cx][cy].getGrid());
-						G[j].getBorders()[p.getCurrentX()][p.getCurrentY()].getGrid().placeRandom(p);
+						G[j].getBorders()[cx][cy].getGrid().placeRandom(p);
 
 						removed[G[j].getID()][cnt] = p;
 
@@ -474,11 +474,13 @@ public class Simulation { // testing
 			for (int k = 0; k < areas; k++) {
 
 				for (int l = 0; l < removed[k].length; l++) {
-					AL[k].remove(removed[k][l]);
+					if(removed[k][l]!=null)
+						AL[k].remove(removed[k][l]);
 				}
 
 				for (int m = 0; m < added[k].length; m++) {
-					AL[k].add(added[k][m]);
+					if(added[k][m]!=null)
+						AL[k].add(added[k][m]);
 				}
 
 			}
