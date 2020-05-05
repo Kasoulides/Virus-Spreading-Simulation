@@ -450,14 +450,29 @@ public class Simulation { // testing
 				G[j].reduceTrace();
 				int cnt = 0;
 				for (Person p : AL[j]) {
+					
+					
+					int cx=p.getCurrentX();
+					int cy=p.getCurrentY();
+					
+					
+					
+					
 					p.move();
 					
 					if(p.hasToMove()) {
-						p.setGrid(G[j].getBorders()[p.getCurrentX()][p.getCurrentY()].getGrid());
+						//p.setGrid(G[j].getBorders()[p.getCurrentX()][p.getCurrentY()].getGrid());
+						//G[j].getBorders()[p.getCurrentX()][p.getCurrentY()].getGrid().placeRandom(p);
+						
+						p.setGrid(G[j].getBorders()[cx][cy].getGrid());
 						G[j].getBorders()[p.getCurrentX()][p.getCurrentY()].getGrid().placeRandom(p);
 						
 						removed[G[j].getID()][cnt] = p;
-						added[G[j].getBorders()[p.getCurrentX()][p.getCurrentY()].getGrid().getID()][cnt] = p;
+						
+						//added[G[j].getBorders()[p.getCurrentX()][p.getCurrentY()].getGrid().getID()][cnt] = p;
+						
+						added[G[j].getBorders()[cx][cy].getGrid().getID()][cnt] = p;
+						
 						cnt++;
 					}
 
