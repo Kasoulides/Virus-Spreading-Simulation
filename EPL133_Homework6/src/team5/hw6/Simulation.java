@@ -439,8 +439,14 @@ public class Simulation { // testing
 						// G[j].getBorders()[p.getCurrentX()][p.getCurrentY()].getGrid().placeRandom(p);
 						StdOut.println("One person from grid " + j + "has moved");
 						p.setGrid(G[j].getBorders()[cx][cy].getGrid());
-						G[j].getBorders()[cx][cy].getGrid().placeRandom(p);
+						//G[j].getBorders()[cx][cy].getGrid().placeRandom(p);
 
+						
+						Grid temp=G[j].getBorders()[cx][cy].getGrid();
+						
+						temp.placeRandom(p);
+						
+						
 						removed[G[j].getID()][cnt] = p;
 
 						// added[G[j].getBorders()[p.getCurrentX()][p.getCurrentY()].getGrid().getID()][cnt]
