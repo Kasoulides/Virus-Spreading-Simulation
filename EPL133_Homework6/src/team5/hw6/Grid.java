@@ -27,7 +27,7 @@ public class Grid {
 	private int width;
 	private final int TO_FLOOR;
 	private final int TIME_INF;
-	private static int counter = 0;
+
 	private int ID;
 	private int numOfPerson;
 
@@ -48,16 +48,16 @@ public class Grid {
 	 * 
 	 * @since 1.0
 	 */
-	public Grid(int h, int w, int maxTrace, int tti, int ptf, Block bord[][]) {
+	public Grid(int h, int w, int maxTrace, int tti, int ptf, Block bord[][], int id) {
 		numOfPerson = 0;
 		MAX_TRACE = maxTrace;
 		TO_FLOOR = ptf;
 		TIME_INF = tti;
-		ID = counter;
-		counter ++;
+		ID = id;
+		
 		height = h;
 		width = w;
-		//borders = null;
+
 		this.trace = new int[height][width];
 		exists = new boolean[height][width];
 		persons = new Person[height][width];
