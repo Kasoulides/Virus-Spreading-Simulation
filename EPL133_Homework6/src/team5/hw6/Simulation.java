@@ -446,8 +446,13 @@ public class Simulation { // testing
 						p.setGrid(G[j].getBorders()[cx][cy].getGrid());
 						//G[j].getBorders()[cx][cy].getGrid().placeRandom(p);
 
-						
-						Grid temp=G[j].getBorders()[cx][cy].getGrid();
+						Block B[][]=G[j].getBorders();
+						StdOut.println("Part1");
+						Block b=B[cx][cy];
+						StdOut.println("Part2");
+						Grid temp=b.getGrid();
+						StdOut.println("Part3");
+						//Grid temp=G[j].getBorders()[cx][cy].getGrid();
 						StdOut.println("Height = "+temp.getHeight()+ " and Width = "+temp.getWidth());
 						temp.placeRandom(p);
 						
