@@ -442,23 +442,28 @@ public class Simulation { // testing
 					if (p.hasToMove()) {
 						// p.setGrid(G[j].getBorders()[p.getCurrentX()][p.getCurrentY()].getGrid());
 						// G[j].getBorders()[p.getCurrentX()][p.getCurrentY()].getGrid().placeRandom(p);
+						StdOut.println(p);
+						
 						StdOut.println("One person from grid " + j + "has moved");
 						p.setGrid(G[j].getBorders()[cx][cy].getGrid());
 						//G[j].getBorders()[cx][cy].getGrid().placeRandom(p);
-						
+						StdOut.println();
 						StdOut.println(p);
 						Block B[][]=G[j].getBorders();
-						StdOut.println("Move");
+						StdOut.println();
 						Block b=B[cx][cy];
 						StdOut.println(b);
+						StdOut.println();
 						Grid temp=b.getGrid();
 						StdOut.println(temp);
+						StdOut.println();
 						//Grid temp=G[j].getBorders()[cx][cy].getGrid();
-						StdOut.println("Height = "+temp.getHeight()+ " and Width = "+temp.getWidth());
+						//StdOut.println("Height = "+temp.getHeight()+ " and Width = "+temp.getWidth());
 						temp.placeRandom(p);
-						
+						StdOut.println();
 						StdOut.println(p);
-						
+						StdOut.println();
+				
 						
 						removed[G[j].getID()].add(p);
 
@@ -488,6 +493,7 @@ public class Simulation { // testing
 					if (p.getSelfProtected() && p.isInfected())
 						A[4][j]++;
 				}
+				StdOut.println("LOOP1 FINISH");
 			}
 
 			for (int k = 0; k < areas; k++) {
@@ -507,6 +513,7 @@ public class Simulation { // testing
 				AL[k].trimToSize();
 
 			}
+			StdOut.println("\nLOOP2 FINISH\n");
 			
 			
 

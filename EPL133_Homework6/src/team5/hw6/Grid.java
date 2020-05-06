@@ -339,6 +339,7 @@ public class Grid {
 		
 		p.setX(newX);
 		p.setY(newY);
+		setPos(newX,newY,p);
 
 		
 	}
