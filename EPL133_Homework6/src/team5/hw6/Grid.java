@@ -29,6 +29,7 @@ public class Grid {
 	private final int TIME_INF;
 	private static int counter = 0;
 	private int ID;
+	private int numOfPerson;
 
 	/**
 	 * This is the constructor of grid.
@@ -48,6 +49,7 @@ public class Grid {
 	 * @since 1.0
 	 */
 	public Grid(int h, int w, int maxTrace, int tti, int ptf, Block bord[][]) {
+		numOfPerson = 0;
 		MAX_TRACE = maxTrace;
 		TO_FLOOR = ptf;
 		TIME_INF = tti;
@@ -177,6 +179,7 @@ public class Grid {
 	public void setPos(int x, int y, Person p) {
 		exists[x][y] = true;
 		persons[x][y] = p;
+		numOfPerson ++;
 
 		if (p.isInfected() && p.getCounter() >= TIME_INF) {
 			if ((new Random()).nextInt(100) < TO_FLOOR)
@@ -199,6 +202,7 @@ public class Grid {
 	public void clearPos(int x, int y) {
 		exists[x][y] = false;
 		persons[x][y] = null;
+		numOfPerson --;
 	}
 	
 	
@@ -379,6 +383,11 @@ public class Grid {
 		if (width != other.width)
 			return false;
 		return true;
+	}
+
+	
+	public String toString() {
+		return "Grid " + ID + " has a height of " + height + ", a width of " + width + " and contains " + numOfPerson + " person.";
 	}
 	
 	
