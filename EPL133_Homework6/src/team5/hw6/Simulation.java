@@ -84,8 +84,8 @@ public class Simulation { // testing
 		// INITIALIZATIONS
 		int height = 0, width = 0, areas = 0, N = 0, time = 0, selfPr = 0, imm = 0, inf = 0, TTI = 2, PTP = 30,
 				FTP = 30, MAXtrace = 2, PTF = 30, SP = 30, numOfBorders = 0, newGrid = 0, totalPerson = 0;
-		String answer, newAnswer, sureExit;
-		boolean exit;
+		String answer = "Y", newAnswer, sureExit;
+		boolean exit , flag[];
 		Person[] persons = null;
 		Block borders[][] = null;
 
@@ -101,41 +101,63 @@ public class Simulation { // testing
 		StdOut.println("Follow the instructions and you'll be fine\n");
 		StdOut.println("LETS BEGIN!!\n\n\n");
 
+		//INITIALIZE FLAGS
+		flag = new boolean[12];
+		for(int i = 0; i < flag.length; i++)
+			flag[i] = false;
+		
+		
 		// USER INPUTS 1st part
 		boolean done1 = false;
 		while (!done1) {
 			try {
+				
 				// DURATION OF SIMULATION
+				
+				if(!flag[0]) {
 				StdOut.println("Enter the duration of the simulation(must be in " + "minutes): ");
 				time = StdIn.readInt();
 				if (time < 0)
 					throw new NegativeNumberException(
 							"The duration of the " + "simulation cannot be a negative number:");
-
+				flag[0] = true;
+				}
 				// CHANCE OF A PERSON BEING SELF-PROTECTED
+		
+				if(!flag[1]) {
 				StdOut.println("Enter the chance of a person being Self " + "Protected(must be between 1-100): ");
 				selfPr = StdIn.readInt();
 				if (selfPr < 1 || selfPr > 100)
 					throw new OutOfRangeException("The number must be between 1-100");
-
+				flag[1] = true;
+				}
 				// CHANCE OF A PERSON BEING IMMUNE
+		
+				if(!flag[2]) {
 				StdOut.println("Enter the chance of a person being Immune" + "(must be between 1-100): ");
 				imm = StdIn.readInt();
 				if (imm < 1 || imm > 100)
 					throw new OutOfRangeException("The number must be between 1-100");
-
+				flag[2] = true;
+				}
 				// CHANCE OF A PERSON BEING INFECTED
+				
+				if(!flag[3]) {
 				StdOut.println("Enter the chance of a person being Infected" + "(must be between 1-100): ");
 				inf = StdIn.readInt();
 				if (inf < 1 || inf > 100)
 					throw new OutOfRangeException("The number must be between 1-100");
-
+				flag[3] = true;
+				}
 				// ADVANCE SETTINGS
+				
+				if(!flag[4]) {
 				StdOut.println("Would you like to open Advanced Settings? (Y/n) ");
 				answer = StdIn.readString();
 				if (!answer.equals("Y") && !answer.equals("n"))
 					throw new IncorrectAnswerException("The answer must be either Y or n");
-
+				flag[4] = true;
+				}
 				if (answer.equals("Y")) {
 					StdOut.println("ADVANCED SETTINGS ");
 					exit = false;
@@ -250,27 +272,39 @@ public class Simulation { // testing
 		boolean done2 = false;
 		while (!done2) {
 			try {
+				
+				if(!flag[5]) {
+			
 				StdOut.println("How many areas do you want? (2 to 4)");
 				areas = StdIn.readInt();
 				if (areas <= 1 || areas > 4)
 					throw new OutOfRangeException("Should be between 2-4 inclusive");
-
+				flag[5] = true;
+				
 				G = new Grid[areas];
 				AL = new ArrayList[areas];
-
+				}
 				for (int z = 1; z <= areas; z++) {
 
+				
+					if(!flag[6]) {
 					StdOut.println("Enter the height of the simulation area no" + z + " (must be between 5-100): ");
 					height = StdIn.readInt();
 					if (height < 5 || height > 100)
 						throw new SimulationSizeException(
 								"The height of the " + "simulation  must be between 5-100.\n  ");
-
+					flag[6] = true;
+					}
+			
+					if(!flag[7]) {
 					StdOut.println("Enter the width of the  simulation area no" + z + " (must be between 5-100): ");
 					width = StdIn.readInt();
 					if (width < 5 || width > 100)
 						throw new SimulationSizeException("The width of the simulation  must be between 5-100.\n  ");
-
+					flag[7] = true;
+					}
+			
+					if(!flag[8]) {
 					StdOut.println("Enter the number of people in the  simulation area no" + z + "(can't be more than "
 							+ (height * width) + "):");
 
@@ -281,7 +315,8 @@ public class Simulation { // testing
 					if (N > height * width)
 						throw new PeopleOverloadingException(
 								"The number of people can't exceed the maximun capacity of the simulation.\n");
-
+					flag[8] = true;
+					}
 					borders = new Block[height][width];
 					for (int h = 0; h < height; h++)
 						for (int w = 0; w < width; w++)
@@ -325,6 +360,8 @@ public class Simulation { // testing
 				try {
 
 					// NUMBER OF BORDER BLOCKS
+				
+					if(!flag[9]) {
 					StdOut.println("Enter the number of border blocks in the area no" + i + "(can't be more than "
 							+ (2 * G[i - 1].getHeight() + 2 * G[i - 1].getWidth() - 4 - cnt) + "):");
 					numOfBorders = StdIn.readInt();
@@ -334,8 +371,11 @@ public class Simulation { // testing
 						throw new BordersOutOfRangeException(
 								"The number of border blocks in this area cant be more than "
 										+ (2 * G[i - 1].getHeight() + 2 * G[i - 1].getWidth() - 4 - cnt) + ".");
-
+					flag[9] = true;
+					}
 					// NUMBER OF THE CONNECTED AREA
+				
+					if(!flag[10]) {
 					StdOut.println(
 							"Enter the number of the area where the border blocks are connected to(can't be more than "
 									+ areas + " and can't be " + i + ").");
@@ -345,10 +385,13 @@ public class Simulation { // testing
 						throw new OutOfRangeException(
 								"The number of the area where the border blocks are connected to cant be more than can't be more than "
 										+ areas + " and can't be " + i + ".");
-
+					flag[10] = true;
+					}
 					// BORDER BLOCKS
 
 					String bo;
+				
+					if(!flag[11] || !done3) {
 
 					for (int j = 1; j <= numOfBorders; j++) {
 
@@ -365,6 +408,8 @@ public class Simulation { // testing
 						temp[xb][yb] = true;
 						G[i - 1].getBorders()[xb][yb].setGrid(G[newGrid - 1]);
 						G[i - 1].getBorders()[xb][yb].setBorder();
+					}
+					flag[11] = true;
 					}
 
 					StdOut.println("Would you like to add more border blocks for a different area? " + "(Y/n) ");
@@ -383,7 +428,7 @@ public class Simulation { // testing
 							done3 = false;
 
 					}
-
+					
 					StdOut.println("Processing data..Please wait\n");
 
 				} catch (InputMismatchException e) {
