@@ -440,7 +440,7 @@ public class Simulation { // testing
 					p.move();
 
 					if (p.hasToMove()) {
-						// p.setGrid(G[j].getBorders()[p.getCurrentX()][p.getCurrentY()].getGrid());
+						
 					
 						StdOut.println("*----------------------------------------------------------------*");
 						StdOut.println("|One person from grid " + (j+1) + " has moved.     ");
