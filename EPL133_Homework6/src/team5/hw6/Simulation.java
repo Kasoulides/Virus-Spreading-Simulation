@@ -102,7 +102,11 @@ public class Simulation { // testing
 		StdOut.println("LETS BEGIN!!\n\n\n");
 
 		// INITIALIZE FLAGS
+
 		flag = new boolean[6];
+
+		flag = new boolean[12];
+
 		for (int i = 0; i < flag.length; i++)
 			flag[i] = false;
 
@@ -285,41 +289,47 @@ public class Simulation { // testing
 				}
 				for (int z = 1; z <= areas; z++) {
 
-					
-						StdOut.println("Enter the height of the simulation area no" + z + " (must be between 5-100): ");
-						height = StdIn.readInt();
-						if (height < 5 || height > 100)
-							throw new SimulationSizeException(
-									"The height of the " + "simulation  must be between 5-100.\n  ");
-					
-				
-						StdOut.println("Enter the width of the  simulation area no" + z + " (must be between 5-100): ");
-						width = StdIn.readInt();
-						if (width < 5 || width > 100)
-							throw new SimulationSizeException(
-									"The width of the simulation  must be between 5-100.\n  ");
-		
+					StdOut.println("Enter the height of the simulation area no" + z + " (must be between 5-100): ");
+					height = StdIn.readInt();
+					if (height < 5 || height > 100)
+						throw new SimulationSizeException(
+								"The height of the " + "simulation  must be between 5-100.\n  ");
 
-				
-						StdOut.println("Enter the number of people in the  simulation area no" + z
-								+ "(can't be more than " + (height * width) + "):");
+					StdOut.println("Enter the width of the  simulation area no" + z + " (must be between 5-100): ");
+					width = StdIn.readInt();
+					if (width < 5 || width > 100)
+						throw new SimulationSizeException("The width of the simulation  must be between 5-100.\n  ");
 
-						N = StdIn.readInt();
+					StdOut.println("Enter the height of the simulation area no" + z + " (must be between 5-100): ");
+					height = StdIn.readInt();
+					if (height < 5 || height > 100)
+						throw new SimulationSizeException(
+								"The height of the " + "simulation  must be between 5-100.\n  ");
 
-						totalPerson += N;
+					StdOut.println("Enter the width of the  simulation area no" + z + " (must be between 5-100): ");
+					width = StdIn.readInt();
+					if (width < 5 || width > 100)
+						throw new SimulationSizeException("The width of the simulation  must be between 5-100.\n  ");
 
-						if (N > height * width)
-							throw new PeopleOverloadingException(
-									"The number of people can't exceed the maximun capacity of the simulation.\n");
-					
+					StdOut.println("Enter the number of people in the  simulation area no" + z + "(can't be more than "
+							+ (height * width) + "):");
+
+					N = StdIn.readInt();
+
+					totalPerson += N;
+
+					if (N > height * width)
+						throw new PeopleOverloadingException(
+								"The number of people can't exceed the maximun capacity of the simulation.\n");
+
 					borders = new Block[height][width];
 					for (int h = 0; h < height; h++)
 						for (int w = 0; w < width; w++)
 							borders[h][w] = new Block(h, w, false);
 
-					G[z - 1] = new Grid(height, width, MAXtrace, TTI, PTF, borders, z-1);
+					G[z - 1] = new Grid(height, width, MAXtrace, TTI, PTF, borders, z - 1);
 
-					//drawFrame(G[z - 1]);
+					// drawFrame(G[z - 1]);
 
 					AL[z - 1] = new ArrayList<Person>();
 
@@ -328,7 +338,6 @@ public class Simulation { // testing
 						persons[k] = new Person(G[z - 1], selfPr, imm, inf, TTI, PTP, FTP, SP);
 						AL[z - 1].add(persons[k]);
 					}
-				
 
 				}
 				done2 = true;
@@ -357,73 +366,66 @@ public class Simulation { // testing
 
 					// NUMBER OF BORDER BLOCKS
 
-				
-						StdOut.println("Enter the number of border blocks in the area no" + i + "(can't be more than "
-								+ (2 * G[i - 1].getHeight() + 2 * G[i - 1].getWidth() - 4 - cnt) + " or less than 0):");
-						numOfBorders = StdIn.readInt();
+					StdOut.println("Enter the number of border blocks in the area no" + i + "(can't be more than "
+							+ (2 * G[i - 1].getHeight() + 2 * G[i - 1].getWidth() - 4 - cnt) + " or less than 0):");
+					numOfBorders = StdIn.readInt();
 
-						if (numOfBorders > (2 * G[i - 1].getHeight() + 2 * G[i - 1].getWidth() - 4 - cnt)
-								|| numOfBorders < 0)
+					if (numOfBorders > (2 * G[i - 1].getHeight() + 2 * G[i - 1].getWidth() - 4 - cnt)
+							|| numOfBorders < 0)
 
-							throw new BordersOutOfRangeException(
-									"The number of border blocks in this area cant be more than "
-											+ (2 * G[i - 1].getHeight() + 2 * G[i - 1].getWidth() - 4 - cnt)
-											+ " or less than 0.");
-			
-					// NUMBER OF THE CONNECTED AREA
-			
+						throw new BordersOutOfRangeException(
+								"The number of border blocks in this area cant be more than "
+										+ (2 * G[i - 1].getHeight() + 2 * G[i - 1].getWidth() - 4 - cnt)
+										+ " or less than 0.");
 
-					
-							StdOut.println(
-									"Enter the number of the area where the border blocks are connected to(can't be more than "
-											+ areas + " and can't be " + i + ").");
-							newGrid = StdIn.readInt();
+					StdOut.println(
+							"Enter the number of the area where the border blocks are connected to(can't be more than "
+									+ areas + " and can't be " + i + ").");
+					newGrid = StdIn.readInt();
 
-							if (newGrid > areas || newGrid <= 0 || newGrid == i)
-								throw new OutOfRangeException(
-										"The number of the area where the border blocks are connected to cant be more than can't be more than "
-												+ areas + " and can't be " + i + ".");
-						// BORDER BLOCKS
+					if (newGrid > areas || newGrid <= 0 || newGrid == i)
+						throw new OutOfRangeException(
+								"The number of the area where the border blocks are connected to cant be more than can't be more than "
+										+ areas + " and can't be " + i + ".");
 
-						String bo;
+					// BORDER BLOCKS
 
-						for (int j = 1; j <= numOfBorders; j++) {
+					String bo;
 
-							StdOut.println("Enter the coordinate of the border block no" + j
-									+ " of this area(the correct form is x,y ).");
+					for (int j = 1; j <= numOfBorders; j++) {
 
-							do {
-								bo = StdIn.readString();
-							} while (!isValid(bo, height, width, temp));
+						StdOut.println("Enter the coordinate of the border block no" + j
+								+ " of this area(the correct form is x,y ).");
 
-							int xb = Integer.parseInt(bo.substring(0, bo.indexOf(',')));
-							int yb = Integer.parseInt(bo.substring(bo.indexOf(',') + 1));
-							cnt++;
-							temp[xb][yb] = true;
-							G[i - 1].getBorders()[xb][yb].setGrid(G[newGrid - 1]);
-							G[i - 1].getBorders()[xb][yb].setBorder();
-						}
-					
+						do {
+							bo = StdIn.readString();
+						} while (!isValid(bo, height, width, temp));
 
-							StdOut.println(
-									"Would you like to add more border blocks for a different area? " + "(Y/n) ");
-							newAnswer3 = StdIn.readString();
-							if (!newAnswer3.equals("Y") && !newAnswer3.equals("n"))
-								throw new IncorrectAnswerException("The answer must be either Y or n");
-			
-						if (!newAnswer3.equals("Y")) {
-							StdOut.println("Are you sure? (Y/n) ");
-							sureExit3 = StdIn.readString();
-							if (!sureExit3.equals("Y") && !sureExit3.equals("n"))
-								throw new IncorrectAnswerException("The answer must be either Y or n");
-							if (sureExit3.equals("Y")) {
-								done3 = true;
-							} else if (sureExit3.equals("n"))
-								done3 = false;
+						int xb = Integer.parseInt(bo.substring(0, bo.indexOf(',')));
+						int yb = Integer.parseInt(bo.substring(bo.indexOf(',') + 1));
+						cnt++;
+						temp[xb][yb] = true;
+						G[i - 1].getBorders()[xb][yb].setGrid(G[newGrid - 1]);
+						G[i - 1].getBorders()[xb][yb].setBorder();
+					}
 
-						}
-					
-					
+					StdOut.println("Would you like to add more border blocks for a different area? " + "(Y/n) ");
+					newAnswer3 = StdIn.readString();
+					if (!newAnswer3.equals("Y") && !newAnswer3.equals("n"))
+						throw new IncorrectAnswerException("The answer must be either Y or n");
+
+					if (!newAnswer3.equals("Y")) {
+						StdOut.println("Are you sure? (Y/n) ");
+						sureExit3 = StdIn.readString();
+						if (!sureExit3.equals("Y") && !sureExit3.equals("n"))
+							throw new IncorrectAnswerException("The answer must be either Y or n");
+						if (sureExit3.equals("Y")) {
+							done3 = true;
+						} else if (sureExit3.equals("n"))
+							done3 = false;
+
+					}
+
 					StdOut.println("Processing data..Please wait\n");
 
 				} catch (InputMismatchException e) {
@@ -506,17 +508,13 @@ public class Simulation { // testing
 						Thread.currentThread().interrupt();
 					}
 
-					if (p.getImmune())
-						A[0][j]++;
-					if (p.isInfected())
-						A[1][j]++;
-					if (p.getSelfProtected())
-						A[2][j]++;
-					if (!p.getImmune() && !p.isInfected() && !p.getSelfProtected())
-						A[3][j]++;
-
-					if (p.getSelfProtected() && p.isInfected())
-						A[4][j]++;
+					/*
+					 * if (p.getImmune()) A[0][j]++; if (p.isInfected()) A[1][j]++; if
+					 * (p.getSelfProtected()) A[2][j]++; if (!p.getImmune() && !p.isInfected() &&
+					 * !p.getSelfProtected()) A[3][j]++;
+					 * 
+					 * if (p.getSelfProtected() && p.isInfected()) A[4][j]++;
+					 */
 				}
 
 				try {
@@ -543,6 +541,20 @@ public class Simulation { // testing
 
 				AL[k].trimToSize();
 
+			}
+			for (int a = 0; a < areas; a++) {
+				for (Person p : AL[a]) {
+					if (p.getImmune())
+						A[0][i]++;
+					if (p.isInfected())
+						A[1][i]++;
+					if (p.getSelfProtected())
+						A[2][i]++;
+					if (!p.getImmune() && !p.isInfected() & !p.getSelfProtected())
+						A[3][i]++;
+					if (p.getSelfProtected() && p.isInfected())
+						A[4][i]++;
+				}
 			}
 
 		}
