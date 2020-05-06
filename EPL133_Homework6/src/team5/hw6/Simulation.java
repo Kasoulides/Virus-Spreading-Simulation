@@ -511,7 +511,7 @@ public class Simulation { // testing
 // CREATION OF SIMULATION GRAPH
 
 		StdDraw.clear();
-		StdDraw.setXscale(0, time);
+		StdDraw.setXscale(0, time/3);
 		StdDraw.setYscale(0, totalPerson);
 
 		int tempx = 0;
@@ -519,7 +519,7 @@ public class Simulation { // testing
 
 		// for immune
 		StdDraw.setPenColor(StdDraw.GREEN);
-		for (int i = 0; i < time; i++) {
+		for (int i = 0; i < time/3; i++) {
 			StdDraw.line(tempx, tempy, tempx + 1, A[0][i]);
 			StdDraw.filledCircle(tempx + 1, A[0][i], 0.1);
 			tempx++;
@@ -530,7 +530,7 @@ public class Simulation { // testing
 		tempx = 0;
 		tempy = 0;
 		StdDraw.setPenColor(StdDraw.RED);
-		for (int i = 0; i < time; i++) {
+		for (int i = 0; i < time/3; i++) {
 			StdDraw.line(tempx, tempy, tempx + 1, A[1][i]);
 			StdDraw.filledCircle(tempx + 1, A[1][i], 0.1);
 			tempx++;
@@ -541,7 +541,7 @@ public class Simulation { // testing
 		tempx = 0;
 		tempy = 0;
 		StdDraw.setPenColor(StdDraw.BLUE);
-		for (int i = 0; i < time; i++) {
+		for (int i = 0; i < time/3; i++) {
 			StdDraw.line(tempx, tempy, tempx + 1, A[2][i]);
 			StdDraw.filledCircle(tempx + 1, A[2][i], 0.1);
 			tempx++;
@@ -553,7 +553,7 @@ public class Simulation { // testing
 		tempx = 0;
 		tempy = 0;
 		StdDraw.setPenColor(StdDraw.BOOK_LIGHT_BLUE);
-		for (int i = 0; i < time; i++) {
+		for (int i = 0; i < time/3; i++) {
 			StdDraw.line(tempx, tempy, tempx + 1, A[3][i]);
 			StdDraw.filledCircle(tempx + 1, A[3][i], 0.1);
 			tempx++;
