@@ -78,8 +78,8 @@ public class Simulation { // testing
 
 	}
 
-	public static void main(String[] args)
-			throws IncorrectAnswerException, OutOfRangeException, PeopleOverloadingException, SimulationSizeException, BordersOutOfRangeException {
+	public static void main(String[] args) throws IncorrectAnswerException, OutOfRangeException,
+			PeopleOverloadingException, SimulationSizeException, BordersOutOfRangeException {
 
 		// INITIALIZATIONS
 		int height = 0, width = 0, areas = 0, N = 0, time = 0, selfPr = 0, imm = 0, inf = 0, TTI = 2, PTP = 30,
@@ -418,8 +418,8 @@ public class Simulation { // testing
 		// SIMULATION PART
 		ArrayList<Person> removed[] = new ArrayList[areas];
 		ArrayList<Person> added[] = new ArrayList[areas];
-		
-		for(int i = 0; i < areas; i++) {
+
+		for (int i = 0; i < areas; i++) {
 			removed[i] = new ArrayList<Person>();
 			added[i] = new ArrayList<Person>();
 		}
@@ -430,7 +430,7 @@ public class Simulation { // testing
 				drawFrame(G[j]);
 				G[j].showTrace();
 				G[j].reduceTrace();
-				
+
 				int cnt = 0;
 				for (Person p : AL[j]) {
 
@@ -440,26 +440,23 @@ public class Simulation { // testing
 					p.move();
 
 					if (p.hasToMove()) {
-						
-					
+
 						StdOut.println("*----------------------------------------------------------------*");
-						StdOut.println("|One person from grid " + (j+1) + " has moved.     ");
+						StdOut.println("|One person from grid " + (j + 1) + " has moved.     ");
 						StdOut.println("|New Grid:                                     ");
 						p.setGrid(G[j].getBorders()[cx][cy].getGrid());
-						
 
 						StdOut.println("|" + p.getGrid() + " ");
 						StdOut.println("*----------------------------------------------------------------*");
-						
+
 						G[j].getBorders()[cx][cy].getGrid().placeRandom(p);
 						StdOut.println();
-					
-						
+
 						removed[G[j].getID()].add(p);
 						added[G[j].getBorders()[cx][cy].getGrid().getID()].add(p);
 
 						cnt++;
-						
+
 					}
 					p.resetToMove();
 
@@ -481,185 +478,106 @@ public class Simulation { // testing
 					if (p.getSelfProtected() && p.isInfected())
 						A[4][j]++;
 				}
-				
+
 				try {
 					Thread.sleep(500);
 				} catch (InterruptedException ex) {
 					Thread.currentThread().interrupt();
 				}
 
-			
 			}
 
 			for (int k = 0; k < areas; k++) {
 
 				for (Person p : removed[k]) {
-					if(p !=null)
+					if (p != null)
 						AL[k].remove(p);
 				}
 				removed[k].clear();
 
 				for (Person p : added[k]) {
-					if(p !=null)
+					if (p != null)
 						AL[k].add(p);
 				}
 				added[k].clear();
-				
+
 				AL[k].trimToSize();
 
 			}
 
-			
-			
-
 		}
 		StdOut.println("Works");
+
+// CREATION OF SIMULATION GRAPH
+
+		StdDraw.clear();
+		StdDraw.setXscale(0, time);
+		StdDraw.setYscale(0, totalPerson);
+
+		int tempx = 0;
+		int tempy = 0;
+
+		// for immune
+		StdDraw.setPenColor(StdDraw.GREEN);
+		for (int i = 0; i < time; i++) {
+			StdDraw.line(tempx, tempy, tempx + 1, A[0][i]);
+			StdDraw.filledCircle(tempx + 1, A[0][i], 0.1);
+			tempx++;
+			tempy = A[0][i];
+		}
+
+		// for infected
+		tempx = 0;
+		tempy = 0;
+		StdDraw.setPenColor(StdDraw.RED);
+		for (int i = 0; i < time; i++) {
+			StdDraw.line(tempx, tempy, tempx + 1, A[1][i]);
+			StdDraw.filledCircle(tempx + 1, A[1][i], 0.1);
+			tempx++;
+			tempy = A[1][i];
+		}
+
+		// for self protected
+		tempx = 0;
+		tempy = 0;
+		StdDraw.setPenColor(StdDraw.BLUE);
+		for (int i = 0; i < time; i++) {
+			StdDraw.line(tempx, tempy, tempx + 1, A[2][i]);
+			StdDraw.filledCircle(tempx + 1, A[2][i], 0.1);
+			tempx++;
+			tempy = A[2][i];
+
+		}
+
+		// for normal
+		tempx = 0;
+		tempy = 0;
+		StdDraw.setPenColor(StdDraw.BOOK_LIGHT_BLUE);
+		for (int i = 0; i < time; i++) {
+			StdDraw.line(tempx, tempy, tempx + 1, A[3][i]);
+			StdDraw.filledCircle(tempx + 1, A[3][i], 0.1);
+			tempx++;
+			tempy = A[3][i];
+		}
+		StdOut.println("\n\nRESULTS OF SIMULATION!\n");
+		StdOut.println("+ IMMUNE are: " + A[0][0] + " out of " + totalPerson);
+		StdOut.println("+ NORMAL are: " + A[3][0] + " out of " + totalPerson);
+		StdOut.println("+ INFECTED are: " + A[1][0] + " out of " + totalPerson);
+		StdOut.println("+ SELF PROTECTED are: " + A[2][0] + " out of " + totalPerson);
+
+		StdOut.println();
+		StdOut.println("+ INFECTED: from " + A[1][0] + " to " + A[1][time - 1]
+				+ " with chances of getting infected from another person " + PTP + "% and from an infected block " + FTP
+				+ "%");
+		StdOut.println();
+		StdOut.println("+ SELF PROTECTED that got infected: from " + A[4][0] + " to " + A[4][time - 1]
+				+ " with chances of getting infected when protected -" + SP + "%");
+		StdOut.println("	-SELF PROTECTED that got infected from another Person: " + Person.getSpfp());
+		StdOut.println("	-SELF PROTECTED that got infected from an infected Block: " + Person.getSpff());
+		StdOut.println();
+		StdOut.println("+ NORMAL that got infected: " + (Person.getFp() + Person.getFf()));
+		StdOut.println("	-NORMAL that got infected from another Person: " + Person.getFp());
+		StdOut.println("	-NORMAL that got infected from an infected Block: " + Person.getFf());
+
 	}
 }
-
-/*
- * 
- * 
- * 
- * 
- * int A[][] = new int[5][time]; for (int i = 0; i < A.length; i++) for (int j =
- * 0; j < A[0].length; j++) A[i][j] = 0; StdDraw.setXscale(0, width);
- * StdDraw.setYscale(height, 0);
- * 
- * drawFrame(height, width);
- * 
- * Grid grid = new Grid(width, height, MAXtrace, TTI, PTF, borders, z);
- * 
- * Person[] persons = new Person[N];
- * 
- *
- * 
- * for (int i = 0; i < N; i++) { persons[i] = new Person(grid, selfPr, imm, inf,
- * TTI, PTP, FTP, SP); AL[z-1].add(persons[i]); }
- * 
- * 
- * 
- * 
- * for (int j = 0; j < time; j++) { grid.showTrace(); grid.reduceTrace();
- * 
- * drawFrame(height, width);
- * 
- * for (int i = 0; i < N; i++) {
- * 
- * persons[i].move();
- * 
- * if (persons[i].getImmune()) A[0][j]++; if (persons[i].isInfected())
- * A[1][j]++; if (persons[i].getSelfProtected()) A[2][j]++; if
- * (!persons[i].getImmune() && !persons[i].isInfected() &&
- * !persons[i].getSelfProtected()) A[3][j]++;
- * 
- * if (persons[i].getSelfProtected() && persons[i].isInfected()) A[4][j]++;
- * 
- * }
- * 
- * try { Thread.sleep(500); } catch (InterruptedException ex) {
- * Thread.currentThread().interrupt(); }
- * 
- *  
- */
-
-// SIMULATION
-/*
- * int A[][] = new int[5][time]; for (int i = 0; i < A.length; i++) for (int j =
- * 0; j < A[0].length; j++) A[i][j] = 0;
- * 
- * StdDraw.setXscale(0, width); StdDraw.setYscale(height, 0);
- * 
- * drawFrame(height, width);
- * 
- * Grid grid = new Grid(width, height, MAXtrace, TTI, PTF);
- * 
- * Person[] persons = new Person[N];
- * 
- * StdOut.println("\nTHE SIMULATION HAS STARTED!\n");
- * StdOut.println("PERSON COLORING:");
- * StdOut.println("+ RED        --> INFECTED");
- * StdOut.println("+ GREEN      --> IMMUNE");
- * StdOut.println("+ BLUE       --> SELF PROTECTED");
- * StdOut.println("+ LIGHT BLUE --> NORMAL");
- * StdOut.println("\nBLOCK COLORING:");
- * StdOut.println("+ WHITE      --> NOT INFECTED");
- * StdOut.println("+ GRAY       --> INFECTED");
- * 
- * for (int i = 0; i < N; i++) { persons[i] = new Person(grid, selfPr, imm, inf,
- * TTI, PTP, FTP, SP); }
- * 
- * for (int j = 0; j < time; j++) { grid.showTrace(); grid.reduceTrace();
- * 
- * drawFrame(height, width);
- * 
- * for (int i = 0; i < N; i++) {
- * 
- * persons[i].move();
- * 
- * if (persons[i].getImmune()) A[0][j]++; if (persons[i].isInfected())
- * A[1][j]++; if (persons[i].getSelfProtected()) A[2][j]++; if
- * (!persons[i].getImmune() && !persons[i].isInfected() &&
- * !persons[i].getSelfProtected()) A[3][j]++;
- * 
- * if (persons[i].getSelfProtected() && persons[i].isInfected()) A[4][j]++;
- * 
- * }
- * 
- * try {Thread.sleep(500); } catch (InterruptedException ex) {
- * Thread.currentThread().interrupt(); }
- * 
- * 
- * }
- */
-// CREATION OF SIMULATION GRAPH
-/*
- * StdDraw.clear(); StdDraw.setXscale(0, time); StdDraw.setYscale(0, N);
- * 
- * int tempx = 0; int tempy = 0;
- * 
- * // for immune StdDraw.setPenColor(StdDraw.GREEN); for (int i = 0; i < time;
- * i++) { StdDraw.line(tempx, tempy, tempx + 1, A[0][i]);
- * StdDraw.filledCircle(tempx + 1, A[0][i], 0.1); tempx++; tempy = A[0][i]; }
- * 
- * // for infected tempx = 0; tempy = 0; StdDraw.setPenColor(StdDraw.RED); for
- * (int i = 0; i < time; i++) { StdDraw.line(tempx, tempy, tempx + 1, A[1][i]);
- * StdDraw.filledCircle(tempx + 1, A[1][i], 0.1); tempx++; tempy = A[1][i]; }
- * 
- * // for self protected tempx = 0; tempy = 0;
- * StdDraw.setPenColor(StdDraw.BLUE); for (int i = 0; i < time; i++) {
- * StdDraw.line(tempx, tempy, tempx + 1, A[2][i]); StdDraw.filledCircle(tempx +
- * 1, A[2][i], 0.1); tempx++; tempy = A[2][i];
- * 
- * }
- * 
- * // for normal tempx = 0; tempy = 0;
- * StdDraw.setPenColor(StdDraw.BOOK_LIGHT_BLUE); for (int i = 0; i < time; i++)
- * { StdDraw.line(tempx, tempy, tempx + 1, A[3][i]); StdDraw.filledCircle(tempx
- * + 1, A[3][i], 0.1); tempx++; tempy = A[3][i]; }
- * StdOut.println("\n\nRESULTS OF SIMULATION!\n");
- * StdOut.println("+ IMMUNE are: " + A[0][0] + " out of " + N);
- * StdOut.println("+ NORMAL are: " + A[3][0] + " out of " + N);
- * StdOut.println("+ INFECTED are: " + A[1][0] + " out of " + N);
- * StdOut.println("+ SELF PROTECTED are: " + A[2][0] + " out of " + N);
- * 
- * StdOut.println(); StdOut.println("+ INFECTED: from " + A[1][0] + " to " +
- * A[1][time - 1] + " with chances of getting infected from another person "+
- * PTP + "% and from an infected block " + FTP + "%" ); StdOut.println();
- * StdOut.println("+ SELF PROTECTED that got infected: from " + A[4][0] + " to "
- * + A[4][time - 1] + " with chances of getting infected when protected -" + SP
- * + "%");
- * StdOut.println("	-SELF PROTECTED that got infected from another Person: " +
- * Person.getSpfp());
- * StdOut.println("	-SELF PROTECTED that got infected from an infected Block: "
- * + Person.getSpff()); StdOut.println();
- * StdOut.println("+ NORMAL that got infected: " + (Person.getFp() +
- * Person.getFf()));
- * StdOut.println("	-NORMAL that got infected from another Person: " +
- * Person.getFp());
- * StdOut.println("	-NORMAL that got infected from an infected Block: " +
- * Person.getFf());
- * 
- * 
- * }
- */
