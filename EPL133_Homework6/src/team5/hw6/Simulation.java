@@ -443,7 +443,7 @@ public class Simulation { // testing
 
 						
 						Grid temp=G[j].getBorders()[cx][cy].getGrid();
-						
+						StdOut.println("Height = "+temp.getHeight()+ " and Width = "+temp.getWidth());
 						temp.placeRandom(p);
 						
 						
