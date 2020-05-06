@@ -44,14 +44,14 @@ public class Simulation { // testing
 			return false;
 
 		} else if (s.indexOf(',') <= 0) {
-			System.out.println("Wrong input!! The correct form is x,y .\n");
+			System.out.println("Wrong input!! The correct form is x,y .Please try again.\n");
 			return false;
 		}
 		try {
 			int x = Integer.parseInt(s.substring(0, s.indexOf(',')));
 			int y = Integer.parseInt(s.substring(s.indexOf(',') + 1));
 		} catch (Exception valid) {
-			System.out.println("Wrong input!! The correct form is x,y .\n");
+			System.out.println("Wrong input!! The correct form is x,y .Please try again.\n");
 			return false;
 		}
 
@@ -79,7 +79,7 @@ public class Simulation { // testing
 	}
 
 	public static void main(String[] args)
-			throws IncorrectAnswerException, OutOfRangeException, PeopleOverloadingException, SimulationSizeException {
+			throws IncorrectAnswerException, OutOfRangeException, PeopleOverloadingException, SimulationSizeException, BordersOutOfRangeException {
 
 		// INITIALIZATIONS
 		int height = 0, width = 0, areas = 0, N = 0, time = 0, selfPr = 0, imm = 0, inf = 0, TTI = 2, PTP = 30,
@@ -246,7 +246,7 @@ public class Simulation { // testing
 		}
 
 		Grid G[] = null;
-		List<Person> AL[] = null;
+		ArrayList<Person> AL[] = null;
 		boolean done2 = false;
 		while (!done2) {
 			try {
@@ -256,7 +256,7 @@ public class Simulation { // testing
 					throw new OutOfRangeException("Should be between 2-4 inclusive");
 
 				G = new Grid[areas];
-				AL = new List[areas];
+				AL = new ArrayList[areas];
 
 				for (int z = 1; z <= areas; z++) {
 
@@ -416,8 +416,8 @@ public class Simulation { // testing
 		StdOut.println("+ PURPLE     --> BORDER");
 
 		// SIMULATION PART
-		List<Person> removed[] = new ArrayList[areas];
-		List<Person> added[] = new ArrayList[areas];
+		ArrayList<Person> removed[] = new ArrayList[areas];
+		ArrayList<Person> added[] = new ArrayList[areas];
 		//Person[][] removed = new Person[areas][totalPerson];
 		//Person[][] added = new Person[areas][totalPerson]; // Prepei na ginun je tuta arraylist tlka !!
 		for(int i = 0; i < areas; i++) {
@@ -495,6 +495,8 @@ public class Simulation { // testing
 						AL[k].add(p);
 				}
 				added[k].clear();
+				
+				AL[k].trimToSize();
 
 			}
 			
