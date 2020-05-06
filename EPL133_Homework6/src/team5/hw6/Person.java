@@ -540,7 +540,16 @@ public class Person {
 			s+="self protected.\n";
 		else
 			s+="not self protected.\n";
-		s+="Its color is "+this.col.toString()+".\n";
+		String c;
+		if(infected)
+			c="red";
+		else if(immune)
+			c="green";
+		else if(selfProtected)
+			c="blue";
+		else
+			c="light blue";
+		s+="Its color is "+c+".\n";
 		s+="This person is in grid:\n";
 		s+=this.grid.toString();
 		return s;
