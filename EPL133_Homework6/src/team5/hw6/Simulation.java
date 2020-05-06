@@ -300,17 +300,6 @@ public class Simulation { // testing
 					if (width < 5 || width > 100)
 						throw new SimulationSizeException("The width of the simulation  must be between 5-100.\n  ");
 
-					StdOut.println("Enter the height of the simulation area no" + z + " (must be between 5-100): ");
-					height = StdIn.readInt();
-					if (height < 5 || height > 100)
-						throw new SimulationSizeException(
-								"The height of the " + "simulation  must be between 5-100.\n  ");
-
-					StdOut.println("Enter the width of the  simulation area no" + z + " (must be between 5-100): ");
-					width = StdIn.readInt();
-					if (width < 5 || width > 100)
-						throw new SimulationSizeException("The width of the simulation  must be between 5-100.\n  ");
-
 					StdOut.println("Enter the number of people in the  simulation area no" + z + "(can't be more than "
 							+ (height * width) + "):");
 
@@ -329,7 +318,7 @@ public class Simulation { // testing
 
 					G[z - 1] = new Grid(height, width, MAXtrace, TTI, PTF, borders, z - 1);
 
-					// drawFrame(G[z - 1]);
+					drawFrame(G[z - 1]);
 
 					AL[z - 1] = new ArrayList<Person>();
 
