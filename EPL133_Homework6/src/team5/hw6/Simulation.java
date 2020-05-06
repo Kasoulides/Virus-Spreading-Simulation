@@ -565,8 +565,7 @@ public class Simulation { // testing
  * try { Thread.sleep(500); } catch (InterruptedException ex) {
  * Thread.currentThread().interrupt(); }
  * 
- * 
- * 
+ *  
  */
 
 // SIMULATION
