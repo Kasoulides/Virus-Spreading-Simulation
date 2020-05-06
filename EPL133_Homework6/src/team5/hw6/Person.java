@@ -329,10 +329,21 @@ public class Person {
 		if(!grid.isBorder(currentX, currentY))
 			return  ((x >= 0) && (x < grid.getHeight()) && (y >= 0) &&
 					(y < grid.getWidth()) && !grid.isTaken(x, y));
-		else if(x<0 || x==grid.getHeight() || y<0 || y==grid.getWidth() && !grid.getBorders()[x][y].getGrid().isFull())
+		else if(x<0 || x==grid.getHeight() || y<0 || y==grid.getWidth() && !grid.getBorders()[currentX][currentY].getGrid().isFull())
 			return true;
 		return false;
 	}
+	/**
+	 * This method returns the persons grid.
+	 * 
+	 * @return Grid returns the persons grid
+	 * 
+	 * @since 1.0
+	 */
+	public Grid getGrid() {
+		return grid;
+	}
+	
 
 	/**
 	 * This method returns the value of currentX.

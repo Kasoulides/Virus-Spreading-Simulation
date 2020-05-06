@@ -418,8 +418,7 @@ public class Simulation { // testing
 		// SIMULATION PART
 		ArrayList<Person> removed[] = new ArrayList[areas];
 		ArrayList<Person> added[] = new ArrayList[areas];
-		//Person[][] removed = new Person[areas][totalPerson];
-		//Person[][] added = new Person[areas][totalPerson]; // Prepei na ginun je tuta arraylist tlka !!
+		
 		for(int i = 0; i < areas; i++) {
 			removed[i] = new ArrayList<Person>();
 			added[i] = new ArrayList<Person>();
@@ -431,6 +430,7 @@ public class Simulation { // testing
 				drawFrame(G[j]);
 				G[j].showTrace();
 				G[j].reduceTrace();
+				
 				int cnt = 0;
 				for (Person p : AL[j]) {
 
@@ -442,41 +442,29 @@ public class Simulation { // testing
 					if (p.hasToMove()) {
 						// p.setGrid(G[j].getBorders()[p.getCurrentX()][p.getCurrentY()].getGrid());
 						// G[j].getBorders()[p.getCurrentX()][p.getCurrentY()].getGrid().placeRandom(p);
-						StdOut.println(p);
-						
-						StdOut.println("One person from grid " + j + "has moved");
+						StdOut.println("*----------------------------------------------------------------*");
+						StdOut.println("|One person from grid " + (j+1) + " has moved.     ");
+						StdOut.println("|New Grid:                                     ");
 						p.setGrid(G[j].getBorders()[cx][cy].getGrid());
-						//G[j].getBorders()[cx][cy].getGrid().placeRandom(p);
+						
+
+						StdOut.println("|" + p.getGrid() + " ");
+						StdOut.println("*----------------------------------------------------------------*");
+						
+						G[j].getBorders()[cx][cy].getGrid().placeRandom(p);
 						StdOut.println();
-						StdOut.println(p);
-						Block B[][]=G[j].getBorders();
-						StdOut.println();
-						Block b=B[cx][cy];
-						StdOut.println(b);
-						StdOut.println();
-						Grid temp=b.getGrid();
-						StdOut.println(temp);
-						StdOut.println();
-						//Grid temp=G[j].getBorders()[cx][cy].getGrid();
-						//StdOut.println("Height = "+temp.getHeight()+ " and Width = "+temp.getWidth());
-						temp.placeRandom(p);
-						StdOut.println();
-						StdOut.println(p);
-						StdOut.println();
-				
+					
 						
 						removed[G[j].getID()].add(p);
-
-						// added[G[j].getBorders()[p.getCurrentX()][p.getCurrentY()].getGrid().getID()][cnt]
-						// = p;
-
 						added[G[j].getBorders()[cx][cy].getGrid().getID()].add(p);
 
 						cnt++;
+						
 					}
+					p.resetToMove();
 
 					try {
-						Thread.sleep(200);
+						Thread.sleep(100);
 					} catch (InterruptedException ex) {
 						Thread.currentThread().interrupt();
 					}
@@ -493,7 +481,14 @@ public class Simulation { // testing
 					if (p.getSelfProtected() && p.isInfected())
 						A[4][j]++;
 				}
-				StdOut.println("LOOP1 FINISH");
+				
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException ex) {
+					Thread.currentThread().interrupt();
+				}
+
+			
 			}
 
 			for (int k = 0; k < areas; k++) {
@@ -513,7 +508,7 @@ public class Simulation { // testing
 				AL[k].trimToSize();
 
 			}
-			StdOut.println("\nLOOP2 FINISH\n");
+
 			
 			
 

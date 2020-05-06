@@ -388,7 +388,7 @@ public class Grid {
 
 	
 	public String toString() {
-		return "Grid " + ID + " has a height of " + height + ", a width of " + width + " and contains " + numOfPerson + " person.";
+		return "Grid " + (ID+1) + " has a height of " + height + ", a width of " + width + " and contains " + numOfPerson + " person.";
 	}
 	
 	
