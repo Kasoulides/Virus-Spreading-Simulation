@@ -517,8 +517,6 @@ public class Simulation { // testing
  * 
  * 
  * 
- * 
- * 
  * int A[][] = new int[5][time]; for (int i = 0; i < A.length; i++) for (int j =
  * 0; j < A[0].length; j++) A[i][j] = 0; StdDraw.setXscale(0, width);
  * StdDraw.setYscale(height, 0);
