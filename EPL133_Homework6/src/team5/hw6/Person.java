@@ -527,5 +527,23 @@ public class Person {
 			return false;
 		return true;
 	}
+	
+	public String toString() {
+		String s="";
+		s+="The coordinates of this person are ("+this.currentX+","+this.currentY+").\n";
+		s+="This person is ";
+		if(infected)
+			s+="infected, is not immune and is ";
+		else if(immune)
+			s+="not infected, immune and is ";
+		if(selfProtected)
+			s+="self protected.\n";
+		else
+			s+="not self protected.\n";
+		s+="Its color is "+this.col.toString()+".\n";
+		s+="This person is in grid:\n";
+		s+=this.grid.toString();
+		return s;
+	}
 
 }

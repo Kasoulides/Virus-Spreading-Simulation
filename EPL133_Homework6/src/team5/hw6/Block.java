@@ -129,4 +129,18 @@ public class Block {
 	public void setBorder() {
 		border=true;
 	}
+	
+	
+	public String toString() {
+		String s="";
+		s+="This block's coordinates are ("+this.x+","+this.y+").\n";
+		if(border)
+			s+="This block is a border.\n";
+		else
+			s+="This block is not a border.\n";
+		s+="It is connected to grid: \n";
+		s+=this.grid.toString();
+		return s;
+			
+	}
 }
