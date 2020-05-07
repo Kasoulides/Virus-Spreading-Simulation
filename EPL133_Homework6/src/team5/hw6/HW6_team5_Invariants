@@ -3,9 +3,9 @@ Christos Eleftheriou (celeft01)
 
 Class Invariants
 ------------------------
-1. heigth: must be between 5-100 inclusive so people can move
+1. heigth: must be between 5-50 inclusive so people can move
 
-2. width: must be between 5-100 inclusive so people can move
+2. width: must be between 5-50 inclusive so people can move
 
 3. N(Number of people): must be less or equal to the number of places in the grid
 

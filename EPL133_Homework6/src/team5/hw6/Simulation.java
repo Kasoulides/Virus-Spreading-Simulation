@@ -289,16 +289,16 @@ public class Simulation { // testing
 				}
 				for (int z = 1; z <= areas; z++) {
 
-					StdOut.println("Enter the height of the simulation area no" + z + " (must be between 5-100): ");
+					StdOut.println("Enter the height of the simulation area no" + z + " (must be between 5-50): ");
 					height = StdIn.readInt();
-					if (height < 5 || height > 100)
+					if (height < 5 || height > 50)
 						throw new SimulationSizeException(
-								"The height of the " + "simulation  must be between 5-100.\n  ");
+								"The height of the " + "simulation  must be between 5-50.\n  ");
 
-					StdOut.println("Enter the width of the  simulation area no" + z + " (must be between 5-100): ");
+					StdOut.println("Enter the width of the  simulation area no" + z + " (must be between 5-50): ");
 					width = StdIn.readInt();
-					if (width < 5 || width > 100)
-						throw new SimulationSizeException("The width of the simulation  must be between 5-100.\n  ");
+					if (width < 5 || width > 50)
+						throw new SimulationSizeException("The width of the simulation  must be between 5-50.\n  ");
 
 					StdOut.println("Enter the number of people in the  simulation area no" + z + "(can't be more than "
 							+ (height * width) + "):");
@@ -464,8 +464,9 @@ public class Simulation { // testing
 
 		for (int i = 0; i < time; i++) {
 			for (int j = 0; j < areas; j++) {
-
+				if(areas > 1)
 				drawFrame(G[j]);
+				
 				G[j].showTrace();
 				G[j].reduceTrace();
 
@@ -498,11 +499,7 @@ public class Simulation { // testing
 					}
 					p.resetToMove();
 
-					try {
-						Thread.sleep(100);
-					} catch (InterruptedException ex) {
-						Thread.currentThread().interrupt();
-					}
+					
 
 				}
 
