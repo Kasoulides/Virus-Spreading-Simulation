@@ -248,6 +248,16 @@ public class Grid {
 	public int getID() {
 		return ID;
 	}
+	/**
+	 * This method returns the number of Person in the grid.
+	 * 
+	 * @return int the number of Person
+	 * 
+	 * @since 1.0
+	 */
+	public int getNumOfPerson() {
+		return numOfPerson;
+	}
 	
 	/**
 	 * This method returns the borders array.

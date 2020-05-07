@@ -484,13 +484,13 @@ public class Simulation { // testing
 						
 						
 						
-						StdOut.println("*--------------------------------------------*");
+						StdOut.println("*----------------------------------*");
 						StdOut.println("|One person from grid " + (j + 1) + " has moved.     ");
-						StdOut.println("|New Grid:                                     ");
+						StdOut.print("|New Grid: grid ");
 						p.setGrid(G[j].getBorders()[cx][cy].getGrid());
 
-						StdOut.println("|" + p.getGrid() + " ");
-						StdOut.println("*--------------------------------------------*");
+						StdOut.println(p.getGrid().getID()+1);
+						StdOut.println("*----------------------------------*");
 
 						G[j].getBorders()[cx][cy].getGrid().placeRandom(p);
 						StdOut.println();
@@ -517,6 +517,7 @@ public class Simulation { // testing
 				} catch (InterruptedException ex) {
 					Thread.currentThread().interrupt();
 				}
+			
 
 			}
 
@@ -551,7 +552,16 @@ public class Simulation { // testing
 						A[4][i]++;
 				}
 			}
+			StdOut.println("\n*--------------------------------------------------*");
+			if(i == 0)
+				StdOut.println((i+1) + " minute has passed.\n");
+			else
+				StdOut.println((i+1) + " minutes have passed.\n");
+			
+			for (int k = 0; k < areas; k++)	
+				StdOut.println("Grid " + (G[k].getID()+1) + " contains " + G[k].getNumOfPerson() + " person.");
 
+			StdOut.println("*--------------------------------------------------*\n");
 		}
 
 
@@ -607,12 +617,14 @@ public class Simulation { // testing
 			tempy = A[3][i];
 		}
 		StdOut.println("\n\nRESULTS OF SIMULATION!\n");
+		StdOut.println("+ Number of person for each category in the beginning of the simulation.\n");
 		StdOut.println("+ IMMUNE are: " + A[0][0] + " out of " + totalPerson);
 		StdOut.println("+ NORMAL are: " + A[3][0] + " out of " + totalPerson);
 		StdOut.println("+ INFECTED are: " + A[1][0] + " out of " + totalPerson);
 		StdOut.println("+ SELF PROTECTED are: " + A[2][0] + " out of " + totalPerson);
 
 		StdOut.println();
+		StdOut.println("+ Change in the number of person for each category during the simulation.\n");
 		StdOut.println("+ INFECTED: from " + A[1][0] + " to " + A[1][time - 1]
 				+ " with chances of getting infected from another person " + PTP + "% and from an infected block " + FTP
 				+ "%");

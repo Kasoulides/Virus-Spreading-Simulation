@@ -204,9 +204,9 @@ public class Person {
 		else
 			counter = 0;
 
-		if (nx != 0 && ny != 0) {
-			grid.clearPos(currentX, currentY);
-		}
+		/*
+		 * if (nx != 0 && ny != 0) { grid.clearPos(currentX, currentY); }
+		 */
 
 		this.eraseCircle();
 
