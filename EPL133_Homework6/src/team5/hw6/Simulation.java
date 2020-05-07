@@ -472,6 +472,12 @@ public class Simulation { // testing
 
 					if (p.hasToMove()) {
 
+						
+						
+						
+						
+						
+						
 						StdOut.println("*----------------------------------------------------------------*");
 						StdOut.println("|One person from grid " + (j + 1) + " has moved.     ");
 						StdOut.println("|New Grid:                                     ");

@@ -139,7 +139,7 @@ public class Person {
 		int nx=0;
 		int ny=0;
 		
-		//grid.clearPos(currentX, currentY);
+		grid.clearPos(currentX, currentY);
 
 		if (grid.isTrapped(currentX, currentY)) {
 			nx = 0;
@@ -442,6 +442,10 @@ public class Person {
 	 * @since 1.0
 	 */
 	public void setGrid(Grid other) {
+		
+		
+		
+		
 		grid = other;
 	}
 	
