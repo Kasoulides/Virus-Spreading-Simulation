@@ -388,12 +388,8 @@ public class Grid {
 
 	
 	public String toString() {
-		/*int counter=0;
-		for(int i=0; i<exists.length; i++)
-			for(int j=0; j<exists[0].length; j++)
-				if(exists[i][j])
-					counter++;*/
-		return "Grid " + (ID+1) + " has a height of " + height + ", a width of " + width + " and contains " + numOfPerson + " person.";
+	
+		return "Grid " + (ID+1) + " has a height of " + height + ", a width of " + width + ".";
 	}
 	
 	

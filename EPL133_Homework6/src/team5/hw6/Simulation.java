@@ -5,7 +5,7 @@ import edu.princeton.cs.introcs.*;
 import java.util.*;
 
 /**
- * This class represents a virus-spreading simulation
+ * This class represents a virus-spreading simulation between different areas
  * 
  * @author Christos Eleftheriou
  * @author Christos Kasoulides
@@ -33,8 +33,8 @@ public class Simulation { // testing
 		for (int i = 0; i < g.getHeight(); i++)
 			for (int j = 0; j < g.getWidth(); j++)
 				if (g.getBorders()[i][j].getBorder()) {
-					StdDraw.setPenColor(StdDraw.MAGENTA);
-					StdDraw.square(j + 0.5, i + 0.5, 0.5);
+					StdDraw.setPenColor(StdDraw.YELLOW);
+					StdDraw.square(j + 0.5, i + 0.5, 0.49);
 				}
 
 	}
@@ -444,7 +444,13 @@ public class Simulation { // testing
 		StdOut.println("\nBLOCK COLORING:");
 		StdOut.println("+ WHITE      --> NOT INFECTED");
 		StdOut.println("+ GRAY       --> INFECTED");
-		StdOut.println("+ PURPLE     --> BORDER");
+		StdOut.println("+ YELLOW     --> BORDER");
+		
+		try {
+			Thread.sleep(1500);
+		} catch (InterruptedException ex) {
+			Thread.currentThread().interrupt();
+		}
 
 		// SIMULATION PART
 		ArrayList<Person> removed[] = new ArrayList[areas];
@@ -478,13 +484,13 @@ public class Simulation { // testing
 						
 						
 						
-						StdOut.println("*----------------------------------------------------------------*");
+						StdOut.println("*--------------------------------------------*");
 						StdOut.println("|One person from grid " + (j + 1) + " has moved.     ");
 						StdOut.println("|New Grid:                                     ");
 						p.setGrid(G[j].getBorders()[cx][cy].getGrid());
 
 						StdOut.println("|" + p.getGrid() + " ");
-						StdOut.println("*----------------------------------------------------------------*");
+						StdOut.println("*--------------------------------------------*");
 
 						G[j].getBorders()[cx][cy].getGrid().placeRandom(p);
 						StdOut.println();
@@ -503,17 +509,11 @@ public class Simulation { // testing
 						Thread.currentThread().interrupt();
 					}
 
-					/*
-					 * if (p.getImmune()) A[0][j]++; if (p.isInfected()) A[1][j]++; if
-					 * (p.getSelfProtected()) A[2][j]++; if (!p.getImmune() && !p.isInfected() &&
-					 * !p.getSelfProtected()) A[3][j]++;
-					 * 
-					 * if (p.getSelfProtected() && p.isInfected()) A[4][j]++;
-					 */
+				
 				}
 
 				try {
-					Thread.sleep(500);
+					Thread.sleep(2500);
 				} catch (InterruptedException ex) {
 					Thread.currentThread().interrupt();
 				}
@@ -553,7 +553,7 @@ public class Simulation { // testing
 			}
 
 		}
-		StdOut.println("Works");
+
 
 // CREATION OF SIMULATION GRAPH
 
@@ -625,6 +625,9 @@ public class Simulation { // testing
 		StdOut.println("+ NORMAL that got infected: " + (Person.getFp() + Person.getFf()));
 		StdOut.println("	-NORMAL that got infected from another Person: " + Person.getFp());
 		StdOut.println("	-NORMAL that got infected from an infected Block: " + Person.getFf());
+		
+		
+		StdOut.println("\nThe graph represents the change for each category of person during the time of the simulation.");
 
 	}
 }
