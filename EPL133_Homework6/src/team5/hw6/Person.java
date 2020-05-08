@@ -140,6 +140,7 @@ public class Person {
 		int ny=0;
 		
 		grid.clearPos(currentX, currentY);
+		
 
 		if (grid.isTrapped(currentX, currentY)) {
 			nx = 0;
@@ -208,7 +209,7 @@ public class Person {
 		 * if (nx != 0 && ny != 0) { grid.clearPos(currentX, currentY); }
 		 */
 
-		this.eraseCircle();
+	
 
 		
 		currentX += nx;
