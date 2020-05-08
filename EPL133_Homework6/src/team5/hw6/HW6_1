@@ -41,8 +41,12 @@ Class Invariants
 
 19. The number of grids has to be between 2-4
 
-20. A block that is a border can not lead to the same grid its in
+20. A block that is a border can not lead to the same grid its in or in more than one other grid
 
 21. For a block to be a border, it has to be on the perimeter of a grid
 
 22. A blocks coordinates must be x,y
+
+23. If an area is full of people, a person that was originally going to move there will not complete the action
+
+24. A border can only be entered one time for each area
