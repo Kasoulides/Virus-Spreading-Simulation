@@ -39,7 +39,7 @@ Class Invariants
 
 18. The number of borders a grid can have is limited to the number equal to its 2*height+2*width-4
 
-19. The number of grids has to be between 1-4
+19. The number of grids has to be between 1-10 (10 is the limit so that the simulation run smoothly)
 
 20. A block that is a border can not lead to the same grid its in or in more than one other grid
 

@@ -59,19 +59,22 @@ public class Simulation { // testing
 		int y = Integer.parseInt(s.substring(s.indexOf(',') + 1));
 
 		if (x < 0 || x >= height || y < 0 || y >= width) {
-			System.out.println("Values are not included in the simulation!! Please try again.\n");
+			System.out.println("Values are not included in the simulation!! "
+					+ "Please try again.\n");
 			return false;
 		}
 
 		if (arr[x][y]) {
-			System.out.println(x + "," + y + " is already a border!! Please try again.\n");
+			System.out.println(x + "," + y + " is already a border!!"
+					+ " Please try again.\n");
 			return false;
 		}
 
 		if (x == 0 || y == 0 || x == height - 1 || y == width - 1)
 			return true;
 		else {
-			System.out.println(x + "," + y + " isn't on the border of the simulation!! Please try again.\n");
+			System.out.println(x + "," + y + " isn't on the border of the simulation!!"
+					+ " Please try again.\n");
 			return false;
 
 		}
@@ -118,7 +121,8 @@ public class Simulation { // testing
 				// DURATION OF SIMULATION
 
 				if (!flag[0]) {
-					StdOut.println("Enter the duration of the simulation(must be in " + "minutes): ");
+					StdOut.println("Enter the duration of the simulation(must be in " 
+				+ "minutes): ");
 					time = StdIn.readInt();
 					if (time < 0)
 						throw new NegativeNumberException(
@@ -128,7 +132,8 @@ public class Simulation { // testing
 				// CHANCE OF A PERSON BEING SELF-PROTECTED
 
 				if (!flag[1]) {
-					StdOut.println("Enter the chance of a person being Self " + "Protected(must be between 1-100): ");
+					StdOut.println("Enter the chance of a person being Self " 
+				+ "Protected(must be between 1-100): ");
 					selfPr = StdIn.readInt();
 					if (selfPr < 1 || selfPr > 100)
 						throw new OutOfRangeException("The number must be between 1-100");
@@ -137,7 +142,8 @@ public class Simulation { // testing
 				// CHANCE OF A PERSON BEING IMMUNE
 
 				if (!flag[2]) {
-					StdOut.println("Enter the chance of a person being Immune" + "(must be between 1-100): ");
+					StdOut.println("Enter the chance of a person being Immune"
+				+ "(must be between 1-100): ");
 					imm = StdIn.readInt();
 					if (imm < 1 || imm > 100)
 						throw new OutOfRangeException("The number must be between 1-100");
@@ -146,7 +152,8 @@ public class Simulation { // testing
 				// CHANCE OF A PERSON BEING INFECTED
 
 				if (!flag[3]) {
-					StdOut.println("Enter the chance of a person being Infected" + "(must be between 1-100): ");
+					StdOut.println("Enter the chance of a person being Infected" 
+				+ "(must be between 1-100): ");
 					inf = StdIn.readInt();
 					if (inf < 1 || inf > 100)
 						throw new OutOfRangeException("The number must be between 1-100");
@@ -170,15 +177,18 @@ public class Simulation { // testing
 					sureExit = null;
 					int num;
 					do {
-						StdOut.println(
-								"1. Time to Infect(time needed for a" + "person to stay in a block to infect it)");
-						StdOut.println("2. Person to Person(chances of an" + " infected person to infect another one)");
-						StdOut.println(
-								"3. Floor to Person(chances of a " + "person getting infected by an infected block)");
-						StdOut.println("4. Person to Floor(chances of a " + "person infecting a block)");
-						StdOut.println("5. Max trace time(time that an" + " infected block stays infected)");
-						StdOut.println("6. Protection Level(protection level making it"
-								+ " harder for a self protected person to get infected)");
+						StdOut.println("1. Time to Infect(time needed for a" +
+					"person to stay in a block to infect it)");
+						StdOut.println("2. Person to Person(chances of an" + 
+					" infected person to infect another one)");
+						StdOut.println("3. Floor to Person(chances of a " + 
+					"person getting infected by an infected block)");
+						StdOut.println("4. Person to Floor(chances of a " + 
+					"person infecting a block)");
+						StdOut.println("5. Max trace time(time that an" + 
+					" infected block stays infected)");
+						StdOut.println("6. Protection Level(protection level making it"+
+					" harder for a self protected person to get infected)");
 						StdOut.println("7. Exit");
 						StdOut.println("\nChoose a number to continue..");
 						num = StdIn.readInt();
@@ -190,38 +200,47 @@ public class Simulation { // testing
 							StdOut.println("Set new Time to Infect: ");
 							TTI = StdIn.readInt();
 							if (TTI < 0)
-								throw new NegativeNumberException(
-										"The time to " + "infect cannot be a negative number");
+								throw new NegativeNumberException
+								("The time to " + "infect cannot be a negative number");
 							break;
 						case 2:
-							StdOut.println("Set new Person to Person" + "(must be between 1-100): ");
+							StdOut.println("Set new Person to Person"
+						+ "(must be between 1-100): ");
 							PTP = StdIn.readInt();
 							if (PTP < 1 || PTP > 100)
-								throw new OutOfRangeException("The number must be between 1-100");
+								throw new OutOfRangeException
+								("The number must be between 1-100");
 							break;
 						case 3:
-							StdOut.println("Set new Floor to Person" + "(must be between 1-100): ");
+							StdOut.println("Set new Floor to Person"
+						+ "(must be between 1-100): ");
 							FTP = StdIn.readInt();
 							if (FTP < 1 || FTP > 100)
-								throw new OutOfRangeException("The number must be between 1-100");
+								throw new OutOfRangeException
+								("The number must be between 1-100");
 							break;
 						case 4:
-							StdOut.println("Set new Person to Floor" + "(must be between 1-100): ");
+							StdOut.println("Set new Person to Floor"
+						+ "(must be between 1-100): ");
 							PTF = StdIn.readInt();
 							if (PTF < 1 || PTF > 100)
-								throw new OutOfRangeException("The number must be between 1-100");
+								throw new OutOfRangeException
+								("The number must be between 1-100");
 							break;
 						case 5:
 							StdOut.println("Set new Max trace time: ");
 							MAXtrace = StdIn.readInt();
 							if (MAXtrace < 0)
-								throw new NegativeNumberException("The max trace time cannot be a negative number");
+								throw new NegativeNumberException
+								("The max trace time cannot be a negative number");
 							break;
 						case 6:
-							StdOut.println("Set new Protection Level" + "(must be between 1-100): ");
+							StdOut.println("Set new Protection Level" 
+						+ "(must be between 1-100): ");
 							SP = StdIn.readInt();
 							if (SP < 0)
-								throw new NegativeNumberException("The number must be between 1-100");
+								throw new NegativeNumberException
+								("The number must be between 1-100");
 							break;
 						case 7:
 							exit = true;
@@ -233,13 +252,15 @@ public class Simulation { // testing
 							StdOut.println("Would you like to change anything else? " + "(Y/n) ");
 							newAnswer = StdIn.readString();
 							if (!newAnswer.equals("Y") && !newAnswer.equals("n"))
-								throw new IncorrectAnswerException("The answer must be either Y or n");
+								throw new IncorrectAnswerException
+								("The answer must be either Y or n");
 
 						} else {
 							StdOut.println("Are you sure? (Y/n) ");
 							sureExit = StdIn.readString();
 							if (!sureExit.equals("Y") && !sureExit.equals("n"))
-								throw new IncorrectAnswerException("The answer must be either Y or n");
+								throw new IncorrectAnswerException
+								("The answer must be either Y or n");
 							if (sureExit.equals("Y")) {
 								exit = true;
 							} else if (sureExit.equals("n")) {
@@ -263,7 +284,7 @@ public class Simulation { // testing
 				StdOut.println("The input you have entered doesn't match the " + "required type.\n ");
 				done1 = false;
 			} catch (Exception e) {
-				StdOut.println("Wrong Input.Lets start again!\n" + e.getMessage() + "\n");
+				StdOut.println("Wrong Input.Please try again!\n" + e.getMessage() + "\n");
 				done1 = false;
 
 			}
@@ -278,10 +299,10 @@ public class Simulation { // testing
 
 				if (!flag[5]) {
 
-					StdOut.println("How many areas do you want? (1 to 4)");
+					StdOut.println("How many areas do you want? (1 to 10)");
 					areas = StdIn.readInt();
-					if (areas < 1 || areas > 4)
-						throw new OutOfRangeException("Should be between 1-4 inclusive");
+					if (areas < 1 || areas > 10)
+						throw new OutOfRangeException("Should be between 1-10 inclusive");
 					flag[5] = true;
 
 					G = new Grid[areas];
@@ -289,18 +310,22 @@ public class Simulation { // testing
 				}
 				for (int z = 1; z <= areas; z++) {
 
-					StdOut.println("Enter the height of the simulation area no" + z + " (must be between 5-50): ");
+					StdOut.println("Enter the height of the simulation area no"
+					+ z + " (must be between 5-50): ");
 					height = StdIn.readInt();
 					if (height < 5 || height > 50)
-						throw new SimulationSizeException(
-								"The height of the " + "simulation  must be between 5-50.\n  ");
+						throw new SimulationSizeException
+						("The height of the " + "simulation  must be between 5-50.\n  ");
 
-					StdOut.println("Enter the width of the  simulation area no" + z + " (must be between 5-50): ");
+					StdOut.println("Enter the width of the  simulation area no" 
+					+ z + " (must be between 5-50): ");
 					width = StdIn.readInt();
 					if (width < 5 || width > 50)
-						throw new SimulationSizeException("The width of the simulation  must be between 5-50.\n  ");
+						throw new SimulationSizeException
+						("The width of the simulation  must be between 5-50.\n  ");
 
-					StdOut.println("Enter the number of people in the  simulation area no" + z + "(can't be more than "
+					StdOut.println("Enter the number of people in the  simulation area no"
+					+ z + "(can't be more than "
 							+ (height * width) + "):");
 
 					N = StdIn.readInt();
@@ -334,7 +359,7 @@ public class Simulation { // testing
 				StdOut.println("The input you have entered doesn't match the " + "required type.\n ");
 				done2 = false;
 			} catch (Exception e) {
-				StdOut.println("Wrong Input.Lets start again!\n" + e.getMessage() + "\n");
+				StdOut.println("Wrong Input.PLease try again!\n" + e.getMessage() + "\n");
 				done2 = false;
 			}
 
@@ -356,26 +381,33 @@ public class Simulation { // testing
 
 						// NUMBER OF BORDER BLOCKS
 
-						StdOut.println("Enter the number of border blocks in the area no" + i + "(can't be more than "
-								+ (2 * G[i - 1].getHeight() + 2 * G[i - 1].getWidth() - 4 - cnt) + " or less than 0):");
+						StdOut.println("Enter the number of border blocks in the area no"
+						+ i + "(can't be more than "+ (2 * G[i - 1].getHeight() 
+								+ 2 * G[i - 1].getWidth() - 4 - cnt) + " or less than 0):");
 						numOfBorders = StdIn.readInt();
 
 						if (numOfBorders > (2 * G[i - 1].getHeight() + 2 * G[i - 1].getWidth() - 4 - cnt)
 								|| numOfBorders < 0)
 
-							throw new BordersOutOfRangeException(
-									"The number of border blocks in this area cant be more than "
-											+ (2 * G[i - 1].getHeight() + 2 * G[i - 1].getWidth() - 4 - cnt)
-											+ " or less than 0.");
-
+							throw new BordersOutOfRangeException
+							("The number of border blocks in this area cant be more than "
+							+ (2 * G[i - 1].getHeight() + 2 * G[i - 1].getWidth() - 4 - cnt)
+							+ " or less than 0.");
+						
+						done3 = true;
+						if(numOfBorders > 0) {
+							
+						
 						StdOut.println(
-								"Enter the number of the area where the border blocks are connected to(can't be more than "
-										+ areas + " and can't be " + i + ").");
+								"Enter the number of the area where the border blocks"
+								+ " are connected to(can't be more than "
+								+ areas + " and can't be " + i + ").");
 						newGrid = StdIn.readInt();
-
+						
 						if (newGrid > areas || newGrid <= 0 || newGrid == i)
 							throw new OutOfRangeException(
-									"The number of the area where the border blocks are connected to cant be more than can't be more than "
+									"The number of the area where the border blocks "
+									+ "are connected to cant be more than can't be more than "
 											+ areas + " and can't be " + i + ".");
 
 						// BORDER BLOCKS
@@ -415,14 +447,14 @@ public class Simulation { // testing
 								done3 = false;
 
 						}
-
+					}
 						StdOut.println("Processing data..Please wait\n");
 
 					} catch (InputMismatchException e) {
 						StdOut.println("The input you have entered doesn't match the " + "required type.\n ");
 						done3 = false;
 					} catch (Exception e) {
-						StdOut.println("Wrong Input.Lets start again!\n" + e.getMessage() + "\n");
+						StdOut.println("Wrong Input.Please try again!\n" + e.getMessage() + "\n");
 						done3 = false;
 					}
 				} while (!done3);
@@ -549,7 +581,8 @@ public class Simulation { // testing
 				StdOut.println((i + 1) + " minutes have passed.\n");
 
 			for (int k = 0; k < areas; k++)
-				StdOut.println("Grid " + (G[k].getID() + 1) + " contains " + G[k].getNumOfPerson() + " person.");
+				StdOut.println("Grid " + (G[k].getID() + 1) + " contains " + 
+					G[k].getNumOfPerson() + " person.");
 
 			StdOut.println("*--------------------------------------------------*\n");
 		}
@@ -606,7 +639,8 @@ public class Simulation { // testing
 			tempy = A[3][i];
 		}
 		StdOut.println("\n\nRESULTS OF SIMULATION!\n");
-		StdOut.println("+ Number of person for each category in the beginning of the simulation.\n");
+		StdOut.println("+ Number of person for each category in the beginning"
+				+ " of the simulation.\n");
 		StdOut.println("+ IMMUNE are: " + A[0][0] + " out of " + totalPerson);
 		StdOut.println("+ NORMAL are: " + A[3][0] + " out of " + totalPerson);
 		StdOut.println("+ INFECTED are: " + A[1][0] + " out of " + totalPerson);
@@ -615,8 +649,8 @@ public class Simulation { // testing
 		StdOut.println();
 		StdOut.println("+ Change in the number of person for each category during the simulation.\n");
 		StdOut.println("+ INFECTED: from " + A[1][0] + " to " + A[1][time - 1]
-				+ " with chances of getting infected from another person " + PTP + "% and from an infected block " + FTP
-				+ "%");
+				+ " with chances of getting infected from another person " + PTP 
+				+ "% and from an infected block " + FTP+ "%");
 		StdOut.println();
 		StdOut.println("+ SELF PROTECTED that got infected: from " + A[4][0] + " to " + A[4][time - 1]
 				+ " with chances of getting infected when protected -" + SP + "%");
@@ -628,7 +662,8 @@ public class Simulation { // testing
 		StdOut.println("	-NORMAL that got infected from an infected Block: " + Person.getFf());
 
 		StdOut.println(
-				"\nThe graph represents the change for each category of person during the time of the simulation.");
+				"\nThe graph represents the change for each category of person "
+				+ "during the time of the simulation.");
 
 	}
 }
