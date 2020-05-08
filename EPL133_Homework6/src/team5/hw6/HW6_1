@@ -36,3 +36,13 @@ Class Invariants
 16. sureExit: must be "Y" for yes or "n" for no
 
 17. SP(Protection level): must be between 1-100 inclusive
+
+18. The number of borders a grid can have is limited to the number equal to its 2*height+2*width-4
+
+19. The number of grids has to be between 2-4
+
+20. A block that is a border can not lead to the same grid its in
+
+21. For a block to be a border, it has to be on the perimeter of a grid
+
+22. A blocks coordinates must be x,y
