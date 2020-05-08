@@ -59,19 +59,22 @@ public class Simulation { // testing
 		int y = Integer.parseInt(s.substring(s.indexOf(',') + 1));
 
 		if (x < 0 || x >= height || y < 0 || y >= width) {
-			System.out.println("Values are not included in the simulation!! Please try again.\n");
+			System.out.println("Values are not included in the simulation!! "
+					+ "Please try again.\n");
 			return false;
 		}
 
 		if (arr[x][y]) {
-			System.out.println(x + "," + y + " is already a border!! Please try again.\n");
+			System.out.println(x + "," + y + " is already a border!!"
+					+ " Please try again.\n");
 			return false;
 		}
 
 		if (x == 0 || y == 0 || x == height - 1 || y == width - 1)
 			return true;
 		else {
-			System.out.println(x + "," + y + " isn't on the border of the simulation!! Please try again.\n");
+			System.out.println(x + "," + y + " isn't on the border of the simulation!!"
+					+ " Please try again.\n");
 			return false;
 
 		}
@@ -281,7 +284,7 @@ public class Simulation { // testing
 				StdOut.println("The input you have entered doesn't match the " + "required type.\n ");
 				done1 = false;
 			} catch (Exception e) {
-				StdOut.println("Wrong Input.Lets start again!\n" + e.getMessage() + "\n");
+				StdOut.println("Wrong Input.Please try again!\n" + e.getMessage() + "\n");
 				done1 = false;
 
 			}
@@ -356,7 +359,7 @@ public class Simulation { // testing
 				StdOut.println("The input you have entered doesn't match the " + "required type.\n ");
 				done2 = false;
 			} catch (Exception e) {
-				StdOut.println("Wrong Input.Lets start again!\n" + e.getMessage() + "\n");
+				StdOut.println("Wrong Input.PLease try again!\n" + e.getMessage() + "\n");
 				done2 = false;
 			}
 
@@ -390,13 +393,17 @@ public class Simulation { // testing
 							("The number of border blocks in this area cant be more than "
 							+ (2 * G[i - 1].getHeight() + 2 * G[i - 1].getWidth() - 4 - cnt)
 							+ " or less than 0.");
-
+						
+						done3 = true;
+						if(numOfBorders > 0) {
+							
+						
 						StdOut.println(
 								"Enter the number of the area where the border blocks"
 								+ " are connected to(can't be more than "
 								+ areas + " and can't be " + i + ").");
 						newGrid = StdIn.readInt();
-
+						
 						if (newGrid > areas || newGrid <= 0 || newGrid == i)
 							throw new OutOfRangeException(
 									"The number of the area where the border blocks "
@@ -440,14 +447,14 @@ public class Simulation { // testing
 								done3 = false;
 
 						}
-
+					}
 						StdOut.println("Processing data..Please wait\n");
 
 					} catch (InputMismatchException e) {
 						StdOut.println("The input you have entered doesn't match the " + "required type.\n ");
 						done3 = false;
 					} catch (Exception e) {
-						StdOut.println("Wrong Input.Lets start again!\n" + e.getMessage() + "\n");
+						StdOut.println("Wrong Input.Please try again!\n" + e.getMessage() + "\n");
 						done3 = false;
 					}
 				} while (!done3);
