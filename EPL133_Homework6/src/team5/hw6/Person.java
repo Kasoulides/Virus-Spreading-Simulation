@@ -196,6 +196,7 @@ public class Person {
 		
 		if(currentX + nx < 0 || currentX + nx == grid.getHeight() || currentY + ny < 0 || currentY + ny == grid.getWidth()) {
 			toMove=true;
+			counter=0;
 			return ;
 		}
 
