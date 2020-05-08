@@ -396,7 +396,7 @@ public class Simulation { // testing
 						
 						done3 = true;
 						if(numOfBorders > 0) {
-							
+						done3 = false;	
 						
 						StdOut.println(
 								"Enter the number of the area where the border blocks"
@@ -421,7 +421,7 @@ public class Simulation { // testing
 
 							do {
 								bo = StdIn.readString();
-							} while (!isValid(bo, height, width, temp));
+							} while (!isValid(bo, G[i - 1].getHeight(),G[i - 1].getWidth(), temp));
 
 							int xb = Integer.parseInt(bo.substring(0, bo.indexOf(',')));
 							int yb = Integer.parseInt(bo.substring(bo.indexOf(',') + 1));
@@ -533,6 +533,12 @@ public class Simulation { // testing
 
 					}
 					p.resetToMove();
+					
+					try {
+						Thread.sleep(50);
+					} catch (InterruptedException ex) {
+						Thread.currentThread().interrupt();
+					}
 
 				}
 				
