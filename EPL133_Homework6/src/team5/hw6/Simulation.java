@@ -495,14 +495,17 @@ public class Simulation { // testing
 		}
 
 		for (int i = 0; i < time; i++) {
+			
 			for (int j = 0; j < areas; j++) {
+				
 				if(areas > 1)
 				drawFrame(G[j]);
 				
 				G[j].showTrace();
 				G[j].reduceTrace();
+				
 
-				int cnt = 0;
+		
 				for (Person p : AL[j]) {
 
 					int cx = p.getCurrentX();
@@ -526,17 +529,17 @@ public class Simulation { // testing
 						removed[G[j].getID()].add(p);
 						added[G[j].getBorders()[cx][cy].getGrid().getID()].add(p);
 
-						cnt++;
+				
 
 					}
 					p.resetToMove();
 
-					
-
 				}
+				
+			
 
 				try {
-					Thread.sleep(2500);
+					Thread.sleep(1500);
 				} catch (InterruptedException ex) {
 					Thread.currentThread().interrupt();
 				}

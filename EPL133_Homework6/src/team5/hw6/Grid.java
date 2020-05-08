@@ -349,6 +349,7 @@ public class Grid {
 		
 		p.setX(newX);
 		p.setY(newY);
+		p.resetCounter();
 		setPos(newX,newY,p);
 
 		

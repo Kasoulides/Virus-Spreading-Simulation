@@ -239,6 +239,7 @@ public class Person {
 		}
 
 	}
+	
 
 	private void checkInfection() {
 		Random r = new Random();
@@ -443,9 +444,6 @@ public class Person {
 	 */
 	public void setGrid(Grid other) {
 		
-		
-		
-		
 		grid = other;
 	}
 	
@@ -489,6 +487,15 @@ public class Person {
 	 */
 	public void resetToMove() {
 		toMove = false;
+	}
+	
+	/**
+	 * This method sets the value of counter to 0.
+	 * 
+	 * @since 1.0
+	 */
+	public void resetCounter() {
+		counter = 0;
 	}
 
 
